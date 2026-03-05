@@ -74,10 +74,19 @@ function resetProgress() {
 }
 
 // ════════════════════════════════════════
-// 2. NAVIGATION & KAPITELKREISE
+// 2. LEHRER-MODUS
+// ════════════════════════════════════════
+
+function isTeacherMode() {
+  return sessionStorage.getItem('archiv45_teacher_v1') === 'ok';
+}
+
+// ════════════════════════════════════════
+// 3. NAVIGATION & KAPITELKREISE
 // ════════════════════════════════════════
 
 function updateChapterNav(currentMappe) {
+  const teacher = isTeacherMode();
   const circles = document.querySelectorAll('.chapter-circle');
   circles.forEach(circle => {
     const num = parseInt(circle.dataset.mappe, 10);
@@ -86,6 +95,10 @@ function updateChapterNav(currentMappe) {
     if (num === currentMappe) {
       circle.classList.add('current');
       circle.removeAttribute('href'); // Kein Link auf aktuelle Seite
+    } else if (teacher) {
+      // Lehrer sieht alle Mappen als navigierbar
+      circle.classList.add('available');
+      circle.title = circle.dataset.title || `Mappe ${num}`;
     } else if (isMappeCompleted(num)) {
       circle.classList.add('completed');
       circle.title = circle.dataset.title || `Mappe ${num}`;
@@ -110,10 +123,12 @@ function updateChapterNav(currentMappe) {
     else { prevBtn.href = `mappe-0${currentMappe - 1}.html`; }
   }
   if (nextBtn) {
-    if (currentMappe >= 7 || !isMappeUnlocked(currentMappe + 1)) {
+    if (currentMappe >= 7) {
       nextBtn.classList.add('disabled');
-    } else {
+    } else if (teacher || isMappeUnlocked(currentMappe + 1)) {
       nextBtn.href = `mappe-0${currentMappe + 1}.html`;
+    } else {
+      nextBtn.classList.add('disabled');
     }
   }
 }
@@ -127,7 +142,7 @@ function showLockedHint() {
 }
 
 // ════════════════════════════════════════
-// 3. AUFGABEN-STEUERUNG
+// 4. AUFGABEN-STEUERUNG
 // ════════════════════════════════════════
 
 let currentMappe = 1;
@@ -138,9 +153,25 @@ function initApp(mappeNum, numTasks) {
   totalTasks = numTasks;
 
   updateChapterNav(mappeNum);
-  restoreTaskProgress(mappeNum, numTasks);
+
+  if (isTeacherMode()) {
+    // Lehrer-Modus: alle Tasks sofort sichtbar, keine Sperren
+    unlockAllForTeacher(numTasks);
+  } else {
+    restoreTaskProgress(mappeNum, numTasks);
+  }
+
   initSidebarToggle();
   initSidebar(mappeNum);
+}
+
+// Alle Tasks + Code-Section für Lehrende freischalten
+function unlockAllForTeacher(numTasks) {
+  for (let i = 1; i <= numTasks; i++) {
+    const el = document.getElementById('task-' + i);
+    if (el) { el.style.display = 'block'; el.classList.add('visible'); }
+  }
+  revealCodeSection();
 }
 
 function restoreTaskProgress(mappeNum, numTasks) {
@@ -258,18 +289,32 @@ function showFeedback(feedbackId, message, type) {
   const el = document.getElementById(feedbackId);
   if (!el) return;
   el.innerHTML = `<div class="feedback feedback-${type}">${message}</div>`;
-  // Feedback sofort ins Sichtfeld scrollen (damit "es passiert nichts" verhindert wird)
+  // Zuverlässig ins Sichtfeld scrollen – window.scrollTo statt scrollIntoView,
+  // da overflow:hidden auf .task-block scrollIntoView in manchen Browsern blockiert.
   setTimeout(() => {
-    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 60);
+    const rect = el.getBoundingClientRect();
+    // Nur scrollen wenn Element nicht vollständig sichtbar
+    if (rect.top < 80 || rect.bottom > window.innerHeight - 20) {
+      const targetY = window.pageYOffset + rect.top - 120;
+      window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+    }
+  }, 80);
 }
 
 // ════════════════════════════════════════
-// 6. SIDEBAR
+// 7. SIDEBAR
 // ════════════════════════════════════════
 
 function initSidebar(mappeNum) {
-  // Restore alle bereits abgeschlossenen Aufgaben in der Sidebar
+  if (isTeacherMode()) {
+    // Lehrer sieht alle Aufgaben und Code-Bereich als zugänglich
+    for (let i = 1; i <= totalTasks; i++) {
+      updateSidebarItem(i, 'active');
+    }
+    updateSidebarItem('code', 'active');
+    return;
+  }
+  // Normalmodus: Fortschritt aus localStorage wiederherstellen
   const p = getProgress();
   const done = (p.completedTasks && p.completedTasks[mappeNum]) || [];
   done.forEach(taskId => {
