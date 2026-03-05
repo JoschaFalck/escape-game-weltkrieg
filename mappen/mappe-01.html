@@ -351,7 +351,44 @@
 
 <script src="../scripts/app.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => initApp(1, 5));
+    /* ── INLINE-FALLBACKS: garantieren Feedback auch ohne app.js ──────── */
+  var _mappeNum = 1;
+  function showFeedback(id,msg,type){
+    var el=document.getElementById(id);if(!el)return;
+    var c={correct:'background:rgba(39,174,96,.18);border-left:4px solid #27ae60;color:#155a2e;',
+           incorrect:'background:rgba(230,126,34,.15);border-left:4px solid #e67e22;color:#6b3510;',
+           warning:'background:rgba(52,152,219,.15);border-left:4px solid #2980b9;color:#1a3d5c;'};
+    el.innerHTML='<div class="feedback feedback-'+type+'" style="padding:.9rem 1.1rem .9rem 1.4rem;border-radius:6px;font-size:.93rem;font-weight:600;line-height:1.6;'+(c[type]||'')+'">'+msg+'</div>';
+    setTimeout(function(){
+      el.scrollIntoView({behavior:'smooth',block:'nearest'});
+      var r=el.getBoundingClientRect();
+      window.scrollTo({top:Math.max(0,window.pageYOffset+r.top-120),behavior:'smooth'});
+    },100);
+  }
+  function validateMC(name){var s=document.querySelector('input[name="'+name+'"]:checked');return{valid:!!s,value:s?s.value:null};}
+  function validateTF(rows){var r={},ok=true;rows.forEach(function(n){var s=document.querySelector('input[name="'+n+'"]:checked');if(!s)ok=false;else r[n]=s.value;});return{allAnswered:ok,results:r};}
+  function validateMS(name){return Array.from(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(c){return c.value;});}
+  function validateMatching(ids){var r={},ok=true;ids.forEach(function(id){var el=document.getElementById(id);if(!el||!el.value)ok=false;else r[id]=el.value;});return{allAnswered:ok,results:r};}
+  function validateSorting(ids){var r={},ok=true,u={};ids.forEach(function(id){var el=document.getElementById(id);if(!el||!el.value||u[el.value])ok=false;else{u[el.value]=true;r[id]=el.value;}});return{allAnswered:ok,results:r};}
+  function completeTask(n){
+    var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
+    if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
+    if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
+  }
+  function goToNextTask(n){
+    if(n<5){
+      if(typeof revealTask==='function')revealTask(n+1);
+      else{var e=document.getElementById('task-'+(n+1));if(e){e.style.display='block';e.classList.add('visible');}}
+      setTimeout(function(){var e=document.getElementById('task-'+(n+1));if(e)e.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }else{
+      if(typeof revealCodeSection==='function')revealCodeSection();
+      else{var cs=document.getElementById('code-section');if(cs){cs.style.display='block';cs.classList.add('visible');}}
+      setTimeout(function(){var cs=document.getElementById('code-section');if(cs)cs.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }
+  }
+  /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(1,5); });
 
   function checkTask1() {
     const r = validateMC('q1');
@@ -381,7 +418,7 @@
     const r = validateMC('q3');
     if (!r.valid) { showFeedback('feedback-3', 'Bitte wähle eine Antwort aus.', 'warning'); return; }
     if (r.value === 'c') {
-      showFeedback('feedback-3', '✓ <strong>Richtig!</strong> Goebbels' Rede war klassische Propaganda: Er verschwieg das Ausmaß der Niederlage, bezeichnete sie als „Heldentod" und nutzte sie, um die Bevölkerung zur weiteren Kriegsanstrengung aufzurufen. Das Publikum war handverlesen und jubelte auf Kommando.', 'correct');
+      showFeedback('feedback-3', '✓ <strong>Richtig!</strong> Goebbels\' Rede war klassische Propaganda: Er verschwieg das Ausmaß der Niederlage, bezeichnete sie als \u201eHeldentod\u201c und nutzte sie, um die Bevölkerung zur weiteren Kriegsanstrengung aufzurufen. Das Publikum war handverlesen und jubelte auf Kommando.', 'correct');
       completeTask(3);
     } else {
       showFeedback('feedback-3', 'Überlege: Sprach Goebbels ehrlich über die Niederlage? Und was forderte er vom Volk? Das Ziel der Rede war Täuschung und Mobilisierung – keine Aufklärung.', 'incorrect');
