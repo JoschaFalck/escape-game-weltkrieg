@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archiv 45 – Interaktiver Escape Room Geschichte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Landing-Page spezifisch */
+    body { background: var(--bg); }
+    .landing-header {
+      position: fixed; top: 0; left: 0; right: 0; height: 60px;
+      background: rgba(18,18,30,0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; z-index: 100;
+    }
+    .landing-header .site-logo { font-size: 1.3rem; }
+    .landing-body { padding-top: 60px; }
+    .geheim-stamp {
+      display: inline-block;
+      border: 3px solid var(--red);
+      color: var(--red);
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      padding: 4px 16px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+      transform: rotate(-2deg);
+      display: block;
+      width: fit-content;
+      margin: 0 auto 1.5rem;
+    }
+  </style>
+</head>
+<body class="landing-page">
+
+  <!-- Header -->
+  <header class="landing-header">
+    <div class="site-logo">
+      ARCHIV<span class="logo-badge">45</span>
+    </div>
+    <button id="reset-btn" title="Fortschritt zurücksetzen"
+      style="background:none;border:1px solid rgba(255,255,255,0.15);color:var(--text-faint);padding:4px 10px;border-radius:4px;font-size:0.75rem;cursor:pointer;">
+      ↺ Reset
+    </button>
+  </header>
+
+  <div class="landing-body">
+    <!-- Hero -->
+    <section class="landing-hero">
+      <div class="landing-content">
+        <p class="landing-eyebrow">Geschichtsunterricht · Klasse 8 · Zweiter Weltkrieg</p>
+        <div class="geheim-stamp">Geheim · Bundesarchiv · 1945</div>
+        <h1 class="landing-title">Archiv 45</h1>
+        <p class="landing-subtitle">Die verschlossenen Akten</p>
+        <div class="landing-divider"></div>
+
+        <div class="mission-document">
+          <div class="mission-document-header">
+            Archiv-Auftrag · Historisches Bundesarchiv Berlin · März 2026
+          </div>
+          <p>
+            Bei Bauarbeiten im Keller eines Berliner Regierungsgebäudes wurde ein versiegeltes
+            Aktenkabinett aus dem Jahr 1945 entdeckt. Es enthält <strong>sieben Mappen</strong>
+            mit Dokumenten, Karten, Berichten und Aufzeichnungen aus den letzten Kriegsjahren.
+          </p>
+          <p>
+            Euer Auftrag: Die Mappen öffnen, die Dokumente auswerten und die Geschichte des
+            Kriegsendes rekonstruieren – bevor die Ausstellung <em>„Die letzten Jahre des
+            Zweiten Weltkriegs"</em> eröffnet.
+          </p>
+          <p>
+            Jede Mappe ist gesichert. <strong>Nur wer die Dokumente wirklich versteht,
+            kommt weiter.</strong>
+          </p>
+        </div>
+
+        <div class="landing-cta">
+          <a href="mappen/mappe-01.html" class="start-btn">Mission beginnen →</a>
+          <span style="font-size:0.8rem;color:var(--text-faint);">
+            Dein Fortschritt wird automatisch gespeichert.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mappe-Übersicht -->
+    <section class="mappe-overview">
+      <h2>Die sieben Mappen</h2>
+      <div class="mappe-grid">
+
+        <a href="mappen/mappe-01.html" class="mappe-card" data-mappe="1">
+          <div class="mappe-card-num">Mappe 1</div>
+          <div class="mappe-card-title">Die Wende<br><small style="font-weight:400;color:var(--text-faint);">Stalingrad 1942/43</small></div>
+        </a>
+
+        <a href="mappen/mappe-02.html" class="mappe-card" data-mappe="2">
+          <div class="mappe-card-num">Mappe 2</div>
+          <div class="mappe-card-title">Das verbrecherische System<br><small style="font-weight:400;color:var(--text-faint);">Holocaust &amp; Wannsee</small></div>
+          <span class="mappe-card-lock">🔒</span>
+        </a>
+
+        <a href="mappen/mappe-03.html" class="mappe-card" data-mappe="3">
+          <div class="mappe-card-num">Mappe 3</div>
+          <div class="mappe-card-title">Nicht alle haben mitgemacht<br><small style="font-weight:400;color:var(--text-faint);">Widerstand</small></div>
+          <span class="mappe-card-lock">🔒</span>
+        </a>
+
+        <a href="mappen/mappe-04.html" class="mappe-card" data-mappe="4">
+          <div class="mappe-card-num">Mappe 4</div>
+          <div class="mappe-card-title">Der Westen greift an<br><small style="font-weight:400;color:var(--text-faint);">D-Day &amp; globaler Krieg</small></div>
+          <span class="mappe-card-lock">🔒</span>
+        </a>
+
+        <a href="mappen/mappe-05.html" class="mappe-card" data-mappe="5">
+          <div class="mappe-card-num">Mappe 5</div>
+          <div class="mappe-card-title">Verzweiflung<br><small style="font-weight:400;color:var(--text-faint);">Volkssturm &amp; Bombenkrieg</small></div>
+          <span class="mappe-card-lock">🔒</span>
+        </a>
+
+        <a href="mappen/mappe-06.html" class="mappe-card" data-mappe="6">
+          <div class="mappe-card-num">Mappe 6</div>
+          <div class="mappe-card-title">Die letzten Tage<br><small style="font-weight:400;color:var(--text-faint);">Berlin 1945</small></div>
+          <span class="mappe-card-lock">🔒</span>
+        </a>
+
+        <a href="mappen/mappe-07.html" class="mappe-card" data-mappe="7">
+          <div class="mappe-card-num">Mappe 7</div>
+          <div class="mappe-card-title">Stunde Null<br><small style="font-weight:400;color:var(--text-faint);">Kapitulation &amp; Neubeginn</small></div>
+          <span class="mappe-card-lock">🔒</span>
+        </a>
+
+      </div>
+      <p style="text-align:center;margin-top:1.5rem;font-size:0.78rem;color:var(--text-faint);">
+        Klasse 8 · LehrplanPLUS Bayern · Geschichte · Zweiter Weltkrieg
+      </p>
+    </section>
+  </div>
+
+  <script src="scripts/app.js"></script>
+  <script> document.addEventListener('DOMContentLoaded', initLandingPage); </script>
+</body>
+</html>

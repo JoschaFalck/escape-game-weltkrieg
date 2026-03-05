@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mappe 6: Die letzten Tage – Archiv 45</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body class="mappe-page">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">ARCHIV<span class="logo-badge">45</span></a>
+    <nav class="chapter-nav" aria-label="Mappe-Navigation">
+      <a href="#" class="nav-arrow" id="prev-mappe">‹</a>
+      <div class="chapter-circles">
+        <a href="mappe-01.html" class="chapter-circle" data-mappe="1" data-title="Mappe 1: Die Wende">1</a>
+        <a href="mappe-02.html" class="chapter-circle" data-mappe="2" data-title="Mappe 2: Holocaust">2</a>
+        <a href="mappe-03.html" class="chapter-circle" data-mappe="3" data-title="Mappe 3: Widerstand">3</a>
+        <a href="mappe-04.html" class="chapter-circle" data-mappe="4" data-title="Mappe 4: D-Day">4</a>
+        <a href="mappe-05.html" class="chapter-circle" data-mappe="5" data-title="Mappe 5: Verzweiflung">5</a>
+        <a href="mappe-06.html" class="chapter-circle" data-mappe="6" data-title="Mappe 6: Letzte Tage">6</a>
+        <a href="mappe-07.html" class="chapter-circle" data-mappe="7" data-title="Mappe 7: Stunde Null">7</a>
+      </div>
+      <a href="#" class="nav-arrow" id="next-mappe">›</a>
+    </nav>
+    <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+  </div>
+</header>
+
+<div class="mappe-banner">
+  <div class="mappe-banner-inner">
+    <span class="mappe-label">Mappe 6</span>
+    <h1>Die letzten Tage – Berlin, April/Mai 1945</h1>
+  </div>
+</div>
+
+<div class="layout-wrapper">
+  <aside class="task-sidebar" id="task-sidebar">
+    <h2 class="sidebar-title">Aufgaben</h2>
+    <ul class="task-list">
+      <li class="task-nav-item active" data-task="1"><span class="task-status"></span><span class="task-nav-title">Zeitstrahl: Berlins Fall</span></li>
+      <li class="task-nav-item locked" data-task="2"><span class="task-status">🔒</span><span class="task-nav-title">Die Einkreisung</span></li>
+      <li class="task-nav-item locked" data-task="3"><span class="task-status">🔒</span><span class="task-nav-title">Hitlers letzter Monat</span></li>
+      <li class="task-nav-item locked" data-task="4"><span class="task-status">🔒</span><span class="task-nav-title">Zivilbevölkerung Berlin</span></li>
+      <li class="task-nav-item locked" data-task="5"><span class="task-status">🔒</span><span class="task-nav-title">Warum kein früheres Ende?</span></li>
+      <li class="task-nav-item locked" data-task="code"><span class="task-status">🔒</span><span class="task-nav-title">Mappe öffnen</span></li>
+    </ul>
+  </aside>
+
+  <main class="content-area">
+    <div class="archive-context">
+      <div class="archive-stamp">Archiv 45 · Mappe 6 · Berlin, April/Mai 1945</div>
+      <p class="context-text">
+        Die vorletzte Akte enthält Berichte aus den letzten Tagen des Dritten Reiches –
+        dem Sturm auf Berlin, dem Ende von Hitler und dem Schicksal der Millionen Berliner,
+        die die letzten Wochen in Kellern und Trümmern überlebten.
+      </p>
+    </div>
+
+    <!-- ═══ AUFGABE 1 ═══ -->
+    <div class="task-block visible" id="task-1">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 1 von 5</span>
+          <span class="difficulty">★☆☆</span>
+        </div>
+      </div>
+      <h2 class="task-title-h2">Zeitstrahl: Die letzten Wochen</h2>
+
+      <div class="document-card">
+        <div class="document-stamp">Chronik · Berlin, April–Mai 1945</div>
+        <p class="document-text">Im Archiv finden sich vier Ereignisse der letzten Kriegswochen. Bringe sie in die richtige zeitliche Reihenfolge:</p>
+        <ul style="margin-top:0.6rem;padding-left:1.2rem;font-size:0.9rem;line-height:1.9;color:var(--text-dark);">
+          <li><strong>A)</strong> Die Rote Armee beginnt die Großoffensive auf Berlin</li>
+          <li><strong>B)</strong> US-amerikanische und sowjetische Truppen treffen sich an der Elbe bei Torgau</li>
+          <li><strong>C)</strong> Hitler nimmt sich im Führerbunker das Leben</li>
+          <li><strong>D)</strong> Kapitulation Berlins – die Stadtkommandantur unterzeichnet die Übergabe</li>
+        </ul>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Bringe die Ereignisse in die richtige Reihenfolge (1 = frühstes):</p>
+        <div class="sorting-list">
+          <div class="sorting-row">
+            <select class="sorting-select" id="s1a">
+              <option value="">–</option><option value="1">1.</option><option value="2">2.</option><option value="3">3.</option><option value="4">4.</option>
+            </select>
+            <div class="sorting-event"><strong>A)</strong> Sowjetische Großoffensive auf Berlin beginnt (16. April)</div>
+          </div>
+          <div class="sorting-row">
+            <select class="sorting-select" id="s1b">
+              <option value="">–</option><option value="1">1.</option><option value="2">2.</option><option value="3">3.</option><option value="4">4.</option>
+            </select>
+            <div class="sorting-event"><strong>B)</strong> Treffen an der Elbe bei Torgau (25. April)</div>
+          </div>
+          <div class="sorting-row">
+            <select class="sorting-select" id="s1c">
+              <option value="">–</option><option value="1">1.</option><option value="2">2.</option><option value="3">3.</option><option value="4">4.</option>
+            </select>
+            <div class="sorting-event"><strong>C)</strong> Hitler nimmt sich das Leben (30. April)</div>
+          </div>
+          <div class="sorting-row">
+            <select class="sorting-select" id="s1d">
+              <option value="">–</option><option value="1">1.</option><option value="2">2.</option><option value="3">3.</option><option value="4">4.</option>
+            </select>
+            <div class="sorting-event"><strong>D)</strong> Kapitulation Berlins (2. Mai)</div>
+          </div>
+        </div>
+        <button class="check-btn" onclick="checkTask1()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-1" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-1" onclick="goToNextTask(1)">Weiter zu Aufgabe 2 →</button>
+      </div>
+    </div>
+
+    <!-- ═══ AUFGABE 2 ═══ -->
+    <div class="task-block" id="task-2">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 2 von 5</span>
+          <span class="difficulty">★☆☆</span>
+        </div>
+      </div>
+      <h2 class="task-title-h2">Die Einkreisung Berlins</h2>
+
+      <div class="document-card">
+        <div class="document-stamp">Lagebericht · Sowjetische Heeresgruppen · April 1945</div>
+        <p class="document-text">
+          Am <strong>16. April 1945</strong> begann die Rote Armee die Weichsel-Oder-Offensive
+          und stieß direkt auf Berlin vor. 2,5 Millionen sowjetische Soldaten und über 6.000 Panzer
+          rückten auf die Hauptstadt zu. Am <strong>25. April 1945</strong> war Berlin vollständig
+          von sowjetischen Truppen eingeschlossen. Am selben Tag trafen an der Elbe bei
+          <strong>Torgau</strong> amerikanische und sowjetische Truppen aufeinander –
+          ein historisches Moment: Deutschland war nun vollständig in zwei Hälften geteilt.
+          In Berlin selbst tobten die schwersten Straßenkämpfe. Jeder Häuserblock wurde
+          umkämpft. Die Berliner Zivilbevölkerung – mehrheitlich Frauen, Kinder und Alte –
+          verbrachte die letzten Tage in Kellern und U-Bahnschächten.
+        </p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Richtig oder falsch?</p>
+        <table class="tf-table">
+          <thead><tr><th>Aussage</th><th>Richtig</th><th>Falsch</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Am 25. April 1945 war Berlin vollständig von sowjetischen Truppen eingeschlossen.</td>
+              <td><input type="radio" name="tf2a" value="r"></td>
+              <td><input type="radio" name="tf2a" value="f"></td>
+            </tr>
+            <tr>
+              <td>US-amerikanische und sowjetische Truppen trafen sich in Berlin.</td>
+              <td><input type="radio" name="tf2b" value="r"></td>
+              <td><input type="radio" name="tf2b" value="f"></td>
+            </tr>
+            <tr>
+              <td>Die Berliner Zivilbevölkerung wurde rechtzeitig evakuiert.</td>
+              <td><input type="radio" name="tf2c" value="r"></td>
+              <td><input type="radio" name="tf2c" value="f"></td>
+            </tr>
+            <tr>
+              <td>Die Straßenkämpfe in Berlin zogen sich haus- und kellerweise hin.</td>
+              <td><input type="radio" name="tf2d" value="r"></td>
+              <td><input type="radio" name="tf2d" value="f"></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="check-btn" onclick="checkTask2()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-2" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-2" onclick="goToNextTask(2)">Weiter zu Aufgabe 3 →</button>
+      </div>
+    </div>
+
+    <!-- ═══ AUFGABE 3 ═══ -->
+    <div class="task-block" id="task-3">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 3 von 5</span>
+          <span class="difficulty">★★☆</span>
+        </div>
+      </div>
+      <h2 class="task-title-h2">Hitlers letzter Monat</h2>
+
+      <div class="document-card">
+        <div class="document-stamp">Bericht · Führerbunker Berlin · April 1945</div>
+        <p class="document-text">
+          In den letzten Wochen des Krieges hielt sich Hitler in einem Tiefbunker unter der
+          Reichskanzlei in Berlin auf – dem sogenannten <strong>Führerbunker</strong>.
+          Während Berlin brannte und die Rote Armee vorrückte, gab Hitler weiterhin sinnlose
+          Befehle an Divisionen, die längst aufgerieben oder nicht existent waren.
+          Er weigerte sich, die Realität anzuerkennen. In seinem letzten politischen Testament
+          vom 29. April gab er anderen die Schuld am Krieg und an der Niederlage.
+          Am <strong>30. April 1945</strong> heiratete Hitler seine langjährige Lebensgefährtin
+          Eva Braun – und erschoss sich wenige Stunden später.
+          Berlin kapitulierte am <strong>2. Mai 1945</strong>.
+        </p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Wann und wie starb Hitler?</p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="q3" value="a"> <span>Er floh nach Südamerika und lebte dort weiter.</span></label>
+          <label class="mc-option"><input type="radio" name="q3" value="b"> <span>Er wurde am 2. Mai 1945 von sowjetischen Soldaten gefangen genommen und erschossen.</span></label>
+          <label class="mc-option"><input type="radio" name="q3" value="c"> <span>Er erschoss sich am 30. April 1945 in seinem Bunker in Berlin.</span></label>
+          <label class="mc-option"><input type="radio" name="q3" value="d"> <span>Er starb am 8. Mai 1945 an einem Herzinfarkt, als er die Kapitulation unterschrieb.</span></label>
+        </div>
+        <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
+      </div>
+    </div>
+
+    <!-- ═══ AUFGABE 4 ═══ -->
+    <div class="task-block" id="task-4">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 4 von 5</span>
+          <span class="difficulty">★★☆</span>
+        </div>
+      </div>
+      <h2 class="task-title-h2">Die Berliner Zivilbevölkerung</h2>
+
+      <div class="document-card">
+        <div class="document-stamp">Augenzeugenberichte · Berlin, April/Mai 1945</div>
+        <p class="document-text">
+          Berlin hatte zu Kriegsbeginn 4,3 Millionen Einwohner. Viele waren bereits geflohen.
+          In den letzten Tagen lebten noch etwa 2 Millionen Menschen in der eingeschlossenen Stadt,
+          die meisten in Kellern, U-Bahnschächten und Bunkern.
+        </p>
+        <div class="source-box">
+          <blockquote>
+            „Wir wussten, dass die Russen kommen würden. Wir hörten die Artillerie Tag und Nacht.
+            Die Kinder weinten vor Hunger und Angst. Man lebte stundweise. Hoffnung hatten wir keine mehr,
+            nur den Wunsch, dass es irgendwann aufhört."
+          </blockquote>
+          <p class="source-attribution">– Adaptierter Bericht einer Berliner Zivilistin, 1945</p>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Was zeigt dieser Bericht über das Leben der Zivilbevölkerung in den letzten Kriegstagen?</p>
+        <div class="mc-options">
+          <label class="mc-option"><input type="radio" name="q4" value="a"> <span>Die Berliner Bevölkerung war entschlossen, bis zum letzten Mann zu kämpfen.</span></label>
+          <label class="mc-option"><input type="radio" name="q4" value="b"> <span>Die Bevölkerung litt unter extremer Not – Hunger, Angst, Erschöpfung – und wünschte sich nur das Ende des Krieges.</span></label>
+          <label class="mc-option"><input type="radio" name="q4" value="c"> <span>Die Zivilisten waren durch NS-Propaganda noch immer vom Endsieg überzeugt.</span></label>
+          <label class="mc-option"><input type="radio" name="q4" value="d"> <span>Die Bevölkerung hatte ausreichend Lebensmittel und war sicher in Bunkern untergebracht.</span></label>
+        </div>
+        <button class="check-btn" onclick="checkTask4()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-4" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-4" onclick="goToNextTask(4)">Weiter zu Aufgabe 5 →</button>
+      </div>
+    </div>
+
+    <!-- ═══ AUFGABE 5 ═══ -->
+    <div class="task-block" id="task-5">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 5 von 5</span>
+          <span class="difficulty">★★★</span>
+        </div>
+      </div>
+      <h2 class="task-title-h2">Warum kein früheres Ende?</h2>
+
+      <div class="document-card">
+        <div class="document-stamp">Historische Analyse · Das Weiterkämpfen trotz hoffnungsloser Lage</div>
+        <p class="document-text">
+          Spätestens nach Stalingrad (Februar 1943) war ein militärischer Sieg Deutschlands
+          unrealistisch. Nach D-Day (Juni 1944) war er unmöglich. Warum kämpfte Deutschland
+          trotzdem bis Mai 1945 weiter? Historiker:innen nennen verschiedene Gründe.
+        </p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Welche Gründe erklären, warum Deutschland nicht früher kapitulierte?</p>
+        <p class="ms-hint">Wähle alle historisch belegbaren Aussagen aus.</p>
+        <div class="ms-options">
+          <label class="ms-option"><input type="checkbox" name="ms5" value="a"> <span>Hitler weigerte sich bis zuletzt, eine Kapitulation zu akzeptieren und bestrafte Defätisten mit dem Tod.</span></label>
+          <label class="ms-option"><input type="checkbox" name="ms5" value="b"> <span>Die NS-Propaganda hatte viele überzeugt, es gebe noch geheime Wunderwaffen und eine Wende sei möglich.</span></label>
+          <label class="ms-option"><input type="checkbox" name="ms5" value="c"> <span>Deutschland hatte militärisch noch eine realistische Chance auf einen Endsieg. <em>(Vorsicht!)</em></span></label>
+          <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Soldaten und Offiziere, die kapitulierten oder desertierten, wurden als Verräter erschossen.</span></label>
+          <label class="ms-option"><input type="checkbox" name="ms5" value="e"> <span>Die Angst vor dem, was die Sowjetunion mit Deutschland nach dem Krieg machen würde, ließ viele weiterkämpfen.</span></label>
+        </div>
+        <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
+      </div>
+
+      <div class="reflection-box">
+        <div class="reflection-label">Reflexionsfrage</div>
+        Hitler gab in seinem letzten Testament anderen die Schuld an der Niederlage.
+        Was sagst du zu dieser Haltung? Und was sagt das über das Wesen von Diktatoren aus?
+      </div>
+    </div>
+
+    <!-- ═══ CODE ═══ -->
+    <div class="code-section" id="code-section">
+      <div class="code-section-header">
+        <span class="code-lock-icon">🔓</span>
+        <h2>Mappe 7 freischalten</h2>
+      </div>
+      <div class="code-section-body">
+        <p>Du hast die letzten Berliner Tage rekonstruiert. Gib den Code ein:</p>
+        <div class="code-hint">
+          Hitler starb am ___ April 1945 im Führerbunker. (2 Ziffern und „APRIL", also z.B. „30APRIL")
+        </div>
+        <div class="code-input-row">
+          <input class="code-input" id="unlock-input" type="text" placeholder="Code eingeben…"
+            autocomplete="off" autocapitalize="characters">
+          <button class="unlock-btn" onclick="checkCode('30april', 7, 'mappe-07.html')">🔓 Öffnen</button>
+        </div>
+        <div id="code-feedback" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../scripts/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => initApp(6, 5));
+
+  function checkTask1() {
+    const r = validateSorting(['s1a','s1b','s1c','s1d']);
+    if (!r.allAnswered) { showFeedback('feedback-1','Bitte ordne alle vier Ereignisse ein.','warning'); return; }
+    // A=16.April(1), B=25.April(2), C=30.April(3), D=2.Mai(4)
+    const correct = {s1a:'1', s1b:'2', s1c:'3', s1d:'4'};
+    const ok = Object.keys(correct).every(k => r.results[k] === correct[k]);
+    if (ok) {
+      showFeedback('feedback-1','✓ <strong>Richtig!</strong> 16. April: Sowjetoffensive beginnt → 25. April: Einkreisung + Elbe-Treffen → 30. April: Hitlers Tod → 2. Mai: Berlins Kapitulation. Innerhalb von 16 Tagen war das Dritte Reich am Ende.','correct');
+      completeTask(1);
+    } else {
+      showFeedback('feedback-1','Denk an die Daten: Sowjetoffensive 16. April, Elbe-Treffen 25. April, Hitler stirbt 30. April, Berlin kapituliert 2. Mai.','incorrect');
+    }
+  }
+
+  function checkTask2() {
+    const {allAnswered, results} = validateTF(['tf2a','tf2b','tf2c','tf2d']);
+    if (!allAnswered) { showFeedback('feedback-2','Bitte beantworte alle Aussagen.','warning'); return; }
+    const correct = {tf2a:'r', tf2b:'f', tf2c:'f', tf2d:'r'};
+    const ok = Object.keys(correct).every(k => results[k] === correct[k]);
+    if (ok) {
+      showFeedback('feedback-2','✓ <strong>Korrekt!</strong> US- und sowjetische Truppen trafen sich an der Elbe – nicht in Berlin. Und die Bevölkerung wurde nicht evakuiert: Millionen verbrachten die letzten Tage unter katastrophalen Bedingungen in Kellern.','correct');
+      completeTask(2);
+    } else {
+      showFeedback('feedback-2','Wo trafen sich US- und sowjetische Truppen? Und wurde die Berliner Bevölkerung wirklich rechtzeitig evakuiert?','incorrect');
+    }
+  }
+
+  function checkTask3() {
+    const r = validateMC('q3');
+    if (!r.valid) { showFeedback('feedback-3','Bitte wähle eine Antwort.','warning'); return; }
+    if (r.value === 'c') {
+      showFeedback('feedback-3','✓ <strong>Richtig.</strong> Hitler erschoss sich am 30. April 1945 im Führerbunker unter Berlin – einen Tag nach der Hochzeit mit Eva Braun. Die Theorien über eine Flucht wurden von Historiker:innen widerlegt. Sein Tod war ein bewusster Entschluss, der Gefangennahme zu entgehen.','correct');
+      completeTask(3);
+    } else {
+      showFeedback('feedback-3','Das genaue Datum und die Art seines Todes steht im Text. Schau nochmal genau hin.','incorrect');
+    }
+  }
+
+  function checkTask4() {
+    const r = validateMC('q4');
+    if (!r.valid) { showFeedback('feedback-4','Bitte wähle eine Antwort.','warning'); return; }
+    if (r.value === 'b') {
+      showFeedback('feedback-4','✓ <strong>Richtig.</strong> Der Zeugenbericht zeigt extreme Not: kein Essen, dauernde Angst, Erschöpfung. Der Wunsch war einfach, dass „es aufhört" – nicht Kriegsbegeisterung, sondern Erschöpfung und Angst prägten die letzten Tage.','correct');
+      completeTask(4);
+    } else {
+      showFeedback('feedback-4','Lies das Zitat nochmal: Was wünschte sich die Zivilistin? Kampfwillen oder Frieden?','incorrect');
+    }
+  }
+
+  function checkTask5() {
+    const selected = validateMS('ms5');
+    if (selected.length === 0) { showFeedback('feedback-5','Wähle mindestens eine Antwort.','warning'); return; }
+    const correct = new Set(['a','b','d','e']);
+    const selSet = new Set(selected);
+    const ok = [...correct].every(v => selSet.has(v)) && [...selSet].every(v => correct.has(v));
+    if (ok) {
+      showFeedback('feedback-5','✓ <strong>Sehr gut analysiert!</strong> Das Weiterkämpfen hatte viele Gründe: Führerbefehl, Angst vor Strafe, Propaganda, Angst vor sowjetischer Rache. Aussage C ist falsch – es gab keine reale Chance mehr. Jeder zusätzliche Kriegstag kostete Tausende Menschenleben unnötig.','correct');
+      completeTask(5);
+    } else {
+      showFeedback('feedback-5','Welche Aussagen beschreiben reale historische Faktoren? Prüfe besonders C – gab es wirklich noch eine militärische Chance?','incorrect');
+    }
+  }
+</script>
+</body>
+</html>
