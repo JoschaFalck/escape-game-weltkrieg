@@ -3,22 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Archiv 45 – Mappe 7: Stunde Null</title>
+  <title>Mappe 7: Stunde Null – Archiv 45</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
   <style>
     /* ── Abschluss-Zertifikat (nur Mappe 7) ── */
     .completion-certificate {
-      background: var(--paper);
-      color: var(--text-dark);
-      border: 3px double var(--gold);
-      border-radius: 6px;
-      padding: 2.5rem 2rem;
       text-align: center;
-      max-width: 640px;
-      margin: 0 auto;
-      box-shadow: 0 0 40px rgba(201,162,39,.25), 0 4px 24px rgba(0,0,0,.4);
+      padding: 1rem 0;
     }
     .cert-stamp {
       display: inline-block;
@@ -26,37 +19,36 @@
       color: var(--green);
       font-family: 'Courier Prime', monospace;
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 5px;
+      font-size: 0.8rem;
+      letter-spacing: 4px;
       padding: 4px 18px;
       border-radius: 4px;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.2rem;
       transform: rotate(-1.5deg);
     }
     .cert-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.65rem;
+      font-size: 1.5rem;
       color: var(--text-dark);
-      margin: 0 0 .5rem;
+      margin-bottom: .5rem;
     }
     .cert-divider {
-      width: 60px;
-      height: 2px;
+      width: 60px; height: 2px;
       background: var(--gold);
       margin: 1rem auto;
       border-radius: 2px;
     }
     .cert-text {
-      font-size: 0.95rem;
+      font-size: 0.93rem;
       line-height: 1.7;
       color: #3a2e1a;
       margin: .6rem 0;
     }
     .cert-quote {
-      margin: 1.5rem auto;
+      margin: 1.4rem auto;
       max-width: 480px;
       font-style: italic;
-      font-size: 1rem;
+      font-size: 0.98rem;
       color: #4a3b1a;
       border-left: 3px solid var(--gold);
       padding: .6rem 1rem;
@@ -66,277 +58,220 @@
     }
     .cert-quote-author {
       display: block;
-      margin-top: .35rem;
+      margin-top: .3rem;
       font-style: normal;
-      font-size: .8rem;
+      font-size: .78rem;
       color: #7a6040;
       font-family: 'Courier Prime', monospace;
     }
     .cert-badges {
       display: flex;
       flex-wrap: wrap;
-      gap: .5rem;
+      gap: .45rem;
       justify-content: center;
-      margin: 1.5rem 0;
+      margin: 1.4rem 0;
     }
     .cert-badge {
       background: rgba(39,174,96,.15);
       border: 1px solid var(--green);
       color: #1a5c35;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-family: 'Courier Prime', monospace;
       font-weight: 700;
       padding: 3px 10px;
       border-radius: 20px;
-      letter-spacing: 1px;
-    }
-    .cert-actions {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    /* Mappe 7: final mappe, chapter nav shows all as completed */
-    @media print {
-      .completion-certificate { border: 2px solid #333; box-shadow: none; }
-      .cert-badge { border: 1px solid #333; color: #333; }
     }
   </style>
 </head>
-<body class="mappe-page" data-mappe="7">
+<body class="mappe-page">
 
-  <!-- Site Header -->
-  <header class="site-header">
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="site-header">
+  <div class="header-inner">
     <a href="../index.html" class="site-logo">ARCHIV<span class="logo-badge">45</span></a>
-    <nav class="chapter-nav" id="chapter-nav" aria-label="Kapitelnavigation"></nav>
-    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Aufgabenliste öffnen">☰</button>
-  </header>
+    <nav class="chapter-nav" aria-label="Mappe-Navigation">
+      <a href="#" class="nav-arrow" id="prev-mappe">‹</a>
+      <div class="chapter-circles">
+        <a href="mappe-01.html" class="chapter-circle" data-mappe="1" data-title="Mappe 1: Die Wende">1</a>
+        <a href="mappe-02.html" class="chapter-circle" data-mappe="2" data-title="Mappe 2: Holocaust">2</a>
+        <a href="mappe-03.html" class="chapter-circle" data-mappe="3" data-title="Mappe 3: Widerstand">3</a>
+        <a href="mappe-04.html" class="chapter-circle" data-mappe="4" data-title="Mappe 4: D-Day">4</a>
+        <a href="mappe-05.html" class="chapter-circle" data-mappe="5" data-title="Mappe 5: Verzweiflung">5</a>
+        <a href="mappe-06.html" class="chapter-circle" data-mappe="6" data-title="Mappe 6: Letzte Tage">6</a>
+        <a href="mappe-07.html" class="chapter-circle" data-mappe="7" data-title="Mappe 7: Stunde Null">7</a>
+      </div>
+      <a href="#" class="nav-arrow" id="next-mappe">›</a>
+    </nav>
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Aufgaben ein-/ausblenden">☰</button>
+  </div>
+</header>
 
-  <!-- Task Sidebar -->
-  <aside class="task-sidebar" id="task-sidebar" aria-label="Aufgabenliste">
-    <div class="sidebar-header">Mappe 7 · Aufgaben</div>
-    <ul class="sidebar-task-list" id="sidebar-task-list"></ul>
+<!-- ═══════════ BANNER ═══════════ -->
+<div class="mappe-banner">
+  <div class="mappe-banner-inner">
+    <span class="mappe-label">Mappe 7</span>
+    <h1>Stunde Null – Kapitulation &amp; Neubeginn</h1>
+  </div>
+</div>
+
+<!-- ═══════════ LAYOUT ═══════════ -->
+<div class="layout-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="task-sidebar" id="task-sidebar">
+    <h2 class="sidebar-title">Aufgaben</h2>
+    <ul class="task-list">
+      <li class="task-nav-item active"  data-task="1"><span class="task-status"></span><span class="task-nav-title">Die Kapitulation</span></li>
+      <li class="task-nav-item locked"  data-task="2"><span class="task-status">🔒</span><span class="task-nav-title">Die Atombombe</span></li>
+      <li class="task-nav-item locked"  data-task="3"><span class="task-status">🔒</span><span class="task-nav-title">Die Besatzungszonen</span></li>
+      <li class="task-nav-item locked"  data-task="4"><span class="task-status">🔒</span><span class="task-nav-title">Nürnberger Prozesse</span></li>
+      <li class="task-nav-item locked"  data-task="5"><span class="task-status">🔒</span><span class="task-nav-title">Was bedeutet Stunde Null?</span></li>
+      <li class="task-nav-item locked"  data-task="code"><span class="task-status">🔒</span><span class="task-nav-title">Abschluss</span></li>
+    </ul>
   </aside>
 
-  <!-- Main Content -->
-  <main class="mappe-main" id="mappe-main">
+  <!-- HAUPTINHALT -->
+  <main class="content-area">
 
-    <!-- Mappe Banner -->
-    <div class="mappe-banner">
-      <span class="mappe-num-label">Mappe 7</span>
-      <h1 class="mappe-title">Stunde Null</h1>
-      <p class="mappe-subtitle">Kapitulation &amp; Neubeginn · 1945</p>
+    <!-- Archiv-Kontext -->
+    <div class="archive-context">
+      <div class="archive-stamp">Archiv 45 · Mappe 7 · Letzte Akte · 1945</div>
+      <p class="context-text">
+        Ihr habt es bis zur letzten Akte geschafft. Was ihr jetzt vor euch habt, sind Dokumente
+        aus den Tagen des Endes – und des Anfangs. Am <strong>8. Mai 1945</strong> unterzeichnete
+        Deutschland die bedingungslose Kapitulation. Sechs Jahre Krieg, Millionen Tote,
+        zerstörte Städte – und nun: Stille. Aber das Kriegsende in Europa war nicht das Ende
+        des Weltkriegs – und für Deutschland begann etwas Neues.
+        <strong>Wertet diese letzte Akte aus.</strong>
+      </p>
     </div>
 
-    <!-- Archiv-Kontext Dokument -->
-    <article class="doc-card" aria-label="Archiv-Einleitung">
-      <div class="doc-stamp">Letzte Akte</div>
-      <div class="doc-header">Archiv-Akte Nr. 7 · Historisches Bundesarchiv Berlin · März 2026</div>
-      <div class="doc-body">
-        <p><strong>Ermittlerin / Ermittler,</strong></p>
-        <p>
-          Ihr habt es bis zur letzten Akte geschafft. Was ihr jetzt vor euch habt,
-          sind Dokumente aus den Tagen des Endes – und des Anfangs. Am
-          <strong>8. Mai 1945</strong> unterzeichnete Deutschland die bedingungslose
-          Kapitulation. Sechs Jahre Krieg, Millionen Tote, zerstörte Städte – und nun: Stille.
-        </p>
-        <p>
-          Aber das Ende des Krieges in Europa war nicht das Ende des Weltkriegs. In Asien
-          warfen die USA erstmals Atombomben auf japanische Städte. Und in Deutschland
-          begann etwas Neues: vier Besatzungszonen, Nürnberger Prozesse, der mühsame
-          Weg zu einem anderen Deutschland.
-        </p>
-        <p>
-          <em>Eure Aufgabe: Versteht, was „Stunde Null" wirklich bedeutete –
-          für Deutschland, für Europa, für die Welt.</em>
-        </p>
-      </div>
-    </article>
-
-    <!-- ═══════════════════════════════════════════════════════════
-         AUFGABE 1 · MC ★☆☆ · Die Kapitulation
-    ═══════════════════════════════════════════════════════════ -->
-    <section class="task-block" id="task-1" data-task="1" aria-labelledby="task-1-label">
-      <div class="task-header">
-        <span class="task-label" id="task-1-label">Aufgabe 1 von 5</span>
-        <span class="task-difficulty" aria-label="Schwierigkeit: einfach">★☆☆ Einstieg</span>
-      </div>
-
-      <div class="task-stimulus">
-        <div class="doc-card small">
-          <div class="doc-header">Auszug · Nachrichtenmeldung · 8./9. Mai 1945</div>
-          <div class="doc-body source-text">
-            <p>
-              Am <strong>7. Mai 1945</strong> unterzeichnete Generaloberst Alfred Jodl
-              in Reims (Frankreich) ein erstes Kapitulationsdokument vor den westalliierten
-              Streitkräften. Die Sowjetunion bestand jedoch auf einer zweiten, feierlicheren
-              Zeremonie in der Reichshauptstadt.
-            </p>
-            <p>
-              In der Nacht vom 8. auf den 9. Mai 1945 unterzeichnete
-              Generalfeldmarschall Wilhelm Keitel in <strong>Berlin-Karlshorst</strong>
-              die bedingungslose Kapitulation der Wehrmacht vor allen alliierten
-              Streitkräften. Sie trat offiziell um Mitternacht in Kraft.
-              Der <strong>8. Mai 1945</strong> gilt in Deutschland als „Tag der Befreiung".
-            </p>
-          </div>
+    <!-- ═══ AUFGABE 1 · MC ★☆☆ · Kapitulation ═══ -->
+    <div class="task-block visible" id="task-1">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 1 von 5</span>
+          <span class="difficulty" title="Einfach">★☆☆</span>
         </div>
       </div>
+      <h2 class="task-title-h2">Die Kapitulation</h2>
 
-      <div class="task-question">
-        <p class="question-text">
-          Wann und wo trat die bedingungslose Kapitulation Deutschlands offiziell in Kraft?
+      <div class="document-card">
+        <div class="document-stamp">Auszug · Nachrichtenmeldung · Mai 1945</div>
+        <p class="document-text">
+          Am <strong>7. Mai 1945</strong> unterzeichnete Generaloberst Alfred Jodl in
+          <strong>Reims</strong> (Frankreich) ein erstes Kapitulationsdokument vor den
+          Westalliierten. Die Sowjetunion bestand auf einer zweiten Zeremonie in der Hauptstadt.
+          In der Nacht vom 8. auf den 9. Mai 1945 unterzeichnete Generalfeldmarschall Wilhelm
+          Keitel in <strong>Berlin-Karlshorst</strong> die bedingungslose Kapitulation der
+          Wehrmacht vor allen Alliierten. Sie trat offiziell um Mitternacht in Kraft.
+          Der <strong>8. Mai 1945</strong> gilt in Deutschland seither als „Tag der Befreiung".
         </p>
-        <div class="mc-options" role="radiogroup" aria-label="Antwortoptionen Aufgabe 1">
-          <label class="mc-option">
-            <input type="radio" name="q1" value="a">
-            <span>30. April 1945 – mit dem Tod Adolf Hitlers in Berlin</span>
-          </label>
-          <label class="mc-option">
-            <input type="radio" name="q1" value="b">
-            <span>7. Mai 1945 – mit der Unterzeichnung in Reims</span>
-          </label>
-          <label class="mc-option">
-            <input type="radio" name="q1" value="c">
-            <span>8. Mai 1945 – nach der Unterzeichnung in Berlin-Karlshorst</span>
-          </label>
-          <label class="mc-option">
-            <input type="radio" name="q1" value="d">
-            <span>2. September 1945 – zusammen mit der japanischen Kapitulation</span>
-          </label>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Wann und wo trat die bedingungslose Kapitulation Deutschlands offiziell in Kraft?</p>
+        <div class="mc-options" role="radiogroup">
+          <label class="mc-option"><input type="radio" name="q1" value="a"> <span>30. April 1945 – mit dem Tod Adolf Hitlers in Berlin</span></label>
+          <label class="mc-option"><input type="radio" name="q1" value="b"> <span>7. Mai 1945 – mit der Unterzeichnung in Reims (Frankreich)</span></label>
+          <label class="mc-option"><input type="radio" name="q1" value="c"> <span>8. Mai 1945 – nach der Unterzeichnung in Berlin-Karlshorst</span></label>
+          <label class="mc-option"><input type="radio" name="q1" value="d"> <span>2. September 1945 – zusammen mit der japanischen Kapitulation</span></label>
         </div>
-        <div class="feedback" id="feedback-1" role="alert" aria-live="polite"></div>
-        <button class="check-btn" id="check-1" aria-label="Antwort zu Aufgabe 1 prüfen">
-          Antwort prüfen
-        </button>
-        <button class="next-task-btn hidden" id="next-1" aria-label="Weiter zu Aufgabe 2">
-          Weiter zur nächsten Aufgabe →
-        </button>
+        <button class="check-btn" onclick="checkTask1()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-1" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-1" onclick="goToNextTask(1)">Weiter zu Aufgabe 2 →</button>
       </div>
-    </section>
+    </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         AUFGABE 2 · TF ★☆☆ · Die Atombombe
-    ═══════════════════════════════════════════════════════════ -->
-    <section class="task-block hidden" id="task-2" data-task="2" aria-labelledby="task-2-label">
-      <div class="task-header">
-        <span class="task-label" id="task-2-label">Aufgabe 2 von 5</span>
-        <span class="task-difficulty" aria-label="Schwierigkeit: einfach">★☆☆ Einstieg</span>
-      </div>
-
-      <div class="task-stimulus">
-        <div class="doc-card small">
-          <div class="doc-header">Historischer Überblick · Die Atombombe 1945</div>
-          <div class="doc-body source-text">
-            <p>
-              Am <strong>6. August 1945</strong> warfen die USA die erste Atombombe auf die
-              japanische Stadt <strong>Hiroshima</strong> ab. Schätzungsweise 70.000 bis
-              80.000 Menschen starben sofort, Zehntausende später an den Folgen.
-              Am <strong>9. August 1945</strong> folgte eine zweite Atombombe auf
-              <strong>Nagasaki</strong>.
-            </p>
-            <p>
-              Die Bomben wurden im sogenannten <em>Manhattan-Projekt</em> entwickelt,
-              das der Physiker Julius Robert Oppenheimer leitete. Wissenschaftler wie
-              Albert Einstein hatten zwar früh auf die Möglichkeit einer Atombombe
-              hingewiesen, bauten sie aber nicht selbst.
-            </p>
-            <p>
-              Japan erklärte am 15. August 1945 die Kapitulation. Am
-              2. September 1945 wurde sie offiziell unterzeichnet – damit endete
-              der Zweite Weltkrieg weltweit.
-            </p>
-          </div>
+    <!-- ═══ AUFGABE 2 · TF ★☆☆ · Atombombe ═══ -->
+    <div class="task-block" id="task-2">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 2 von 5</span>
+          <span class="difficulty" title="Einfach">★☆☆</span>
         </div>
       </div>
+      <h2 class="task-title-h2">Die Atombombe</h2>
 
-      <div class="task-question">
-        <p class="question-text">
-          Richtig oder falsch? Beantworte jede Aussage auf Basis des Textes.
+      <div class="document-card">
+        <div class="document-stamp">Historischer Überblick · Atombombe 1945</div>
+        <p class="document-text">
+          Am <strong>6. August 1945</strong> warfen die USA die erste Atombombe auf die japanische
+          Stadt <strong>Hiroshima</strong> ab. Schätzungsweise 70.000 bis 80.000 Menschen starben
+          sofort. Am <strong>9. August</strong> folgte eine zweite Bombe auf <strong>Nagasaki</strong>.
+          Die Bomben wurden im <em>Manhattan-Projekt</em> entwickelt, das der Physiker Julius Robert
+          Oppenheimer leitete. Albert Einstein hatte mit einem berühmten Brief den Anstoß gegeben,
+          baute die Bombe aber nicht selbst. Japan kapitulierte am 15. August 1945 – der Zweite
+          Weltkrieg war weltweit beendet.
         </p>
-        <table class="tf-table" role="table" aria-label="Richtig-Falsch-Tabelle Aufgabe 2">
-          <thead>
-            <tr>
-              <th scope="col">Aussage</th>
-              <th scope="col">Richtig</th>
-              <th scope="col">Falsch</th>
-            </tr>
-          </thead>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Richtig oder falsch? Beantworte jede Aussage auf Basis des Textes.</p>
+        <table class="tf-table">
+          <thead><tr><th>Aussage</th><th>Richtig</th><th>Falsch</th></tr></thead>
           <tbody>
             <tr>
               <td>Die erste Atombombe fiel auf Nagasaki.</td>
-              <td><label><input type="radio" name="tf2a" value="r" aria-label="Richtig"> R</label></td>
-              <td><label><input type="radio" name="tf2a" value="f" aria-label="Falsch"> F</label></td>
+              <td><input type="radio" name="tf2a" value="r" aria-label="Richtig"></td>
+              <td><input type="radio" name="tf2a" value="f" aria-label="Falsch"></td>
             </tr>
             <tr>
               <td>Die USA warfen im August 1945 zwei Atombomben auf Japan ab.</td>
-              <td><label><input type="radio" name="tf2b" value="r" aria-label="Richtig"> R</label></td>
-              <td><label><input type="radio" name="tf2b" value="f" aria-label="Falsch"> F</label></td>
+              <td><input type="radio" name="tf2b" value="r" aria-label="Richtig"></td>
+              <td><input type="radio" name="tf2b" value="f" aria-label="Falsch"></td>
             </tr>
             <tr>
               <td>Japan kapitulierte kurz nach dem Abwurf der Atombombe.</td>
-              <td><label><input type="radio" name="tf2c" value="r" aria-label="Richtig"> R</label></td>
-              <td><label><input type="radio" name="tf2c" value="f" aria-label="Falsch"> F</label></td>
+              <td><input type="radio" name="tf2c" value="r" aria-label="Richtig"></td>
+              <td><input type="radio" name="tf2c" value="f" aria-label="Falsch"></td>
             </tr>
             <tr>
               <td>Albert Einstein baute persönlich die erste Atombombe.</td>
-              <td><label><input type="radio" name="tf2d" value="r" aria-label="Richtig"> R</label></td>
-              <td><label><input type="radio" name="tf2d" value="f" aria-label="Falsch"> F</label></td>
+              <td><input type="radio" name="tf2d" value="r" aria-label="Richtig"></td>
+              <td><input type="radio" name="tf2d" value="f" aria-label="Falsch"></td>
             </tr>
           </tbody>
         </table>
-        <div class="feedback" id="feedback-2" role="alert" aria-live="polite"></div>
-        <button class="check-btn" id="check-2" aria-label="Antwort zu Aufgabe 2 prüfen">
-          Antwort prüfen
-        </button>
-        <button class="next-task-btn hidden" id="next-2" aria-label="Weiter zu Aufgabe 3">
-          Weiter zur nächsten Aufgabe →
-        </button>
+        <button class="check-btn" onclick="checkTask2()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-2" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-2" onclick="goToNextTask(2)">Weiter zu Aufgabe 3 →</button>
       </div>
-    </section>
+    </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         AUFGABE 3 · Matching ★★☆ · Die Besatzungszonen
-    ═══════════════════════════════════════════════════════════ -->
-    <section class="task-block hidden" id="task-3" data-task="3" aria-labelledby="task-3-label">
-      <div class="task-header">
-        <span class="task-label" id="task-3-label">Aufgabe 3 von 5</span>
-        <span class="task-difficulty" aria-label="Schwierigkeit: mittel">★★☆ Erarbeitung</span>
-      </div>
-
-      <div class="task-stimulus">
-        <div class="doc-card small">
-          <div class="doc-header">Archivnotiz · Die vier Besatzungszonen · 1945</div>
-          <div class="doc-body source-text">
-            <p>
-              Auf der Konferenz von Jalta (Februar 1945) hatten die Alliierten
-              vereinbart, Deutschland nach der Kapitulation in Besatzungszonen aufzuteilen.
-              Die vier Siegermächte übernahmen je eine Zone:
-            </p>
-            <ul>
-              <li><strong>Ostzone</strong>: das östliche Deutschland – von der Elbe bis zur Oder</li>
-              <li><strong>Nordwestzone</strong>: Küstengebiet, Hamburg, Nordrhein-Westfalen (Ruhrgebiet)</li>
-              <li><strong>Südwestzone</strong>: Rheinland-Pfalz, Baden, Württemberg (westliches Süddeutschland)</li>
-              <li><strong>Südzone</strong>: Bayern, Hessen, Bremen (als Enklave)</li>
-            </ul>
-            <p>
-              Berlin, obwohl tief in der sowjetischen Zone gelegen,
-              wurde ebenfalls unter allen vier Mächten aufgeteilt.
-            </p>
-          </div>
+    <!-- ═══ AUFGABE 3 · Matching ★★☆ · Besatzungszonen ═══ -->
+    <div class="task-block" id="task-3">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 3 von 5</span>
+          <span class="difficulty" title="Mittel">★★☆</span>
         </div>
       </div>
+      <h2 class="task-title-h2">Die Besatzungszonen</h2>
 
-      <div class="task-question">
-        <p class="question-text">
-          Ordne jede Besatzungszone der zuständigen Siegermacht zu.
+      <div class="document-card">
+        <div class="document-stamp">Archivnotiz · Die vier Besatzungszonen · 1945</div>
+        <p class="document-text">
+          Auf der Konferenz von Jalta (Februar 1945) einigten sich die Alliierten, Deutschland
+          nach der Kapitulation in Besatzungszonen aufzuteilen:
         </p>
-        <div class="matching-grid" role="group" aria-label="Besatzungszonen zuordnen">
+        <p class="document-text">
+          <strong>Ostzone:</strong> östliches Deutschland, von der Elbe bis zur Oder<br>
+          <strong>Nordwestzone:</strong> Nordseeküste, Hamburg, Nordrhein-Westfalen (Ruhrgebiet)<br>
+          <strong>Südwestzone:</strong> Rheinland-Pfalz, Baden, westliches Württemberg<br>
+          <strong>Südzone:</strong> Bayern, Hessen, südliches Deutschland<br>
+          Berlin selbst wurde ebenfalls unter alle vier Mächte aufgeteilt.
+        </p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Ordne jede Besatzungszone der zuständigen Siegermacht zu.</p>
+        <div class="matching-grid">
           <div class="matching-row">
-            <span class="matching-term">Ostzone</span>
-            <select id="m3a" class="matching-select" aria-label="Siegermacht für die Ostzone">
-              <option value="">– Siegermacht auswählen –</option>
+            <div class="matching-term">Ostzone</div>
+            <span class="matching-arrow">→</span>
+            <select class="matching-select" id="match3a">
+              <option value="">– Siegermacht –</option>
               <option value="udssr">Sowjetunion (UdSSR)</option>
               <option value="usa">USA</option>
               <option value="uk">Großbritannien</option>
@@ -344,9 +279,10 @@
             </select>
           </div>
           <div class="matching-row">
-            <span class="matching-term">Nordwestzone</span>
-            <select id="m3b" class="matching-select" aria-label="Siegermacht für die Nordwestzone">
-              <option value="">– Siegermacht auswählen –</option>
+            <div class="matching-term">Nordwestzone</div>
+            <span class="matching-arrow">→</span>
+            <select class="matching-select" id="match3b">
+              <option value="">– Siegermacht –</option>
               <option value="udssr">Sowjetunion (UdSSR)</option>
               <option value="usa">USA</option>
               <option value="uk">Großbritannien</option>
@@ -354,9 +290,10 @@
             </select>
           </div>
           <div class="matching-row">
-            <span class="matching-term">Südwestzone</span>
-            <select id="m3c" class="matching-select" aria-label="Siegermacht für die Südwestzone">
-              <option value="">– Siegermacht auswählen –</option>
+            <div class="matching-term">Südwestzone</div>
+            <span class="matching-arrow">→</span>
+            <select class="matching-select" id="match3c">
+              <option value="">– Siegermacht –</option>
               <option value="udssr">Sowjetunion (UdSSR)</option>
               <option value="usa">USA</option>
               <option value="uk">Großbritannien</option>
@@ -364,9 +301,10 @@
             </select>
           </div>
           <div class="matching-row">
-            <span class="matching-term">Südzone</span>
-            <select id="m3d" class="matching-select" aria-label="Siegermacht für die Südzone">
-              <option value="">– Siegermacht auswählen –</option>
+            <div class="matching-term">Südzone</div>
+            <span class="matching-arrow">→</span>
+            <select class="matching-select" id="match3d">
+              <option value="">– Siegermacht –</option>
               <option value="udssr">Sowjetunion (UdSSR)</option>
               <option value="usa">USA</option>
               <option value="uk">Großbritannien</option>
@@ -374,344 +312,217 @@
             </select>
           </div>
         </div>
-        <div class="feedback" id="feedback-3" role="alert" aria-live="polite"></div>
-        <button class="check-btn" id="check-3" aria-label="Antwort zu Aufgabe 3 prüfen">
-          Antwort prüfen
-        </button>
-        <button class="next-task-btn hidden" id="next-3" aria-label="Weiter zu Aufgabe 4">
-          Weiter zur nächsten Aufgabe →
-        </button>
+        <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
       </div>
-    </section>
+    </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         AUFGABE 4 · MC ★★☆ · Nürnberger Prozesse
-    ═══════════════════════════════════════════════════════════ -->
-    <section class="task-block hidden" id="task-4" data-task="4" aria-labelledby="task-4-label">
-      <div class="task-header">
-        <span class="task-label" id="task-4-label">Aufgabe 4 von 5</span>
-        <span class="task-difficulty" aria-label="Schwierigkeit: mittel">★★☆ Erarbeitung</span>
+    <!-- ═══ AUFGABE 4 · MC ★★☆ · Nürnberger Prozesse ═══ -->
+    <div class="task-block" id="task-4">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 4 von 5</span>
+          <span class="difficulty" title="Mittel">★★☆</span>
+        </div>
+      </div>
+      <h2 class="task-title-h2">Die Nürnberger Prozesse</h2>
+
+      <div class="document-card">
+        <div class="document-stamp">Archivdokument · Nürnberger Prozesse · November 1945 – Oktober 1946</div>
+        <p class="document-text">
+          Von November 1945 bis Oktober 1946 wurden in Nürnberg führende Vertreter des
+          NS-Regimes vor einem Internationalen Militärtribunal angeklagt – darunter
+          Hermann Göring, Rudolf Heß und Albert Speer. Die Anklagepunkte umfassten:
+          <em>Verbrechen gegen den Frieden</em> (Vorbereitung eines Angriffskrieges),
+          <em>Kriegsverbrechen</em> und <em>Verbrechen gegen die Menschlichkeit</em>
+          (Massenmord, Verfolgung, Versklavung). 12 Angeklagte wurden zum Tode verurteilt,
+          andere erhielten Gefängnisstrafen, drei wurden freigesprochen.
+          Die Prozesse schufen erstmals einen <strong>internationalen Rechtsrahmen</strong>
+          für die Ahndung von Kriegsverbrechen.
+        </p>
       </div>
 
-      <div class="task-stimulus">
-        <div class="doc-card small">
-          <div class="doc-header">Archivdokument · Nürnberger Prozesse 1945/46</div>
-          <div class="doc-body source-text">
-            <p>
-              Von November 1945 bis Oktober 1946 fanden in Nürnberg die
-              Internationalen Militärtribunale statt. 24 führende Vertreter
-              des NS-Regimes wurden angeklagt – darunter Hermann Göring,
-              Rudolf Heß und Albert Speer.
-            </p>
-            <p>
-              Die Anklagepunkte umfassten: <em>Verbrechen gegen den Frieden</em>
-              (Vorbereitung eines Angriffskriegs), <em>Kriegsverbrechen</em>
-              (Verletzung der Kriegsgesetze) und <em>Verbrechen gegen die Menschlichkeit</em>
-              (Massenmord, Verfolgung, Versklavung).
-            </p>
-            <p>
-              12 Angeklagte wurden zum Tode verurteilt, andere erhielten Gefängnisstrafen,
-              drei wurden freigesprochen. Die Prozesse schufen erstmals einen
-              <strong>internationalen Rechtsrahmen</strong> für die Ahndung von Kriegsverbrechen
-              und legten den Grundstein für das moderne Völkerrecht.
-            </p>
+      <div class="question-block">
+        <p class="question-text">Was war die historisch bedeutsamste Leistung der Nürnberger Prozesse?</p>
+        <div class="mc-options" role="radiogroup">
+          <label class="mc-option"><input type="radio" name="q4" value="a"> <span>Deutschland wurde verpflichtet, hohe Reparationen an alle Siegermächte zu zahlen.</span></label>
+          <label class="mc-option"><input type="radio" name="q4" value="b"> <span>Erstmals wurden Kriegsverbrechen und Verbrechen gegen die Menschlichkeit als internationale Straftaten verfolgt und geahndet.</span></label>
+          <label class="mc-option"><input type="radio" name="q4" value="c"> <span>Die Alliierten einigten sich endgültig auf die dauerhafte Teilung Deutschlands in zwei Staaten.</span></label>
+          <label class="mc-option"><input type="radio" name="q4" value="d"> <span>Hitler und Goebbels wurden posthum angeklagt und verurteilt.</span></label>
+        </div>
+        <button class="check-btn" onclick="checkTask4()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-4" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-4" onclick="goToNextTask(4)">Weiter zu Aufgabe 5 →</button>
+      </div>
+    </div>
+
+    <!-- ═══ AUFGABE 5 · MS ★★★ · Stunde Null ═══ -->
+    <div class="task-block" id="task-5">
+      <div class="task-block-header">
+        <div class="task-meta">
+          <span class="task-number">Aufgabe 5 von 5</span>
+          <span class="difficulty" title="Anspruchsvoll">★★★</span>
+        </div>
+      </div>
+      <h2 class="task-title-h2">Was bedeutete die „Stunde Null"?</h2>
+
+      <div class="document-card">
+        <div class="document-stamp">Quellenreflexion · „Stunde Null" – ein Begriff, viele Bedeutungen</div>
+        <p class="document-text">
+          Der Begriff „Stunde Null" suggeriert einen völligen Neubeginn – als ob die Geschichte
+          auf null zurückgesetzt worden wäre. Historiker:innen sind gespalten: War 1945 wirklich
+          ein Neuanfang? Oder wirkten Strukturen, Denkmuster und Täter des NS-Regimes weiter?
+          Sicher ist: Deutschland lag in Trümmern. Rund zwölf Millionen Vertriebene strömten
+          ins Land. Millionen galten als vermisst oder waren in Kriegsgefangenschaft.
+          Gleichzeitig wurden in Nürnberg Verantwortliche zur Rechenschaft gezogen.
+        </p>
+      </div>
+
+      <div class="question-block">
+        <p class="question-text">Welche Aussagen beschreiben die „Stunde Null" 1945 zutreffend?</p>
+        <p class="ms-hint">Wähle alle zutreffenden Aussagen aus. Achtung: Manche Aussagen sind falsch!</p>
+        <div class="ms-options">
+          <label class="ms-option"><input type="checkbox" name="ms7" value="a"> <span>Deutschland lag in Trümmern: Städte, Infrastruktur und Wirtschaft waren weitgehend zerstört.</span></label>
+          <label class="ms-option"><input type="checkbox" name="ms7" value="b"> <span>Millionen Menschen waren auf der Flucht, vermisst oder in Kriegsgefangenschaft.</span></label>
+          <label class="ms-option"><input type="checkbox" name="ms7" value="c"> <span>Der Nationalsozialismus war offiziell beendet, aber sein Erbe wirkte in Strukturen weiter.</span></label>
+          <label class="ms-option"><input type="checkbox" name="ms7" value="d"> <span>Deutschland erholte sich sofort: Bereits 1946 herrschten Wohlstand und Stabilität. <em>(Vorsicht!)</em></span></label>
+          <label class="ms-option"><input type="checkbox" name="ms7" value="e"> <span>1945 war trotz allem ein Moment der Möglichkeit – ein Neubeginn mit einer anderen Zukunft.</span></label>
+        </div>
+        <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
+        <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
+        <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Archiv abschließen →</button>
+      </div>
+
+      <div class="reflection-box">
+        <div class="reflection-label">Reflexionsfrage</div>
+        Warum ist es wichtig, dass wir uns heute noch mit dem Zweiten Weltkrieg beschäftigen?
+        Was bedeutet das Zitat „Wer die Geschichte nicht kennt, ist verdammt, sie zu wiederholen" für euch?
+      </div>
+    </div>
+
+    <!-- ═══ ABSCHLUSS (Zertifikat statt Code-Eingabe) ═══ -->
+    <div class="code-section" id="code-section">
+      <div class="code-section-header">
+        <span class="code-lock-icon">🏆</span>
+        <h2>Mission erfüllt!</h2>
+      </div>
+      <div class="code-section-body">
+        <div class="completion-certificate">
+          <div class="cert-stamp">ARCHIV 45 – VOLLSTÄNDIG AUSGEWERTET</div>
+          <h3 class="cert-title">Alle sieben Mappen analysiert</h3>
+          <div class="cert-divider"></div>
+          <p class="cert-text">
+            Ihr habt alle sieben Mappen des Archivs durchgearbeitet und die Geschichte
+            des Zweiten Weltkriegs – von der Wende in Stalingrad bis zur Stunde Null –
+            vollständig rekonstruiert.
+          </p>
+          <p class="cert-text">
+            Ihr habt Quellen ausgewertet, Propaganda entlarvt, Widerstand gewürdigt,
+            Verbrechen nicht beschönigt und verstanden, wie ein Krieg endet –
+            und was danach kommt.
+          </p>
+          <div class="cert-quote">
+            „Wer die Geschichte nicht kennt, ist verdammt, sie zu wiederholen."
+            <span class="cert-quote-author">— George Santayana, 1905</span>
+          </div>
+          <div class="cert-badges">
+            <span class="cert-badge">✓ Stalingrad</span>
+            <span class="cert-badge">✓ Holocaust</span>
+            <span class="cert-badge">✓ Widerstand</span>
+            <span class="cert-badge">✓ D-Day</span>
+            <span class="cert-badge">✓ Volkssturm</span>
+            <span class="cert-badge">✓ Berlin 1945</span>
+            <span class="cert-badge">✓ Stunde Null</span>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <a href="../index.html" class="home-btn">← Zurück zur Übersicht</a>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="task-question">
-        <p class="question-text">
-          Was war die historisch bedeutsamste Leistung der Nürnberger Prozesse?
-        </p>
-        <div class="mc-options" role="radiogroup" aria-label="Antwortoptionen Aufgabe 4">
-          <label class="mc-option">
-            <input type="radio" name="q4" value="a">
-            <span>Deutschland wurde verpflichtet, hohe Reparationen an alle Siegermächte zu zahlen.</span>
-          </label>
-          <label class="mc-option">
-            <input type="radio" name="q4" value="b">
-            <span>Erstmals wurden Kriegsverbrechen und Verbrechen gegen die Menschlichkeit als internationale Straftaten verfolgt und geahndet.</span>
-          </label>
-          <label class="mc-option">
-            <input type="radio" name="q4" value="c">
-            <span>Die Alliierten einigten sich endgültig auf die dauerhafte Teilung Deutschlands in zwei Staaten.</span>
-          </label>
-          <label class="mc-option">
-            <input type="radio" name="q4" value="d">
-            <span>Hitler und Goebbels wurden posthum angeklagt und zu lebenslangen Haftstrafen verurteilt.</span>
-          </label>
-        </div>
-        <div class="feedback" id="feedback-4" role="alert" aria-live="polite"></div>
-        <button class="check-btn" id="check-4" aria-label="Antwort zu Aufgabe 4 prüfen">
-          Antwort prüfen
-        </button>
-        <button class="next-task-btn hidden" id="next-4" aria-label="Weiter zu Aufgabe 5">
-          Weiter zur nächsten Aufgabe →
-        </button>
-      </div>
-    </section>
+  </main>
+</div><!-- end layout-wrapper -->
 
-    <!-- ═══════════════════════════════════════════════════════════
-         AUFGABE 5 · MS ★★★ · Was bedeutete die „Stunde Null"?
-    ═══════════════════════════════════════════════════════════ -->
-    <section class="task-block hidden" id="task-5" data-task="5" aria-labelledby="task-5-label">
-      <div class="task-header">
-        <span class="task-label" id="task-5-label">Aufgabe 5 von 5</span>
-        <span class="task-difficulty" aria-label="Schwierigkeit: schwer">★★★ Vertiefung</span>
-      </div>
+<script src="../scripts/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => initApp(7, 5));
 
-      <div class="task-stimulus">
-        <div class="doc-card small">
-          <div class="doc-header">Quellenreflexion · „Stunde Null" – ein Begriff, viele Bedeutungen</div>
-          <div class="doc-body source-text">
-            <p>
-              Der Begriff „Stunde Null" suggeriert einen völligen Neubeginn –
-              als ob die Geschichte auf null zurückgesetzt worden wäre.
-              Historiker:innen sind gespalten: War 1945 wirklich ein Neuanfang?
-              Oder wirkten Strukturen, Denkmuster und Täter des NS-Regimes weiter?
-            </p>
-            <p>
-              Sicher ist: Deutschland lag in Trümmern. Rund zwölf Millionen
-              Vertriebene aus den Ostgebieten strömten ins Land. Millionen
-              galten als vermisst oder waren in Kriegsgefangenschaft.
-              Die Versorgungslage war katastrophal. Gleichzeitig wurden
-              in Nürnberg Verantwortliche zur Rechenschaft gezogen – und viele
-              Überlebende begannen, ihre Erinnerungen zu bewahren.
-            </p>
-            <p>
-              Erinnerung ist Verantwortung. „Stunde Null" kann nicht bedeuten,
-              dass die Vergangenheit vergessen wird – sondern dass ein anderer
-              Umgang mit ihr möglich ist.
-            </p>
-          </div>
-        </div>
-      </div>
+  function checkTask1() {
+    const r = validateMC('q1');
+    if (!r.valid) { showFeedback('feedback-1', 'Bitte wähle eine Antwort aus.', 'warning'); return; }
+    if (r.value === 'c') {
+      showFeedback('feedback-1', '✓ <strong>Richtig!</strong> Der 8. Mai 1945 gilt als offizieller Tag der bedingungslosen Kapitulation – unterzeichnet in Berlin-Karlshorst. In Deutschland wird dieser Tag als „Tag der Befreiung" begangen.', 'correct');
+      completeTask(1);
+    } else {
+      showFeedback('feedback-1', 'Nicht ganz. Lies den Text genau: Wann trat die Kapitulation offiziell in Kraft – und wo wurde sie endgültig unterzeichnet?', 'incorrect');
+    }
+  }
 
-      <div class="task-question">
-        <p class="question-text">
-          Welche Aussagen beschreiben die „Stunde Null" 1945 zutreffend?
-          <em>(Mehrere Antworten möglich)</em>
-        </p>
-        <div class="ms-options" role="group" aria-label="Mehrfachauswahl Aufgabe 5">
-          <label class="ms-option">
-            <input type="checkbox" name="q5" value="a">
-            <span>Deutschland lag in Trümmern: Städte, Infrastruktur und Wirtschaft waren weitgehend zerstört.</span>
-          </label>
-          <label class="ms-option">
-            <input type="checkbox" name="q5" value="b">
-            <span>Millionen Menschen waren auf der Flucht, vermisst oder in Kriegsgefangenschaft.</span>
-          </label>
-          <label class="ms-option">
-            <input type="checkbox" name="q5" value="c">
-            <span>Der Nationalsozialismus war offiziell beendet, aber sein Erbe wirkte in Köpfen und Strukturen weiter fort.</span>
-          </label>
-          <label class="ms-option">
-            <input type="checkbox" name="q5" value="d">
-            <span>Deutschland erholte sich sofort: Bereits 1946 herrschten Wohlstand und politische Stabilität.</span>
-          </label>
-          <label class="ms-option">
-            <input type="checkbox" name="q5" value="e">
-            <span>1945 war trotz aller Zerstörung und Schuld ein Moment der Möglichkeit – ein Neubeginn mit einer anderen Zukunft.</span>
-          </label>
-        </div>
-        <div class="feedback" id="feedback-5" role="alert" aria-live="polite"></div>
-        <button class="check-btn" id="check-5" aria-label="Antwort zu Aufgabe 5 prüfen">
-          Antwort prüfen
-        </button>
-        <button class="next-task-btn hidden" id="next-5" aria-label="Archiv abschließen">
-          Archiv abschließen →
-        </button>
-      </div>
-    </section>
+  function checkTask2() {
+    const {allAnswered, results} = validateTF(['tf2a','tf2b','tf2c','tf2d']);
+    if (!allAnswered) { showFeedback('feedback-2', 'Bitte beantworte alle vier Aussagen.', 'warning'); return; }
+    const correct = {tf2a:'f', tf2b:'r', tf2c:'r', tf2d:'f'};
+    const ok = Object.keys(correct).every(k => results[k] === correct[k]);
+    if (ok) {
+      showFeedback('feedback-2', '✓ <strong>Richtig!</strong> Die erste Bombe fiel auf Hiroshima (nicht Nagasaki). Oppenheimer leitete das Manhattan-Projekt – Einstein hat lediglich einen einflussreichen Brief an Roosevelt geschrieben, die Bombe aber nicht gebaut.', 'correct');
+      completeTask(2);
+    } else {
+      showFeedback('feedback-2', 'Nicht alle Antworten stimmen. Achte auf die Reihenfolge: Welche Stadt wurde zuerst getroffen? Und wer hat die Bombe tatsächlich entwickelt?', 'incorrect');
+    }
+  }
 
-    <!-- ═══════════════════════════════════════════════════════════
-         ABSCHLUSS – Zertifikat (kein Code – letzte Mappe)
-    ═══════════════════════════════════════════════════════════ -->
-    <section class="code-unlock hidden" id="code-section" aria-label="Abschluss der Mission">
-      <div class="completion-certificate">
-        <div class="cert-stamp">MISSION ERFÜLLT</div>
-        <h2 class="cert-title">Archiv 45 – vollständig ausgewertet</h2>
-        <div class="cert-divider"></div>
-        <p class="cert-text">
-          Ihr habt alle sieben Mappen des Archivs durchgearbeitet und die Geschichte
-          des Zweiten Weltkriegs – von der Wende in Stalingrad bis zur Stunde Null –
-          rekonstruiert.
-        </p>
-        <p class="cert-text">
-          Ihr habt Quellen ausgewertet, Propaganda entlarvt, Widerstand gewürdigt,
-          Verbrechen nicht beschönigt und verstanden, wie ein Krieg endet –
-          und was danach kommt.
-        </p>
-        <div class="cert-quote">
-          „Wer die Geschichte nicht kennt, ist verdammt, sie zu wiederholen."
-          <span class="cert-quote-author">— George Santayana, 1905</span>
-        </div>
-        <div class="cert-badges" aria-label="Abgeschlossene Mappen">
-          <span class="cert-badge">✓ Stalingrad</span>
-          <span class="cert-badge">✓ Holocaust</span>
-          <span class="cert-badge">✓ Widerstand</span>
-          <span class="cert-badge">✓ D-Day</span>
-          <span class="cert-badge">✓ Volkssturm</span>
-          <span class="cert-badge">✓ Berlin 1945</span>
-          <span class="cert-badge">✓ Stunde Null</span>
-        </div>
-        <div class="cert-actions">
-          <a href="../index.html" class="start-btn" style="display:inline-block;">
-            ← Zurück zur Übersicht
-          </a>
-        </div>
-      </div>
-    </section>
+  function checkTask3() {
+    const r = validateMatching(['match3a','match3b','match3c','match3d']);
+    if (!r.allAnswered) { showFeedback('feedback-3', 'Bitte ordne alle vier Zonen zu.', 'warning'); return; }
+    const correct = {match3a:'udssr', match3b:'uk', match3c:'fr', match3d:'usa'};
+    const ok = Object.keys(correct).every(k => r.results[k] === correct[k]);
+    if (ok) {
+      showFeedback('feedback-3', '✓ <strong>Sehr gut!</strong> Sowjetunion im Osten, Großbritannien im Nordwesten, Frankreich im Südwesten, USA im Süden (Bayern). Diese Zonen wurden später zur Grundlage für BRD (West) und DDR (Ost).', 'correct');
+      completeTask(3);
+    } else {
+      showFeedback('feedback-3', 'Noch nicht ganz richtig. Hinweis: Die USA hatten ihre Haupttruppen im Süden (Bayern). Die Sowjetunion kontrollierte das östliche Deutschland – von der Elbe bis zur Oder.', 'incorrect');
+    }
+  }
 
-  </main><!-- /.mappe-main -->
+  function checkTask4() {
+    const r = validateMC('q4');
+    if (!r.valid) { showFeedback('feedback-4', 'Bitte wähle eine Antwort aus.', 'warning'); return; }
+    if (r.value === 'b') {
+      showFeedback('feedback-4', '✓ <strong>Richtig!</strong> Die Nürnberger Prozesse schufen erstmals einen internationalen Rechtsrahmen: „Verbrechen gegen die Menschlichkeit" wurde als Straftatbestand des Völkerrechts anerkannt – ein Meilenstein, der das moderne Völkerrecht und spätere internationale Tribunale prägte.', 'correct');
+      completeTask(4);
+    } else {
+      showFeedback('feedback-4', 'Nicht ganz. Was ist das historisch Besondere an den Nürnberger Prozessen – nicht nur für Deutschland, sondern für die gesamte Weltgemeinschaft?', 'incorrect');
+    }
+  }
 
-  <script src="../scripts/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      initApp(7, 5);
+  function checkTask5() {
+    const selected = validateMS('ms7');
+    if (selected.length === 0) { showFeedback('feedback-5', 'Wähle mindestens eine Aussage aus.', 'warning'); return; }
+    const correct = new Set(['a','b','c','e']);
+    const selSet = new Set(selected);
+    const ok = [...correct].every(v => selSet.has(v)) && [...selSet].every(v => correct.has(v));
+    if (ok) {
+      showFeedback('feedback-5', '✓ <strong>Ausgezeichnet!</strong> Die „Stunde Null" war kein echter Neustart – Deutschland trug die Last der Geschichte. Aber 1945 war ein Moment der Möglichkeit: ein anderes Deutschland aufzubauen. Aussage d) ist falsch: Wohlstand und Stabilität kamen erst mit dem Wirtschaftswunder der 1950er-Jahre.', 'correct');
+      completeTask(5);
+      markTaskDone(7, 'done'); // Mappe 7 als abgeschlossen markieren
+    } else {
+      if (selSet.has('d')) {
+        showFeedback('feedback-5', 'Achtung: Aussage d) ist falsch! Deutschland erholte sich nicht sofort – der Wiederaufbau dauerte Jahre. Entferne diese Aussage und überprüfe die anderen.', 'incorrect');
+      } else {
+        showFeedback('feedback-5', 'Noch nicht vollständig. Überprüfe nochmal alle Aussagen einzeln – es fehlen ein oder zwei zutreffende Antworten.', 'incorrect');
+      }
+    }
+  }
+</script>
 
-      // ── AUFGABE 1 · MC · Kapitulationsdatum ────────────────────────────────
-      document.getElementById('check-1').addEventListener('click', () => {
-        const result = validateMC('q1');
-        if (!result.valid) {
-          showFeedback('feedback-1', 'Bitte wähle eine Antwort aus.', 'warning');
-          return;
-        }
-        if (result.value === 'c') {
-          showFeedback(
-            'feedback-1',
-            '✓ Richtig! Der 8. Mai 1945 gilt als offizieller Tag der bedingungslosen Kapitulation – unterzeichnet in Berlin-Karlshorst. In Deutschland wird er als „Tag der Befreiung" begangen.',
-            'correct'
-          );
-          completeTask(1);
-        } else {
-          showFeedback(
-            'feedback-1',
-            'Nicht ganz. Lies den Text genau: Wann trat die Kapitulation offiziell in Kraft – und wo wurde sie final unterzeichnet?',
-            'incorrect'
-          );
-        }
-      });
-      document.getElementById('next-1').addEventListener('click', () => goToNextTask(1));
-
-      // ── AUFGABE 2 · TF · Atombombe ────────────────────────────────────────
-      document.getElementById('check-2').addEventListener('click', () => {
-        const result = validateTF(['tf2a', 'tf2b', 'tf2c', 'tf2d']);
-        if (!result.allAnswered) {
-          showFeedback('feedback-2', 'Bitte beantworte alle vier Aussagen.', 'warning');
-          return;
-        }
-        const correct = { tf2a: 'f', tf2b: 'r', tf2c: 'r', tf2d: 'f' };
-        const allCorrect = Object.keys(correct).every(k => result.results[k] === correct[k]);
-        if (allCorrect) {
-          showFeedback(
-            'feedback-2',
-            '✓ Richtig! Die erste Bombe fiel auf Hiroshima (nicht Nagasaki). Oppenheimer leitete das Manhattan-Projekt – Einstein hatte nur einen einflussreichen Brief an Roosevelt geschrieben, baute die Bombe aber nicht selbst.',
-            'correct'
-          );
-          completeTask(2);
-        } else {
-          showFeedback(
-            'feedback-2',
-            'Nicht alle Antworten stimmen. Achte auf die Reihenfolge der Städte und auf die Frage, wer die Bombe tatsächlich entwickelt hat.',
-            'incorrect'
-          );
-        }
-      });
-      document.getElementById('next-2').addEventListener('click', () => goToNextTask(2));
-
-      // ── AUFGABE 3 · Matching · Besatzungszonen ────────────────────────────
-      document.getElementById('check-3').addEventListener('click', () => {
-        const result = validateMatching(['m3a', 'm3b', 'm3c', 'm3d']);
-        if (!result.allAnswered) {
-          showFeedback('feedback-3', 'Bitte ordne alle vier Zonen zu.', 'warning');
-          return;
-        }
-        const correct = { m3a: 'udssr', m3b: 'uk', m3c: 'fr', m3d: 'usa' };
-        const allCorrect = Object.keys(correct).every(k => result.results[k] === correct[k]);
-        if (allCorrect) {
-          showFeedback(
-            'feedback-3',
-            '✓ Sehr gut! Sowjetunion im Osten, Großbritannien im Nordwesten, Frankreich im Südwesten, USA im Süden (Bayern). Diese Zonen wurden später zur Grundlage für Bundesrepublik (BRD) und DDR.',
-            'correct'
-          );
-          completeTask(3);
-        } else {
-          showFeedback(
-            'feedback-3',
-            'Noch nicht ganz. Hinweis: Die USA hatten ihre Truppen im Süden (Bayern). Die Sowjetunion kontrollierte das östliche Deutschland.',
-            'incorrect'
-          );
-        }
-      });
-      document.getElementById('next-3').addEventListener('click', () => goToNextTask(3));
-
-      // ── AUFGABE 4 · MC · Nürnberger Prozesse ─────────────────────────────
-      document.getElementById('check-4').addEventListener('click', () => {
-        const result = validateMC('q4');
-        if (!result.valid) {
-          showFeedback('feedback-4', 'Bitte wähle eine Antwort aus.', 'warning');
-          return;
-        }
-        if (result.value === 'b') {
-          showFeedback(
-            'feedback-4',
-            '✓ Richtig! Die Nürnberger Prozesse schufen erstmals einen internationalen Rechtsrahmen: „Verbrechen gegen die Menschlichkeit" wurde als Straftatbestand anerkannt – ein Meilenstein für das moderne Völkerrecht und Vorbild für spätere internationale Tribunale.',
-            'correct'
-          );
-          completeTask(4);
-        } else {
-          showFeedback(
-            'feedback-4',
-            'Nicht ganz. Was ist das Besondere an den Nürnberger Prozessen – nicht nur für Deutschland, sondern für die gesamte Weltgemeinschaft?',
-            'incorrect'
-          );
-        }
-      });
-      document.getElementById('next-4').addEventListener('click', () => goToNextTask(4));
-
-      // ── AUFGABE 5 · MS · Stunde Null ─────────────────────────────────────
-      document.getElementById('check-5').addEventListener('click', () => {
-        const selected = validateMS('q5');
-        if (selected.length === 0) {
-          showFeedback('feedback-5', 'Bitte wähle mindestens eine Antwort aus.', 'warning');
-          return;
-        }
-        const correct = new Set(['a', 'b', 'c', 'e']);
-        const selectedSet = new Set(selected);
-        const isCorrect =
-          correct.size === selectedSet.size &&
-          [...correct].every(v => selectedSet.has(v));
-
-        if (isCorrect) {
-          showFeedback(
-            'feedback-5',
-            '✓ Ausgezeichnet! Die „Stunde Null" war kein echter Neustart – Deutschland trug die Last der Geschichte. Aber es war ein Moment der Möglichkeit: ein anderes Deutschland aufzubauen. Aussage d) ist falsch: Wohlstand und Stabilität kamen erst mit dem Wirtschaftswunder der 1950er-Jahre.',
-            'correct'
-          );
-          completeTask(5);
-          // Mappe 7 als abgeschlossen in localStorage markieren
-          if (typeof markTaskDone === 'function') {
-            markTaskDone(7, 'mappe-complete');
-          }
-        } else {
-          if (selectedSet.has('d')) {
-            showFeedback(
-              'feedback-5',
-              'Achtung: Eine Aussage ist falsch. Deutschland erholte sich nicht sofort – der Wiederaufbau und politische Stabilität kamen erst Jahre später.',
-              'incorrect'
-            );
-          } else {
-            showFeedback(
-              'feedback-5',
-              'Fast! Überprüfe noch einmal alle Aussagen – es fehlen ein oder zwei zutreffende Antworten.',
-              'incorrect'
-            );
-          }
-        }
-      });
-      document.getElementById('next-5').addEventListener('click', () => goToNextTask(5));
-    });
-  </script>
+<footer class="site-footer">
+  Erstellt mit Liebe &#10084;&#65039; und <a href="https://claude.ai/claude-code" target="_blank" rel="noopener">Claude Code</a> von Joscha Falck
+  <span class="footer-sep">|</span>
+  <a href="../impressum.html">Impressum</a>
+  <span class="footer-sep">|</span>
+  <a href="../datenschutz.html">Datenschutz</a>
+</footer>
 </body>
 </html>

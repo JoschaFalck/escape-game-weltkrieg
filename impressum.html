@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum – Archiv 45</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .legal-page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .legal-header {
+      padding-top: 80px;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1.5rem;
+    }
+    .legal-eyebrow {
+      font-size: 0.7rem;
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .legal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--text-light);
+      margin-bottom: 0.25rem;
+    }
+    .legal-card {
+      background: var(--paper);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .legal-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--paper-border);
+    }
+    .legal-card p, .legal-card address {
+      font-size: 0.93rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      font-style: normal;
+      margin-bottom: 0.8rem;
+    }
+    .legal-card p:last-child { margin-bottom: 0; }
+    .legal-card strong { color: var(--text-dark); }
+    .legal-card a { color: var(--blue); text-decoration: underline; }
+    .legal-placeholder {
+      background: rgba(201,162,39,.12);
+      border: 1px dashed rgba(201,162,39,.5);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.85rem;
+      color: #7a5800;
+      font-family: 'Courier Prime', monospace;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-faint);
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      font-family: 'Lato', sans-serif;
+    }
+    .back-link:hover { color: var(--text-light); }
+  </style>
+</head>
+<body style="background: var(--bg);">
+
+  <!-- Schlanker Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">ARCHIV<span class="logo-badge">45</span></a>
+    </div>
+  </header>
+
+  <div class="legal-page">
+    <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+
+    <div class="legal-header">
+      <p class="legal-eyebrow">Pflichtangaben nach § 5 TMG</p>
+      <h1 class="legal-title">Impressum</h1>
+    </div>
+
+    <!-- Verantwortlicher -->
+    <div class="legal-card">
+      <h2>Verantwortlicher</h2>
+      <address>
+        <strong>Joscha Falck</strong><br>
+        <span class="legal-placeholder">[Straße Hausnummer]</span><br>
+        <span class="legal-placeholder">[PLZ Ort]</span><br>
+        Deutschland
+      </address>
+    </div>
+
+    <!-- Kontakt -->
+    <div class="legal-card">
+      <h2>Kontakt</h2>
+      <p>
+        E-Mail: <span class="legal-placeholder">[ihre-email@schule.de]</span>
+      </p>
+      <p>
+        <em>Hinweis: Bitte ersetzen Sie die markierten Platzhalter
+        (<code style="background:rgba(0,0,0,.05);padding:1px 4px;border-radius:3px;">[…]</code>)
+        mit Ihren tatsächlichen Angaben, bevor Sie die Website öffentlich zugänglich machen.</em>
+      </p>
+    </div>
+
+    <!-- Art des Angebots -->
+    <div class="legal-card">
+      <h2>Art und Zweck des Angebots</h2>
+      <p>
+        Diese Website ist ein <strong>nicht-kommerzielles Bildungsprojekt</strong>
+        für den Einsatz im Geschichtsunterricht (Klasse 8, Mittelschule Bayern).
+        Sie dient ausschließlich dem Zweck der historisch-didaktischen Wissensvermittlung
+        über den Zweiten Weltkrieg.
+      </p>
+      <p>
+        Das Angebot richtet sich an Schülerinnen und Schüler sowie Lehrkräfte
+        im Rahmen schulischer Bildungsveranstaltungen.
+        Eine kommerzielle Nutzung ist nicht vorgesehen.
+      </p>
+    </div>
+
+    <!-- Urheberrecht -->
+    <div class="legal-card">
+      <h2>Urheberrecht</h2>
+      <p>
+        Die auf dieser Website enthaltenen Inhalte und Werke unterliegen dem deutschen
+        Urheberrecht. Die Inhalte basieren auf allgemein zugänglichem historischem
+        Unterrichtsmaterial (LehrplanPLUS Bayern, didaktisch aufbereiteten Quellen).
+      </p>
+      <p>
+        Technische Umsetzung: Joscha Falck mit Unterstützung von
+        <a href="https://claude.ai/claude-code" target="_blank" rel="noopener">Claude Code</a>
+        (Anthropic).
+      </p>
+    </div>
+
+    <!-- Haftungsausschluss -->
+    <div class="legal-card">
+      <h2>Haftungsausschluss</h2>
+      <p>
+        Die historischen Inhalte dieser Website wurden sorgfältig nach aktuellem
+        Forschungsstand erstellt und an den Lehrplan Bayern angepasst.
+        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung
+        für die Richtigkeit, Vollständigkeit und Aktualität aller Inhalte.
+      </p>
+      <p>
+        Für externe Links (z. B. GitHub Pages, Google Fonts) gilt: Für die Inhalte
+        verlinkter Seiten sind ausschließlich deren Betreiber verantwortlich.
+      </p>
+    </div>
+
+    <!-- Hosting -->
+    <div class="legal-card">
+      <h2>Hosting</h2>
+      <p>
+        Diese Website wird über <strong>GitHub Pages</strong> gehostet.
+        Anbieter: GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.<br>
+        Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>
+      </p>
+    </div>
+
+  </div><!-- /.legal-page -->
+
+  <footer class="site-footer">
+    Erstellt mit Liebe &#10084;&#65039; und <a href="https://claude.ai/claude-code" target="_blank" rel="noopener">Claude Code</a> von Joscha Falck
+    <span class="footer-sep">|</span>
+    <a href="impressum.html">Impressum</a>
+    <span class="footer-sep">|</span>
+    <a href="datenschutz.html">Datenschutz</a>
+  </footer>
+</body>
+</html>

@@ -258,6 +258,10 @@ function showFeedback(feedbackId, message, type) {
   const el = document.getElementById(feedbackId);
   if (!el) return;
   el.innerHTML = `<div class="feedback feedback-${type}">${message}</div>`;
+  // Feedback sofort ins Sichtfeld scrollen (damit "es passiert nichts" verhindert wird)
+  setTimeout(() => {
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 60);
 }
 
 // ════════════════════════════════════════

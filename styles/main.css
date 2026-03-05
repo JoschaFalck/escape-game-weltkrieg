@@ -977,7 +977,31 @@ h1, h2, h3, h4 {
   .layout-wrapper { padding: 1rem 0.75rem; }
 }
 
-/* ------- 21. PRINT ------- */
+/* ------- 21. SITE FOOTER ------- */
+.site-footer {
+  background: var(--bg-mid);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  font-family: 'Lato', sans-serif;
+  line-height: 1.8;
+  margin-top: 2rem;
+}
+.site-footer a {
+  color: var(--text-faint);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition);
+}
+.site-footer a:hover { color: var(--text-light); }
+.site-footer .footer-sep {
+  opacity: 0.35;
+  margin: 0 .5rem;
+}
+
+/* ------- 22. PRINT ------- */
 @media print {
   .site-header, .task-sidebar, .sidebar-toggle,
   .check-btn, .next-task-btn, .code-section { display: none !important; }
