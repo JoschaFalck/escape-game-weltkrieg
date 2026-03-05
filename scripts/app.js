@@ -289,16 +289,16 @@ function showFeedback(feedbackId, message, type) {
   const el = document.getElementById(feedbackId);
   if (!el) return;
   el.innerHTML = `<div class="feedback feedback-${type}">${message}</div>`;
-  // Zuverlässig ins Sichtfeld scrollen – window.scrollTo statt scrollIntoView,
-  // da overflow:hidden auf .task-block scrollIntoView in manchen Browsern blockiert.
+  // Immer scrollen – ohne Bedingung, damit das Feedback garantiert sichtbar ist.
+  // Beide Methoden als Absicherung: scrollIntoView + window.scrollTo.
   setTimeout(() => {
+    // Methode 1: scrollIntoView (einfach, funktioniert in den meisten Fällen)
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Methode 2: window.scrollTo als Backup (zuverlässiger bei overflow:hidden)
     const rect = el.getBoundingClientRect();
-    // Nur scrollen wenn Element nicht vollständig sichtbar
-    if (rect.top < 80 || rect.bottom > window.innerHeight - 20) {
-      const targetY = window.pageYOffset + rect.top - 120;
-      window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
-    }
-  }, 80);
+    const targetY = window.pageYOffset + rect.top - 120;
+    window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+  }, 200);
 }
 
 // ════════════════════════════════════════

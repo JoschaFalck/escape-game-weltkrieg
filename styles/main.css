@@ -355,7 +355,8 @@ h1, h2, h3, h4 {
 .task-block {
   background: var(--paper);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  /* overflow: hidden entfernt – verhindert in Webkit das Rendern von
+     dynamisch hinzugefügtem Inhalt (Feedback) bei animierten Elementen */
   box-shadow: var(--shadow-md);
   display: none; /* shown by JS */
 }
@@ -369,6 +370,8 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid var(--paper-border);
+  /* Statt overflow:hidden am Parent: Header selbst hat oben abgerundete Ecken */
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .task-meta {
   display: flex;
@@ -602,28 +605,36 @@ h1, h2, h3, h4 {
 }
 
 /* ------- 13. FEEDBACK ------- */
-.feedback-area { margin: 0.8rem 0 0; min-height: 0; }
+.feedback-area {
+  margin: 0.8rem 0 0;
+  min-height: 0;
+  scroll-margin-top: 120px; /* Browser-native Scroll berücksichtigt Header */
+}
 .feedback {
-  padding: 0.9rem 1.1rem;
+  padding: 0.9rem 1.1rem 0.9rem 1.3rem;
   border-radius: var(--radius);
-  font-size: 0.91rem;
-  line-height: 1.6;
-  font-weight: 500;
+  font-size: 0.93rem;
+  line-height: 1.65;
+  font-weight: 600;
   border: 1px solid transparent;
+  border-left-width: 4px; /* Prominente linke Leiste – sofort sichtbar */
 }
 .feedback-correct {
-  background: rgba(39,174,96,0.12);
-  border-color: rgba(39,174,96,0.4);
-  color: #1a5c35;
+  background: rgba(39,174,96,0.15);
+  border-color: rgba(39,174,96,0.5);
+  border-left-color: #27ae60;
+  color: #155a2e;
 }
 .feedback-incorrect {
-  background: rgba(230,126,34,0.1);
-  border-color: rgba(230,126,34,0.4);
-  color: #7a3d10;
+  background: rgba(230,126,34,0.12);
+  border-color: rgba(230,126,34,0.5);
+  border-left-color: #e67e22;
+  color: #6b3510;
 }
 .feedback-warning {
-  background: rgba(52,152,219,0.1);
-  border-color: rgba(52,152,219,0.3);
+  background: rgba(52,152,219,0.12);
+  border-color: rgba(52,152,219,0.4);
+  border-left-color: #2980b9;
   color: #1a3d5c;
 }
 
@@ -686,7 +697,7 @@ h1, h2, h3, h4 {
 .code-section {
   background: var(--paper);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  /* overflow: hidden ebenfalls entfernt – selbe Begründung wie .task-block */
   box-shadow: var(--shadow-md);
   display: none; /* shown by JS */
 }
@@ -695,6 +706,7 @@ h1, h2, h3, h4 {
   background: var(--red);
   padding: 1rem 1.4rem;
   display: flex; align-items: center; gap: 0.75rem;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .code-section-header h2 {
   color: #fff;
@@ -903,12 +915,15 @@ h1, h2, h3, h4 {
 
 /* ------- 18. ANIMATIONEN ------- */
 @keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  /* Nur Opacity animieren – kein transform, da transform + overflow:hidden
+     in Webkit/Safari composite layers erzeugt, die dynamischen Inhalt
+     (Feedback nach Button-Klick) nicht korrekt nachrendern. */
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 .task-block.visible,
 .code-section.visible {
-  animation: fadeSlideIn 0.4s ease both;
+  animation: fadeSlideIn 0.35s ease both;
 }
 
 @keyframes pulse-unlock {
