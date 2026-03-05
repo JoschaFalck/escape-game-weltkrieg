@@ -192,6 +192,8 @@
           <label class="mc-option"><input type="radio" name="q3" value="c"> <span>Gezeiten, Mondlicht und Wetter mussten gleichzeitig stimmen – und eine Täuschung musste die Deutschen ablenken.</span></label>
           <label class="mc-option"><input type="radio" name="q3" value="d"> <span>Nur die politischen Entscheidungen der Regierungen – keine militärischen Faktoren.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-4-3');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-4-3">Denk an das Wort "Overlord". Was war der wichtigste Faktor: Überraschung oder Stärke? Was hätte passiert, wenn die Deutschen gewusst hätten, wo und wann die Landung stattfindet?</div></div>
         <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
@@ -291,6 +293,8 @@
           <label class="ms-option"><input type="checkbox" name="ms5" value="c"> <span>D-Day beendete den Zweiten Weltkrieg sofort. <em>(Vorsicht!)</em></span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Das Überraschungsmoment und die alliierte Überlegenheit waren entscheidend für den Erfolg.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-4-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-4-5">Der D-Day war militärisch bedeutsam. Aber hat er Deutschland sofort besiegt? Hat er den Krieg kurz gemacht? Und welche Rolle spielten die anderen Fronten?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -364,6 +368,20 @@
     }
   }
   /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 4: D-Day und der globale Krieg',
+    code: 'overlord',
+    tasks: [
+    {num:1,title:"Pearl Harbor",type:"MC",answer:"<b>Antwort B:</b> Der japanische Angriff auf Pearl Harbor veranlasste die USA, in den Zweiten Weltkrieg einzutreten."},
+    {num:2,title:"D-Day – Faktencheck",type:"TF",answer:"<b>Richtig:</b> A, C<br><b>Falsch:</b> B (nicht Pazifik), D (größte Landungsoperation der Geschichte)"},
+    {num:3,title:"Planung des D-Day",type:"MC",answer:"<b>Antwort C:</b> Operation Overlord war auf höchste Geheimhaltung angewiesen – Täuschungsmanöver lenkten die deutsche Führung ab."},
+    {num:4,title:"Die Alliierten",type:"Matching",answer:"<b>USA:</b> m4a &nbsp;|&nbsp; <b>Großbritannien:</b> m4b &nbsp;|&nbsp; <b>Kanada:</b> m4c"},
+    {num:5,title:"Bedeutung des D-Day",type:"MS",answer:"<b>Richtig:</b> A, B, D &nbsp;|&nbsp; <b>Falsch:</b> C, E"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(4,5); });
 
   function checkTask1() {

@@ -124,6 +124,8 @@
             <div class="sorting-event"><strong>D)</strong> Reichspogromnacht (November 1938)</div>
           </div>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-2-1');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-2-1">Überleg zeitlich: Wann begann die Diskriminierung? Was kam danach? Ordne: Nürnberger Gesetze (1935), Machtergreifung (1933), Wannsee-Konferenz (1942), Pogromnacht (1938).</div></div>
         <button class="check-btn" onclick="checkTask1()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-1" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-1" onclick="goToNextTask(1)">Weiter zu Aufgabe 2 →</button>
@@ -173,6 +175,8 @@
           <label class="mc-option"><input type="radio" name="q2" value="d"> <span>Ein Arbeitsprogramm für jüdische Gefangene ohne Tötungsabsicht.</span></label>
         </div>
         <div class="hint-box">Achte auf die Tarnbegriffe im Protokoll. Was bedeuten „Endlösung" und „entsprechend behandelt" wirklich?</div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-2-2');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-2-2">Was war das Ziel des Treffens? War es ein öffentliches oder geheimes Meeting? Wer hat dort Entscheidungen getroffen?</div></div>
         <button class="check-btn" onclick="checkTask2()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-2" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-2" onclick="goToNextTask(2)">Weiter zu Aufgabe 3 →</button>
@@ -312,6 +316,8 @@
           <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Alle Deutschen ohne Ausnahme – kein einziger wusste Bescheid. <em>(Vorsicht!)</em></span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="e"> <span>Diejenigen, die Widerstand leisteten oder Verfolgten halfen, tragen keine Mitverantwortung.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-2-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-2-5">Verantwortung kann viele Formen haben. Wer hat befohlen? Wer hat ausgeführt? Wer hat weggeschaut? Wer hat profitiert?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -387,6 +393,20 @@
     }
   }
   /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 2: Holocaust und Wannsee-Konferenz',
+    code: 'niemals',
+    tasks: [
+    {num:1,title:"Zeitstrahl: Die Verfolgung",type:"Sortierung",answer:"<b>Reihenfolge:</b> B (1933) → D (1935) → A (1938 Pogromnacht) → C (1942 Wannsee-Konferenz)"},
+    {num:2,title:"Die Wannsee-Konferenz",type:"MC",answer:"<b>Antwort B:</b> Die Wannsee-Konferenz war eine geheime Behördenkonferenz, auf der die organisatorische Durchführung des Massenmords geplant wurde."},
+    {num:3,title:"Das Lagersystem",type:"TF",answer:"<b>Falsch:</b> A (nicht alle Lager = Vernichtungslager)<br><b>Richtig:</b> B, C, D"},
+    {num:4,title:"Eine Zeugin",type:"MC",answer:"<b>Antwort B:</b> Der Text zeigt, dass die \"Endlösung\" systematisch, bürokratisch und mit direkter staatlicher Kontrolle durchgeführt wurde."},
+    {num:5,title:"Wer trägt Verantwortung?",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(2,5); });
 
   function checkTask1() {

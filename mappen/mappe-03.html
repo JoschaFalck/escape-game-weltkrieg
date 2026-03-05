@@ -133,6 +133,8 @@
             </select>
           </div>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-3-1');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-3-1">Ordne die Namen den Beschreibungen zu: Weiße Rose = Studenten, 20. Juli = Offiziere, Bekennende Kirche = Geistliche, Edelweiß-Piraten = Jugendliche.</div></div>
         <button class="check-btn" onclick="checkTask1()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-1" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-1" onclick="goToNextTask(1)">Weiter zu Aufgabe 2 →</button>
@@ -177,6 +179,8 @@
           <label class="mc-option"><input type="radio" name="q2" value="c"> <span>Sie wollten die Bevölkerung wachrütteln, über NS-Verbrechen informieren und zum Widerstand aufrufen.</span></label>
           <label class="mc-option"><input type="radio" name="q2" value="d"> <span>Sie wollten das NS-Regime reformieren, aber nicht abschaffen.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-3-2');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-3-2">Wie haben sie Widerstand geleistet? Mit Waffen? Nein – lies den Text nochmal. Was war ihr Mittel, und was riskierten sie dabei?</div></div>
         <button class="check-btn" onclick="checkTask2()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-2" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-2" onclick="goToNextTask(2)">Weiter zu Aufgabe 3 →</button>
@@ -312,6 +316,8 @@
           <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Alle Deutschen waren von Natur aus böse – Widerstand war biologisch unmöglich. <em>(Vorsicht!)</em></span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="e"> <span>Viele wussten nicht genau, was in den Lagern geschah – oder wollten es nicht wissen.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-3-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-3-5">Stell dir vor: Was wäre passiert, wenn du dich gegen das Regime gestellt hättest? Welche Konsequenzen gab es? Warum haben so viele geschwiegen?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -386,6 +392,20 @@
     }
   }
   /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 3: Widerstand gegen das NS-Regime',
+    code: 'freiheit',
+    tasks: [
+    {num:1,title:"Formen des Widerstands",type:"Matching",answer:"<b>Zuordnung:</b> A → Studentenwiderstand, B → Widerstand der Wehrmacht, C → Eichmann-Prozess, D → Bekennende Kirche"},
+    {num:2,title:"Die Weiße Rose",type:"MC",answer:"<b>Antwort C:</b> Die Weiße Rose verbreitete Flugblätter und rief zur passiven Resistenz gegen das NS-Regime auf."},
+    {num:3,title:"Der 20. Juli 1944",type:"TF",answer:"<b>Richtig:</b> A, D<br><b>Falsch:</b> B (Hitler überlebte), C (Attentat scheiterte)"},
+    {num:4,title:"Jugendlicher Widerstand",type:"MC",answer:"<b>Antwort B:</b> Jugendliche Widerständler riskierten Verhaftung, KZ oder Hinrichtung – dennoch lehnten sie sich gegen das Regime auf."},
+    {num:5,title:"Warum wagten es so wenige?",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(3,5); });
 
   function checkTask1() {

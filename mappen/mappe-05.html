@@ -92,6 +92,8 @@
           <label class="mc-option"><input type="radio" name="q1" value="c"> <span>Ein freiwilliger Heimatschutz für ältere Männer, die freiwillig beitragen wollten.</span></label>
           <label class="mc-option"><input type="radio" name="q1" value="d"> <span>Eine Polizeitruppe zur inneren Sicherheit.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-5-1');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-5-1">Wann wurde der Volkssturm gegründet? Was sagt das über den Stand des Krieges? Wer wurde eingezogen – und was bedeutet das für die Kampfkraft?</div></div>
         <button class="check-btn" onclick="checkTask1()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-1" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-1" onclick="goToNextTask(1)">Weiter zu Aufgabe 2 →</button>
@@ -263,6 +265,8 @@
           <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Nur die kämpfenden Soldaten – Zivilisten waren geschützt. <em>(Vorsicht!)</em></span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="e"> <span>KZ-Häftlinge, die auf Todesmärschen vor den anrückenden Alliierten getrieben wurden.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-5-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-5-5">Wer litt am meisten in den letzten Kriegsjahren? Zivilisten oder Soldaten? Welche Arten von Leid gab es, und welche Aussagen beschreiben das korrekt?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -336,6 +340,20 @@
     }
   }
   /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 5: Volkssturm und Bombenkrieg',
+    code: '1944',
+    tasks: [
+    {num:1,title:"Der Volkssturm",type:"MC",answer:"<b>Antwort B:</b> Der Volkssturm war eine Notmaßnahme – er bestand aus Männern, die regulär nicht kriegstauglich waren."},
+    {num:2,title:"Der Bombenkrieg",type:"TF",answer:"<b>Falsch:</b> A, C<br><b>Richtig:</b> B, D"},
+    {num:3,title:"Dresden, Februar 1945",type:"MC",answer:"<b>Antwort B:</b> Die Bombardierung Dresdens traf eine Stadt, die kaum Kriegsproduktion hatte – sie gilt bis heute als umstritten."},
+    {num:4,title:"Wer wurde eingezogen?",type:"MC",answer:"<b>Antwort B:</b> Gegen Kriegsende wurden 16–60-Jährige eingezogen, darunter Jugendliche und Greise."},
+    {num:5,title:"Zivile Opfer der letzten Kriegsjahre",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(5,5); });
 
   function checkTask1() {

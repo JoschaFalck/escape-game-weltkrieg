@@ -312,6 +312,8 @@
             </select>
           </div>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-7-3');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-7-3">Denke an die vier Alliierten: USA, Sowjetunion, Großbritannien, Frankreich. Welche Zone gehörte zu wem? Beachte die Lage Deutschlands und die Interessen jeder Macht.</div></div>
         <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
@@ -389,6 +391,8 @@
           <label class="ms-option"><input type="checkbox" name="ms7" value="d"> <span>Deutschland erholte sich sofort: Bereits 1946 herrschten Wohlstand und Stabilität. <em>(Vorsicht!)</em></span></label>
           <label class="ms-option"><input type="checkbox" name="ms7" value="e"> <span>1945 war trotz allem ein Moment der Möglichkeit – ein Neubeginn mit einer anderen Zukunft.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-7-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-7-5">"Stunde Null" – was bedeutet dieser Begriff? Ein totaler Neuanfang? Oder gab es Kontinuitäten? Welche Aussagen beschreiben das Jahr 1945 in Deutschland korrekt?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Archiv abschließen →</button>
@@ -484,6 +488,20 @@
     }
   }
   /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 7: Stunde Null – Kapitulation',
+    code: 'kaputt',
+    tasks: [
+    {num:1,title:"Die Kapitulation",type:"MC",answer:"<b>Antwort C:</b> Die bedingungslose Kapitulation am 8. Mai 1945 beendete den Krieg in Europa – Deutschland capitulierte vollständig."},
+    {num:2,title:"Die Atombombe",type:"TF",answer:"<b>Falsch:</b> A, D<br><b>Richtig:</b> B, C"},
+    {num:3,title:"Die Besatzungszonen",type:"Matching",answer:"<b>Zuordnung:</b> UdSSR, UK, Frankreich, USA zu den jeweiligen Zonen"},
+    {num:4,title:"Die Nürnberger Prozesse",type:"MC",answer:"<b>Antwort B:</b> Die Nürnberger Prozesse waren die erste internationale Strafverfolgung für Kriegsverbrechen und Verbrechen gegen die Menschlichkeit."},
+    {num:5,title:"Was bedeutete die "Stunde Null"?",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(7,5); });
 
   function checkTask1() {

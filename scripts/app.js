@@ -163,6 +163,7 @@ function initApp(mappeNum, numTasks) {
 
   initSidebarToggle();
   initSidebar(mappeNum);
+  addTeacherUI();
 }
 
 // Alle Tasks + Code-Section für Lehrende freischalten
@@ -404,7 +405,74 @@ function initSidebarToggle() {
 }
 
 // ════════════════════════════════════════
-// 9. LANDING PAGE INITIALISIERUNG
+// 9. LEHRER-UI (Floating Controls + Lösungen-Modal)
+// ════════════════════════════════════════
+
+function addTeacherUI() {
+  if (!isTeacherMode()) return;
+
+  // Floating-Bar: Lehrer-Kontrollen unten rechts
+  const fab = document.createElement('div');
+  fab.id = 'teacher-fab';
+  fab.innerHTML =
+    '<a href="../lehrer.html" id="teacher-back-btn" title="Zur Lehrer-Übersicht">&#8592; Lehrer-Übersicht</a>' +
+    '<button id="teacher-solutions-btn" onclick="showSolutions()" title="Alle Musterlösungen anzeigen">&#128203; Lösungen</button>';
+  document.body.appendChild(fab);
+
+  // Modal-Overlay (leer – wird von showSolutions befüllt)
+  const overlay = document.createElement('div');
+  overlay.id = 'solutions-overlay';
+  overlay.innerHTML =
+    '<div id="solutions-modal">' +
+      '<div id="solutions-header">' +
+        '<h2 id="solutions-title">&#128203; Musterlösungen</h2>' +
+        '<button id="solutions-close" onclick="hideSolutions()">&#10005;</button>' +
+      '</div>' +
+      '<div id="solutions-body"></div>' +
+    '</div>';
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) hideSolutions(); });
+  document.body.appendChild(overlay);
+}
+
+function showSolutions() {
+  const overlay = document.getElementById('solutions-overlay');
+  const body    = document.getElementById('solutions-body');
+  if (!overlay || !body) return;
+
+  // Lösungen aus window.TASK_SOLUTIONS (von der jeweiligen Mappe definiert)
+  const solutions = window.TASK_SOLUTIONS;
+  if (!solutions || !solutions.tasks || solutions.tasks.length === 0) {
+    body.innerHTML = '<p style="color:#555;font-style:italic">Keine Lösungsdaten für diese Mappe hinterlegt.</p>';
+  } else {
+    const title = document.getElementById('solutions-title');
+    if (title && solutions.mappeTitle) title.textContent = '📋 Musterlösungen – ' + solutions.mappeTitle;
+
+    body.innerHTML = solutions.tasks.map(function(t) {
+      return '<div class="sol-task">' +
+        '<div class="sol-task-header">Aufgabe ' + t.num + ': ' + t.title + '</div>' +
+        '<div class="sol-answer">' + t.answer + '</div>' +
+        (t.note ? '<div class="sol-note">' + t.note + '</div>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  // Code-Wort anzeigen
+  if (solutions && solutions.code) {
+    body.innerHTML += '<div class="sol-code">🔑 Geheimcode: <strong>' + solutions.code + '</strong></div>';
+  }
+
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function hideSolutions() {
+  const overlay = document.getElementById('solutions-overlay');
+  if (overlay) overlay.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// ════════════════════════════════════════
+// 10. LANDING PAGE INITIALISIERUNG
 // ════════════════════════════════════════
 
 function initLandingPage() {

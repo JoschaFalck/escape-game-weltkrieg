@@ -209,6 +209,8 @@
           <label class="mc-option"><input type="radio" name="q3" value="d"> <span>Er wollte Kritik am Regime öffentlich zulassen.</span></label>
         </div>
         <div class="hint-box">Achte darauf, was Goebbels sagte – und was er <em>nicht</em> sagte. Vergleiche seine Worte mit dem, was du in den Aufgaben 1 und 2 gelernt hast.</div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-1-3');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-1-3">Achte auf den Unterschied: Was sagte Goebbels? Und was war die militärische Wahrheit über Stalingrad? Welche Absicht hatte er mit seiner Rede?</div></div>
         <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
@@ -274,6 +276,8 @@
             </select>
           </div>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-1-4');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-1-4">Propaganda sind Aussagen, die bewusst täuschen oder verschleiern. Wirklichkeit sind nachweisbare, historische Fakten. Ordne jede Aussage: Entspricht sie dem, was wirklich passiert ist?</div></div>
         <button class="check-btn" onclick="checkTask4()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-4" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-4" onclick="goToNextTask(4)">Weiter zu Aufgabe 5 →</button>
@@ -307,10 +311,12 @@
         <div class="ms-options">
           <label class="ms-option"><input type="checkbox" name="ms5" value="a"> <span>Es war die erste Niederlage, bei der eine gesamte deutsche Armee vernichtet wurde.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="b"> <span>Die Niederlage zeigte erstmals, dass Deutschland den Krieg verlieren konnte.</span></label>
-          <label class="ms-option"><input type="checkbox" name="ms5" value="c"> <span>Die Sowjetunion kapitulierte kurz nach der deutschen Niederlage. <em>(Vorsicht!)</em></span></label>
+          <label class="ms-option"><input type="checkbox" name="ms5" value="c"> <span>Die Sowjetunion kapitulierte kurz nach der deutschen Niederlage.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Die deutschen Verluste an Menschen und Material waren nicht mehr auszugleichen.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="e"> <span>Das NS-Regime musste beginnen, Niederlagen propagandistisch umzudeuten.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-1-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-1-5">Lies jede Aussage genau. Eine ist historisch falsch – die Sowjetunion hat NICHT kapituliert. Überleg bei jeder: Erklärt sie, warum Stalingrad ein Wendepunkt war?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -388,6 +394,20 @@
     }
   }
   /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 1: Die Wende – Stalingrad 1942/43',
+    code: 'wolga',
+    tasks: [
+    {num:1,title:"Die Lage",type:"MC",answer:"<b>Antwort B:</b> Die 6. Armee war vollständig von sowjetischen Truppen umzingelt – kein Nachschub, keine Flucht möglich."},
+    {num:2,title:"Zahlen der Katastrophe",type:"TF",answer:"<b>Richtig:</b> A (Kapitulation Feb. 1943), C (Hitler Haltebefehl)<br><b>Falsch:</b> B (nicht alle in Gefangenschaft), D (Luftversorgung scheiterte)"},
+    {num:3,title:"Die Sportpalastrede",type:"MC",answer:"<b>Antwort C:</b> Goebbels wollte die Niederlage verschleiern und die Bevölkerung zu weiterer Kriegsbegeisterung verleiten."},
+    {num:4,title:"Propaganda oder Wirklichkeit?",type:"Matching",answer:"<b>Propaganda:</b> A (\"Heldentod\"), C (\"Endsieg\")<br><b>Wirklichkeit:</b> B (90.000 Gefangene), D (−30 °C im Kessel)"},
+    {num:5,title:"Der Wendepunkt",type:"MS",answer:"<b>Richtig:</b> A, B, D, E &nbsp;|&nbsp; <b>Falsch:</b> C (Die Sowjetunion kapitulierte <em>nicht</em>)"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(1,5); });
 
   function checkTask1() {

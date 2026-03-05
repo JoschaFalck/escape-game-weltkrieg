@@ -600,7 +600,7 @@
       const input = document.getElementById('pw-input');
       const errorEl = document.getElementById('login-error');
       if (input.value.trim() === TEACHER_PW) {
-        sessionStorage.setItem(SESSION_KEY, '1');
+        sessionStorage.setItem(SESSION_KEY, 'ok');
         showDashboard();
       } else {
         errorEl.style.display = 'block';
@@ -629,7 +629,7 @@
     });
 
     // Session prüfen beim Laden
-    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    if (sessionStorage.getItem(SESSION_KEY) === 'ok') {
       showDashboard();
     }
   </script>

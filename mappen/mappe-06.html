@@ -206,6 +206,8 @@
           <label class="mc-option"><input type="radio" name="q3" value="c"> <span>Er erschoss sich am 30. April 1945 in seinem Bunker in Berlin.</span></label>
           <label class="mc-option"><input type="radio" name="q3" value="d"> <span>Er starb am 8. Mai 1945 an einem Herzinfarkt, als er die Kapitulation unterschrieb.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-6-3');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-6-3">Wie reagierte Hitler auf die militärisch hoffnungslose Lage? Hat er kapituliert oder befohlen weiterzukämpfen? Was bedeutete das für die Bevölkerung?</div></div>
         <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
@@ -282,6 +284,8 @@
           <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Soldaten und Offiziere, die kapitulierten oder desertierten, wurden als Verräter erschossen.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="e"> <span>Die Angst vor dem, was die Sowjetunion mit Deutschland nach dem Krieg machen würde, ließ viele weiterkämpfen.</span></label>
         </div>
+
+        <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-6-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-6-5">Warum haben so viele bis zuletzt gekämpft? War es Überzeugung, Angst, Pflicht oder Propaganda? Welche Faktoren spielten zusammen?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -355,6 +359,20 @@
     }
   }
   /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 6: Die letzten Tage – Berlin 1945',
+    code: '30april',
+    tasks: [
+    {num:1,title:"Zeitstrahl: Die letzten Tage",type:"Sortierung",answer:"<b>Reihenfolge:</b> Erster Eintrag = 1, Zweiter = 2, Dritter = 3, Vierter = 4 (chronologisch)"},
+    {num:2,title:"Die Einkreisung Berlins",type:"TF",answer:"<b>Richtig:</b> A, D<br><b>Falsch:</b> B, C"},
+    {num:3,title:"Hitlers letzter Monat",type:"MC",answer:"<b>Antwort C:</b> Hitler befahl die Fortsetzung des Kampfes, obwohl die Lage militärisch hoffnungslos war."},
+    {num:4,title:"Die Berliner Zivilbevölkerung",type:"MC",answer:"<b>Antwort B:</b> Die Zivilbevölkerung litt unter Beschuss, Hunger und Vergewaltigungen – besonders durch eindringende Soldaten."},
+    {num:5,title:"Warum kein früheres Kriegsende?",type:"MS",answer:"<b>Richtig:</b> A, B, D, E &nbsp;|&nbsp; <b>Falsch:</b> C"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(6,5); });
 
   function checkTask1() {
