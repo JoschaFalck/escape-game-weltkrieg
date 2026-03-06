@@ -628,7 +628,8 @@ function addTeacherUI() {
   fab.id = 'teacher-fab';
   fab.innerHTML =
     '<a href="../lehrer.html" id="teacher-back-btn" title="Zur Lehrer-Übersicht">&#8592; Lehrer-Übersicht</a>' +
-    '<button id="teacher-solutions-btn" onclick="showSolutions()" title="Alle Musterlösungen anzeigen">&#128203; Lösungen</button>';
+    '<button id="teacher-solutions-btn" onclick="showSolutions()" title="Alle Musterlösungen anzeigen">&#128203; Lösungen</button>' +
+    '<button id="teacher-exit-btn" onclick="exitTeacherMode()" title="Lehrer-Modus beenden – zurück zur Schüler-Ansicht">&#10005; Schüler-Ansicht</button>';
   document.body.appendChild(fab);
 
   // Modal-Overlay (leer – wird von showSolutions befüllt)
@@ -644,6 +645,11 @@ function addTeacherUI() {
     '</div>';
   overlay.addEventListener('click', function(e){ if (e.target === overlay) hideSolutions(); });
   document.body.appendChild(overlay);
+}
+
+function exitTeacherMode() {
+  sessionStorage.removeItem('archiv45_teacher_v1');
+  location.reload();
 }
 
 function showSolutions() {

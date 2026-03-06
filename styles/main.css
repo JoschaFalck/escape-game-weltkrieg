@@ -1051,6 +1051,19 @@ h1, h2, h3, h4 {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.55);
 }
+/* "Schüler-Ansicht"-Button: dezenter als die anderen Lehrer-Buttons */
+#teacher-exit-btn {
+  background: rgba(50,55,70,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  font-weight: 400 !important;
+  opacity: 0.82;
+  letter-spacing: 0;
+}
+#teacher-exit-btn:hover {
+  background: rgba(80,85,100,0.95) !important;
+  opacity: 1;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4) !important;
+}
 
 /* Lösungen Modal */
 #solutions-overlay {
