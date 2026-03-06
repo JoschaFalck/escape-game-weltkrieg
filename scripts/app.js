@@ -694,6 +694,12 @@ function hideSolutions() {
 // ════════════════════════════════════════
 
 function initLandingPage() {
+  // ── Startseite = Schüler-Einstieg: Teacher-Session immer beenden ──────────
+  // Wer über lehrer.html eingeloggt war und zur Startseite navigiert,
+  // soll automatisch im Schüler-Modus landen. Teacher-Login ist über
+  // lehrer.html jederzeit erneut möglich.
+  sessionStorage.removeItem('archiv45_teacher_v1');
+
   const cards = document.querySelectorAll('.mappe-card');
   cards.forEach(card => {
     const num = parseInt(card.dataset.mappe, 10);
