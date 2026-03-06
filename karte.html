@@ -292,6 +292,7 @@
     var PROGRESS_KEY = 'archiv45_progress_v1';
     var MUSIC_KEY    = 'archiv45_music';
     var TRACK_KEY    = 'archiv45_track';
+    var TEACHER_KEY  = 'archiv45_teacher_v1';
 
     var MAPPE_URLS = {
       1: 'mappen/mappe-01.html',
@@ -318,23 +319,30 @@
       catch(e) { return {}; }
     }
 
+    // Lehrer-Modus aktiv?
+    function isTeacherMode() {
+      return sessionStorage.getItem(TEACHER_KEY) === 'ok';
+    }
+
     // Mappe N ist erreichbar?
-    // Mappe 1 immer, alle anderen wenn progress['mappe-N'] gesetzt ist.
+    // Mappe 1 immer; im Lehrermodus alle; sonst wenn progress['mappe-N'] gesetzt.
     function isUnlocked(n) {
       if (n === 1) return true;
+      if (isTeacherMode()) return true;
       var p = getProgress();
       return !!p['mappe-' + n];
     }
 
-    // Welche ist die höchste freigeschaltete Mappe?
+    // Welche ist die höchste freigeschaltete Mappe (Schüler-Fortschritt)?
     function getHighestUnlocked() {
+      var p = getProgress();
       for (var i = 7; i >= 1; i--) {
-        if (isUnlocked(i)) return i;
+        if (i === 1 || !!p['mappe-' + i]) return i;
       }
       return 1;
     }
 
-    // Ist alles abgeschlossen? (Mappe 7 freigeschaltet = alle 6 Codes korrekt eingegeben)
+    // Ist alles abgeschlossen?
     function isAllDone() {
       var p = getProgress();
       return !!p['archiv-complete'];
@@ -343,11 +351,12 @@
     function renderKarte() {
       var highest  = getHighestUnlocked();
       var allDone  = isAllDone();
+      var teacher  = isTeacherMode();
       var subtitle = document.getElementById('karte-subtitle');
 
       for (var n = 1; n <= 7; n++) {
-        var btn     = document.getElementById('hotspot-' + n);
-        var inner   = btn.querySelector('.hotspot-inner');
+        var btn      = document.getElementById('hotspot-' + n);
+        var inner    = btn.querySelector('.hotspot-inner');
         var unlocked = isUnlocked(n);
 
         // Klassen zurücksetzen
@@ -355,9 +364,14 @@
         btn.disabled = false;
 
         if (!unlocked) {
+          // Nur im Schüler-Modus bei gesperrten Mappen
           btn.classList.add('locked');
           btn.disabled = true;
           inner.innerHTML = '<span class="lock-icon">🔒</span>';
+        } else if (teacher) {
+          // Lehrermodus: alle offen, kein Pulsieren
+          btn.classList.add('completed');
+          inner.innerHTML = '';
         } else if (allDone || n < highest) {
           // Bereits besucht / abgeschlossen
           btn.classList.add('completed');
@@ -369,15 +383,28 @@
         }
       }
 
-      // Untertitel
-      if (allDone) {
+      // Untertitel + optionaler Lehrer-Badge
+      if (teacher) {
+        subtitle.textContent = 'Lehrer-Modus: Alle Mappen zugänglich.';
+        if (!document.getElementById('lehrer-badge')) {
+          var badge = document.createElement('span');
+          badge.id = 'lehrer-badge';
+          badge.textContent = 'Lehrer-Ansicht';
+          badge.style.cssText =
+            'display:inline-block;margin-left:0.75rem;font-size:0.68rem;font-family:Lato,sans-serif;' +
+            'font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9a227;' +
+            'background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.3);' +
+            'padding:2px 10px;border-radius:20px;vertical-align:middle;';
+          document.querySelector('.karte-logo').appendChild(badge);
+        }
+      } else if (allDone) {
         subtitle.textContent = 'Alle Mappen wurden geöffnet. Mission abgeschlossen.';
         document.getElementById('karte-completion').classList.add('visible');
-      } else if (highest === 1 && !isUnlocked(2)) {
+      } else if (highest === 1 && !getProgress()['mappe-2']) {
         subtitle.textContent = 'Beginne mit Mappe 1 – klicke darauf.';
       } else {
         subtitle.textContent =
-          'Mappe ' + highest + ': „' + MAPPE_TITEL[highest] + '" ist freigeschaltet.';
+          'Mappe ' + highest + ': \u201e' + MAPPE_TITEL[highest] + '\u201c ist freigeschaltet.';
       }
     }
 

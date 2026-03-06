@@ -153,11 +153,16 @@ function initMusicPlayer() {
 
   _musicEl = document.createElement('audio');
   _musicEl.id      = 'bg-music';
-  _musicEl.loop    = true;
+  _musicEl.loop    = false;   // kein Loop – Auto-Advance übernimmt das Weiterlaufen
   _musicEl.volume  = 0.3;
   _musicEl.preload = 'none';
   _musicEl.src     = _getAudioPath(_TRACKS[_trackIdx].file);
   document.body.appendChild(_musicEl);
+
+  // Auto-Advance: wenn ein Track zu Ende ist, automatisch den nächsten starten
+  _musicEl.addEventListener('ended', function() {
+    changeTrack(+1);
+  });
 
   // Player-Container
   const wrap = document.createElement('div');
@@ -175,12 +180,17 @@ function initMusicPlayer() {
   document.getElementById('music-prev').addEventListener('click', function() { changeTrack(-1); });
   document.getElementById('music-next').addEventListener('click', function() { changeTrack(+1); });
 
-  // Zustand wiederherstellen
-  if (sessionStorage.getItem(MUSIC_KEY) === 'on') {
-    _musicOn = true;
-    _musicEl.play().catch(function() { _musicOn = false; sessionStorage.removeItem(MUSIC_KEY); });
-    _updateMusicBtn();
-  }
+  // In jeder Mappe Musik automatisch starten – unabhängig davon ob der Nutzer
+  // sie in der vorherigen Mappe ausgeschaltet hatte.
+  _musicOn = true;
+  sessionStorage.setItem(MUSIC_KEY, 'on');
+  _musicEl.play().catch(function() {
+    // Browser-Autoplay-Policy hat abgelehnt (z. B. kein vorheriger User-Klick).
+    // Player zeigt dann „aus"-Zustand; Nutzer kann manuell starten.
+    _musicOn = false;
+    sessionStorage.removeItem(MUSIC_KEY);
+  });
+  _updateMusicBtn();
 }
 
 function toggleMusic() {
