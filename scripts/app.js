@@ -208,6 +208,30 @@ function changeTrack(dir) {
   _updateMusicBtn();
 }
 
+// Automatischer Track-Wechsel beim Mappe-Abschluss.
+// Wird von checkCode() aufgerufen, wenn der Code korrekt ist.
+// Wechselt sofort auf den nächsten Track (während Konfetti läuft)
+// und stellt sicher, dass die nächste Mappe automatisch startet.
+function _autoAdvanceToNextMappe() {
+  var nextIdx = (_trackIdx + 1) % _TRACKS.length;
+  // Für die nächste Seite merken: welcher Track + Musik an
+  sessionStorage.setItem(TRACK_KEY, String(nextIdx));
+  sessionStorage.setItem(MUSIC_KEY, 'on');
+  // Sofort wechseln, falls der Player bereits läuft
+  if (_musicEl) {
+    _trackIdx = nextIdx;
+    _musicEl.pause();
+    _musicEl.src = _getAudioPath(_TRACKS[_trackIdx].file);
+    _musicEl.load();
+    // Kurze Pause: erst den Unlock-Sound ausspielen lassen (ca. 1,1 s)
+    setTimeout(function() {
+      _musicEl.play().catch(function() {});
+      _musicOn = true;
+      _updateMusicBtn();
+    }, 1100);
+  }
+}
+
 // ════════════════════════════════════════
 // 1. SPEICHER-FUNKTIONEN (localStorage)
 // ════════════════════════════════════════
@@ -472,6 +496,7 @@ function checkCode(correctCode, nextMappeNum, nextMappeUrl) {
     updateChapterNav(currentMappe);
     playSound('unlock');
     launchConfetti();
+    _autoAdvanceToNextMappe(); // Track wechseln + nächste Mappe startet mit Musik
 
     const weiterLink = nextMappeUrl
       ? `<br><br><a href="${nextMappeUrl}" class="unlock-btn">Weiter zu Mappe ${nextMappeNum} →</a>`
