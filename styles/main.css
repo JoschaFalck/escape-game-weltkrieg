@@ -1494,7 +1494,7 @@ h1, h2, h3, h4 {
 }
 .vorwissens-intro {
   font-size: 0.83rem;
-  color: var(--text-muted);
+  color: var(--text-light);
   margin-bottom: 0.6rem;
   line-height: 1.5;
 }
@@ -1508,7 +1508,7 @@ h1, h2, h3, h4 {
 }
 .vorwissens-questions li {
   font-size: 0.81rem;
-  color: var(--text);
+  color: var(--text-light);
   padding-left: 1.3rem;
   position: relative;
   line-height: 1.5;
