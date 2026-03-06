@@ -121,56 +121,91 @@ function launchConfetti() {
 // 0d. HINTERGRUNDMUSIK-PLAYER
 // ════════════════════════════════════════
 
-let _musicEl  = null;
-let _musicOn  = false;
-const MUSIC_KEY = 'archiv45_music_v1';
+let _musicEl    = null;
+let _musicOn    = false;
+let _trackIdx   = 0;
+const MUSIC_KEY  = 'archiv45_music_v1';
+const TRACK_KEY  = 'archiv45_track_v1';
+
+const _TRACKS = [
+  { file: 'hitslab-epic-war-background-music-333128.mp3',         name: 'Kriegsatmosphäre' },
+  { file: 'sergepavkinmusic-soldiers-154022.mp3',                  name: 'Soldaten' },
+  { file: 'lexin_music-inspiring-cinematic-ambient-116199.mp3',    name: 'Cinematic Ambient' },
+  { file: 'ob-lix-heilir-sir-norse-viking-background-music-114582.mp3', name: 'Nordisch I' },
+  { file: 'ob-lix-the-gift-pagan-norse-background-music-117479.mp3',    name: 'Nordisch II' },
+];
+
+function _getAudioPath(file) {
+  const isMappe = document.body.classList.contains('mappe-page');
+  return (isMappe ? '../' : './') + 'audio/' + file;
+}
+
+function _updateMusicBtn() {
+  const btn   = document.getElementById('music-toggle');
+  const label = document.getElementById('music-track-name');
+  if (btn) btn.classList.toggle('music-on', _musicOn);
+  if (label) label.textContent = _TRACKS[_trackIdx].name;
+}
 
 function initMusicPlayer() {
-  const isMappe  = document.body.classList.contains('mappe-page');
-  const rootPath = isMappe ? '../' : './';
+  _trackIdx = parseInt(sessionStorage.getItem(TRACK_KEY) || '0', 10);
+  if (_trackIdx < 0 || _trackIdx >= _TRACKS.length) _trackIdx = 0;
 
   _musicEl = document.createElement('audio');
-  _musicEl.id   = 'bg-music';
-  _musicEl.loop = true;
-  _musicEl.volume = 0.3;
-  _musicEl.src  = rootPath + 'audio/ambient.mp3';
+  _musicEl.id      = 'bg-music';
+  _musicEl.loop    = true;
+  _musicEl.volume  = 0.3;
   _musicEl.preload = 'none';
+  _musicEl.src     = _getAudioPath(_TRACKS[_trackIdx].file);
   document.body.appendChild(_musicEl);
 
-  const btn = document.createElement('button');
-  btn.id    = 'music-toggle';
-  btn.title = 'Hintergrundmusik ein/aus';
-  btn.setAttribute('aria-label', 'Hintergrundmusik ein/aus');
-  btn.innerHTML = '<span class="music-icon">🎵</span><span class="music-label">Musik</span>';
-  btn.addEventListener('click', toggleMusic);
-  document.body.appendChild(btn);
+  // Player-Container
+  const wrap = document.createElement('div');
+  wrap.id = 'music-player';
+  wrap.innerHTML =
+    '<button id="music-toggle" title="Musik ein/aus" aria-label="Musik ein/aus">' +
+      '<span class="music-icon">🎵</span>' +
+      '<span id="music-track-name" class="music-label">' + _TRACKS[_trackIdx].name + '</span>' +
+    '</button>' +
+    '<button id="music-prev" title="Vorheriger Track" aria-label="Vorheriger Track">‹</button>' +
+    '<button id="music-next" title="Nächster Track" aria-label="Nächster Track">›</button>';
+  document.body.appendChild(wrap);
 
-  // Zustand aus sessionStorage wiederherstellen
+  document.getElementById('music-toggle').addEventListener('click', toggleMusic);
+  document.getElementById('music-prev').addEventListener('click', function() { changeTrack(-1); });
+  document.getElementById('music-next').addEventListener('click', function() { changeTrack(+1); });
+
+  // Zustand wiederherstellen
   if (sessionStorage.getItem(MUSIC_KEY) === 'on') {
     _musicOn = true;
-    _musicEl.play().catch(function() {
-      // Autoplay blockiert – warten auf Nutzerinteraktion
-      _musicOn = false;
-      sessionStorage.removeItem(MUSIC_KEY);
-    });
-    btn.classList.add('music-on');
+    _musicEl.play().catch(function() { _musicOn = false; sessionStorage.removeItem(MUSIC_KEY); });
+    _updateMusicBtn();
   }
 }
 
 function toggleMusic() {
-  const btn = document.getElementById('music-toggle');
   if (!_musicEl) return;
   if (_musicOn) {
     _musicEl.pause();
     _musicOn = false;
     sessionStorage.setItem(MUSIC_KEY, 'off');
-    if (btn) btn.classList.remove('music-on');
   } else {
     _musicEl.play().catch(function() {});
     _musicOn = true;
     sessionStorage.setItem(MUSIC_KEY, 'on');
-    if (btn) btn.classList.add('music-on');
   }
+  _updateMusicBtn();
+}
+
+function changeTrack(dir) {
+  _trackIdx = (_trackIdx + dir + _TRACKS.length) % _TRACKS.length;
+  sessionStorage.setItem(TRACK_KEY, String(_trackIdx));
+  const wasPlaying = _musicOn;
+  _musicEl.pause();
+  _musicEl.src = _getAudioPath(_TRACKS[_trackIdx].file);
+  _musicEl.load();
+  if (wasPlaying) _musicEl.play().catch(function() {});
+  _updateMusicBtn();
 }
 
 // ════════════════════════════════════════

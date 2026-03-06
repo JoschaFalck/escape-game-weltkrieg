@@ -1174,41 +1174,57 @@ h1, h2, h3, h4 {
 }
 .hint-box-collapsible.visible { display: block; }
 
-/* ------- 23. MUSIK-PLAYER BUTTON ------- */
-#music-toggle {
+/* ------- 23. MUSIK-PLAYER ------- */
+#music-player {
   position: fixed;
   bottom: 1.5rem;
   left: 1.5rem;
   z-index: 890;
-  background: rgba(14,27,38,0.9);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.45);
   border-radius: 30px;
-  padding: 0.42rem 0.9rem;
+  overflow: hidden;
+}
+#music-player button {
+  background: rgba(14,27,38,0.92);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text-faint);
   font-family: 'Lato', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
+  transition: all var(--transition);
+  min-height: 36px;
+  border-radius: 0;
+  border-left: none;
+}
+#music-player button:first-child { border-radius: 30px 0 0 30px; border-left: 1px solid rgba(255,255,255,0.15); }
+#music-player button:last-child  { border-radius: 0 30px 30px 0; }
+#music-player button:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-light);
+}
+#music-toggle {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-  transition: all var(--transition);
+  padding: 0.42rem 0.9rem;
   letter-spacing: 0.3px;
-  min-height: 36px;
-}
-#music-toggle:hover {
-  border-color: rgba(255,255,255,0.35);
-  color: var(--text-light);
-  background: rgba(14,27,38,0.98);
 }
 #music-toggle.music-on {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(201,162,39,0.12);
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+  background: rgba(201,162,39,0.15) !important;
+}
+#music-prev, #music-next {
+  padding: 0.42rem 0.65rem;
+  font-size: 1rem;
+  line-height: 1;
 }
 .music-icon { font-size: 0.9rem; }
-.music-label { display: inline; }
+.music-label { display: inline; max-width: 110px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 /* ------- 24. STEMPEL-ANIMATION ------- */
 .analysiert-stamp {
@@ -1336,9 +1352,10 @@ h1, h2, h3, h4 {
   /* MC/MS-Optionen: mehr Padding für Touch */
   .mc-option, .ms-option { padding: 0.85rem 0.85rem; }
 
-  /* Musik-Button auf kleinen Screens kleiner */
-  #music-toggle .music-label { display: none; }
-  #music-toggle { padding: 0.5rem 0.7rem; border-radius: 50%; width: 40px; height: 40px; justify-content: center; }
+  /* Musik-Player auf kleinen Screens: Track-Name ausblenden */
+  .music-label { display: none; }
+  #music-toggle { padding: 0.42rem 0.65rem; }
+  #music-player { bottom: 1rem; left: 1rem; }
 
   /* Stempel auf kleinen Screens: nicht zu groß */
   .analysiert-stamp { font-size: 0.72rem; letter-spacing: 2px; }
@@ -1350,4 +1367,43 @@ h1, h2, h3, h4 {
   .task-title-h2 { font-size: 1.05rem; }
   .document-text { font-size: 0.87rem; }
   .chapter-circle { width: 24px; height: 24px; font-size: 0.68rem; }
+}
+
+/* ------- 27. HISTORISCHE FOTOS ------- */
+.doc-image-wrap {
+  float: right;
+  margin: 0 0 1rem 1.4rem;
+  max-width: 190px;
+  border: 2px solid var(--paper-border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--paper-dark);
+}
+.doc-image {
+  width: 100%;
+  display: block;
+  filter: sepia(15%) grayscale(25%);
+  transition: filter 0.3s ease;
+}
+.doc-image:hover { filter: sepia(5%) grayscale(10%); }
+.doc-image-caption {
+  font-size: 0.58rem;
+  color: var(--text-faint);
+  font-family: 'Lato', sans-serif;
+  padding: 3px 7px 4px;
+  background: var(--paper-dark);
+  line-height: 1.45;
+  font-style: italic;
+  text-align: center;
+  border-top: 1px solid var(--paper-border);
+}
+/* Kein Float auf kleinen Screens */
+@media (max-width: 600px) {
+  .doc-image-wrap {
+    float: none;
+    margin: 0 auto 1rem;
+    max-width: min(100%, 260px);
+    display: block;
+  }
 }

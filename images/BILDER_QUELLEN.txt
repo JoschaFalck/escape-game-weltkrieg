@@ -1,0 +1,61 @@
+HISTORISCHE BILDER – QUELLEN & ANLEITUNG
+========================================
+
+Lade für jede Mappe ein historisches Foto herunter, benenne es wie angegeben
+und lege es in DIESEM Ordner (archiv45/images/) ab.
+
+Alle Bilder sind gemeinfrei (Public Domain) oder unter CC BY-SA 3.0 DE lizenziert.
+Fehlt ein Bild, wird der Bildbereich automatisch ausgeblendet – die Seite
+funktioniert also auch ohne Bilder einwandfrei.
+
+
+MAPPE 1 – Stalingrad
+  Dateiname: mappe-01.jpg
+  Quelle: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-W0506-316,_Russland,_Kampf_um_Stalingrad,_Ruinenkämpfe.jpg
+  Lizenz: CC BY-SA 3.0 DE (Bundesarchiv)
+  Beschreibung: Stalingrad, Ruinenkämpfe im Winter 1942/43
+
+MAPPE 2 – Holocaust / Wannseekonferenz
+  Dateiname: mappe-02.jpg
+  Quelle: https://commons.wikimedia.org/wiki/File:HdG_Am_Großen_Wannsee_56-58.jpg
+  Lizenz: CC BY-SA 3.0 (Wikimedia Commons)
+  Beschreibung: Villa am Großen Wannsee, Berlin – Ort der Wannseekonferenz 1942
+  Alternativ: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-N0827-318,_KZ_Auschwitz,_Ankunft_ungarischer_Juden.jpg
+
+MAPPE 3 – Widerstand / Weiße Rose
+  Dateiname: mappe-03.jpg
+  Quelle: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_146-1978-043-13,_Hans_und_Sophie_Scholl.jpg
+  Lizenz: CC BY-SA 3.0 DE (Bundesarchiv)
+  Beschreibung: Hans und Sophie Scholl, München 1942
+
+MAPPE 4 – D-Day / Operation Overlord
+  Dateiname: mappe-04.jpg
+  Quelle: https://commons.wikimedia.org/wiki/File:Into_the_Jaws_of_Death_23-0455M_edit.jpg
+  Lizenz: Public Domain (U.S. Army)
+  Beschreibung: Landung in der Normandie, 6. Juni 1944
+
+MAPPE 5 – Volkssturm
+  Dateiname: mappe-05.jpg
+  Quelle: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_146-1980-036-02,_Volkssturm.jpg
+  Lizenz: CC BY-SA 3.0 DE (Bundesarchiv)
+  Beschreibung: Volkssturm-Aufgebot, Herbst/Winter 1944/45
+
+MAPPE 6 – Letzte Tage / Berlin April 1945
+  Dateiname: mappe-06.jpg
+  Quelle: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-R77767,_Berlin,_Reichstag.jpg
+  Lizenz: CC BY-SA 3.0 DE (Bundesarchiv)
+  Beschreibung: Reichstag Berlin, 1945
+
+MAPPE 7 – Kapitulation
+  Dateiname: mappe-07.jpg
+  Quelle: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_146-1971-028-35,_Kapitulation_Deutschland,_Nachtsitzung.jpg
+  Lizenz: CC BY-SA 3.0 DE (Bundesarchiv)
+  Alternativ: https://commons.wikimedia.org/wiki/File:German_instrument_of_surrender2.jpg (Public Domain)
+  Beschreibung: Unterzeichnung der Kapitulationsurkunde, Reims, 7. Mai 1945
+
+
+HINWEISE:
+  - Format: JPG oder PNG (JPG empfohlen, kleinere Dateigröße)
+  - Empfohlene Breite: 400–600 px (wird im Design automatisch skaliert)
+  - Fehlt eine Datei, verschwindet der Bildbereich automatisch (kein Fehler sichtbar)
+  - Bilder werden mit leichtem Sepia-/Graustufen-Filter angezeigt (historischer Look)
