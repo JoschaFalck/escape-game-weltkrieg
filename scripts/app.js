@@ -739,4 +739,13 @@ function initLandingPage() {
   // Reset-Button
   const resetBtn = document.getElementById('reset-btn');
   if (resetBtn) resetBtn.addEventListener('click', resetProgress);
+
+  // Musik automatisch starten, wenn Schüler:in auf "Mission beginnen" klickt.
+  // MUSIC_KEY wird gesetzt → mappe-01 erkennt das in initMusicPlayer() und spielt ab.
+  var startBtn = document.querySelector('.start-btn');
+  if (startBtn) {
+    startBtn.addEventListener('click', function() {
+      sessionStorage.setItem(MUSIC_KEY, 'on');
+    });
+  }
 }
