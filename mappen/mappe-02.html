@@ -318,6 +318,7 @@
         </div>
 
         <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-2-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-2-5">Verantwortung kann viele Formen haben. Wer hat befohlen? Wer hat ausgeführt? Wer hat weggeschaut? Wer hat profitiert?</div></div>
+        <div class="hint-toggle hint-toggle-2"><button class="hint-btn hint-btn-2" onclick="var h=document.getElementById('hint-2-5-2');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Weiterer Tipp ausblenden':'&#128161; Weiterer Tipp anzeigen'">&#128161; Weiterer Tipp anzeigen</button><div class="hint-box-collapsible level-2" id="hint-2-5-2">Teile die Antworten in vier Gruppen: 1) Wer hat den Befehl gegeben? 2) Wer hat ihn ausgeführt? 3) Wer hat die Logistik organisiert? 4) Wer hat weggeschaut oder profitiert? Jede Gruppe trägt Verantwortung – bis auf eine Ausnahme in der Liste.</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -327,6 +328,8 @@
         <div class="reflection-label">Reflexionsfrage</div>
         Warum ist es wichtig, dass wir uns auch heute noch an den Holocaust erinnern?
         Was könnte passieren, wenn wir vergessen?
+        Viele Überlebende, Zeitzeug:innen und ihre Nachkommen haben eine klare Antwort:
+        „Das darf <strong>niemals</strong> wieder passieren."
       </div>
     </div>
 
@@ -379,6 +382,8 @@
     var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
     if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
     if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    if(typeof playSound==='function')playSound('correct');
+    if(typeof showStamp==='function')showStamp(n);
     setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
   }
   function goToNextTask(n){

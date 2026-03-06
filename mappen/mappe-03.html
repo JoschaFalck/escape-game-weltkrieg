@@ -318,6 +318,7 @@
         </div>
 
         <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-3-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-3-5">Stell dir vor: Was wäre passiert, wenn du dich gegen das Regime gestellt hättest? Welche Konsequenzen gab es? Warum haben so viele geschwiegen?</div></div>
+        <div class="hint-toggle hint-toggle-2"><button class="hint-btn hint-btn-2" onclick="var h=document.getElementById('hint-3-5-2');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Weiterer Tipp ausblenden':'&#128161; Weiterer Tipp anzeigen'">&#128161; Weiterer Tipp anzeigen</button><div class="hint-box-collapsible level-2" id="hint-3-5-2">Drei Antwortmöglichkeiten beschreiben reale Hindernisse: <em>Angst vor Konsequenzen</em>, <em>Propaganda/Gehirnwäsche</em> und <em>Überwachung durch Gestapo</em>. Eine Aussage ist falsch – welche beschreibt Widerstand zu positiv oder zu vereinfacht?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -378,6 +379,8 @@
     var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
     if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
     if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    if(typeof playSound==='function')playSound('correct');
+    if(typeof showStamp==='function')showStamp(n);
     setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
   }
   function goToNextTask(n){

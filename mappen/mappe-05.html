@@ -73,7 +73,7 @@
       <div class="document-card">
         <div class="document-stamp">Erlass · Reichsverteidigungskommissare · 25. September 1944</div>
         <p class="document-text">
-          Am <strong>25. September 1944</strong> ordnete Hitler die Aufstellung des „Deutschen Volkssturms" an.
+          Am <strong>25. September <span style="color:var(--red);font-size:1.05em;">1944</span></strong> ordnete Hitler die Aufstellung des „Deutschen Volkssturms" an.
           Alle Männer zwischen <strong>16 und 60 Jahren</strong>, die nicht bereits in der Wehrmacht dienten,
           wurden verpflichtet, an der Verteidigung des Deutschen Reiches teilzunehmen –
           unter der Leitung der NSDAP. Der Volkssturm erhielt oft veraltete Waffen oder gar keine.
@@ -267,6 +267,7 @@
         </div>
 
         <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-5-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-5-5">Wer litt am meisten in den letzten Kriegsjahren? Zivilisten oder Soldaten? Welche Arten von Leid gab es, und welche Aussagen beschreiben das korrekt?</div></div>
+        <div class="hint-toggle hint-toggle-2"><button class="hint-btn hint-btn-2" onclick="var h=document.getElementById('hint-5-5-2');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Weiterer Tipp ausblenden':'&#128161; Weiterer Tipp anzeigen'">&#128161; Weiterer Tipp anzeigen</button><div class="hint-box-collapsible level-2" id="hint-5-5-2">Schau auf drei Gruppen im Text: Vertriebene, Bombardierte und Zwangsarbeiter. Welche konkreten Zahlen nennt das Dokument? Und welche der Aussagen ist <em>zu pauschalisierend</em> – also stimmt nicht für alle Gruppen?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -326,6 +327,8 @@
     var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
     if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
     if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    if(typeof playSound==='function')playSound('correct');
+    if(typeof showStamp==='function')showStamp(n);
     setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
   }
   function goToNextTask(n){

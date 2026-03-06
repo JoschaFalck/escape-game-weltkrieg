@@ -88,6 +88,8 @@
           Die gesamte <strong>6. Armee unter Generalfeldmarschall Friedrich Paulus</strong>
           befand sich nun im sogenannten <em>Kessel von Stalingrad</em> –
           eingeschlossen von drei sowjetischen Armeen.
+          Stalingrad liegt am Westufer der <strong>Wolga</strong> – ein Rückzug über den Fluss
+          war abgeschnitten, ein Ausbruch unmöglich.
           Mehr als 300.000 deutsche und verbündete Soldaten waren abgeschnitten.
           Feldmarschall von Manstein versuchte, den Kessel von außen zu sprengen – ohne Erfolg.
         </p>
@@ -317,6 +319,7 @@
         </div>
 
         <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-1-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-1-5">Lies jede Aussage genau. Eine ist historisch falsch – die Sowjetunion hat NICHT kapituliert. Überleg bei jeder: Erklärt sie, warum Stalingrad ein Wendepunkt war?</div></div>
+        <div class="hint-toggle hint-toggle-2"><button class="hint-btn hint-btn-2" onclick="var h=document.getElementById('hint-1-5-2');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Weiterer Tipp ausblenden':'&#128161; Weiterer Tipp anzeigen'">&#128161; Weiterer Tipp anzeigen</button><div class="hint-box-collapsible level-2" id="hint-1-5-2">Konzentriere dich auf vier Kriterien: Wie veränderten sich (1) die Kriegslage, (2) die Stimmung in der Bevölkerung, (3) die NS-Propaganda und (4) Deutschlands Verbündete? Welche Aussagen treffen auf <em>alle vier</em> Bereiche zu?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -380,6 +383,8 @@
     var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
     if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
     if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    if(typeof playSound==='function')playSound('correct');
+    if(typeof showStamp==='function')showStamp(n);
     setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
   }
   function goToNextTask(n){

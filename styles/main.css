@@ -1174,10 +1174,180 @@ h1, h2, h3, h4 {
 }
 .hint-box-collapsible.visible { display: block; }
 
-/* ------- 23. PRINT ------- */
+/* ------- 23. MUSIK-PLAYER BUTTON ------- */
+#music-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 890;
+  background: rgba(14,27,38,0.9);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--text-faint);
+  border-radius: 30px;
+  padding: 0.42rem 0.9rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  transition: all var(--transition);
+  letter-spacing: 0.3px;
+  min-height: 36px;
+}
+#music-toggle:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: var(--text-light);
+  background: rgba(14,27,38,0.98);
+}
+#music-toggle.music-on {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,162,39,0.12);
+}
+.music-icon { font-size: 0.9rem; }
+.music-label { display: inline; }
+
+/* ------- 24. STEMPEL-ANIMATION ------- */
+.analysiert-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg) scale(3.5);
+  color: rgba(39,174,96,0.9);
+  border: 2.5px solid rgba(39,174,96,0.9);
+  border-radius: 5px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 3px 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              opacity 0.25s ease;
+  z-index: 20;
+  white-space: nowrap;
+  user-select: none;
+  text-shadow: 0 1px 2px rgba(39,174,96,0.3);
+  background: rgba(255,255,255,0.92);
+}
+.analysiert-stamp.stamped {
+  transform: translate(-50%, -50%) rotate(-12deg) scale(1);
+  opacity: 1;
+}
+.analysiert-stamp.stamp-settle {
+  transform: translate(-50%, -50%) rotate(-12deg) scale(0.88);
+  opacity: 0.75;
+  transition: transform 0.3s ease, opacity 0.4s ease;
+}
+
+/* ------- 25. ZWEISTUFIGES TIPP-SYSTEM ------- */
+.hint-toggle-2 { margin-top: 0.45rem; }
+.hint-btn-2 {
+  background: none;
+  border: 1px dashed var(--paper-border);
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8rem;
+  font-family: 'Lato', sans-serif;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  opacity: 0.8;
+}
+.hint-btn-2:hover {
+  border-color: var(--orange);
+  color: var(--text-mid);
+  background: rgba(230,126,34,0.07);
+  opacity: 1;
+}
+.hint-box-collapsible.level-2 {
+  background: rgba(230,126,34,0.08);
+  border-left-color: var(--orange);
+  color: #5a3510;
+}
+.hint-box-collapsible.level-2.visible { display: block; }
+
+/* ------- 26. PRINT – ZERTIFIKAT ------- */
+.print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  background: rgba(255,255,255,0.12);
+  color: var(--text-light);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 30px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+.print-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
 @media print {
-  .site-header, .task-sidebar, .sidebar-toggle,
-  .check-btn, .next-task-btn, .code-section { display: none !important; }
-  body { background: #fff; color: #000; padding-top: 0; }
-  .task-block { box-shadow: none; border: 1px solid #ccc; display: block !important; }
+  /* Alles ausblenden außer dem Zertifikat */
+  .site-header, .task-sidebar, .sidebar-toggle, .mappe-banner,
+  .check-btn, .next-task-btn, .code-section, .site-footer,
+  .archive-context, #music-toggle, #teacher-fab,
+  .print-btn, .task-block, .layout-wrapper > aside { display: none !important; }
+
+  body { background: #fff !important; color: #000 !important; padding-top: 0 !important; }
+  .layout-wrapper { display: block !important; padding: 0 !important; }
+
+  /* Zertifikat schön drucken */
+  .completion-certificate { page-break-inside: avoid; }
+  .cert-stamp { border-color: #1a5c35 !important; color: #1a5c35 !important; }
+  .cert-badge { border-color: #1a5c35 !important; color: #1a5c35 !important; background: #e8f5e9 !important; }
+  .cert-quote { border-left-color: #c9a227 !important; background: #fdf9ec !important; }
+  .code-section { display: block !important; box-shadow: none !important; }
+  .code-section-header { background: #333 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ------- 20b. MOBILE ERWEITERUNGEN ------- */
+@media (max-width: 600px) {
+  /* Touch-Targets: mind. 44px für Barrierefreiheit */
+  .check-btn, .next-task-btn, .unlock-btn, .start-btn {
+    min-height: 44px;
+    padding: 0.75rem 1.3rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .hint-btn, .hint-btn-2 {
+    min-height: 38px;
+    padding: 0.45rem 1rem;
+  }
+
+  /* TF-Tabelle horizontal scrollbar auf kleinen Screens */
+  .question-block { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tf-table { min-width: 420px; }
+
+  /* MC/MS-Optionen: mehr Padding für Touch */
+  .mc-option, .ms-option { padding: 0.85rem 0.85rem; }
+
+  /* Musik-Button auf kleinen Screens kleiner */
+  #music-toggle .music-label { display: none; }
+  #music-toggle { padding: 0.5rem 0.7rem; border-radius: 50%; width: 40px; height: 40px; justify-content: center; }
+
+  /* Stempel auf kleinen Screens: nicht zu groß */
+  .analysiert-stamp { font-size: 0.72rem; letter-spacing: 2px; }
+}
+
+@media (max-width: 380px) {
+  .site-logo { font-size: 1.05rem; }
+  .mappe-banner h1 { font-size: 0.95rem; }
+  .task-title-h2 { font-size: 1.05rem; }
+  .document-text { font-size: 0.87rem; }
+  .chapter-circle { width: 24px; height: 24px; font-size: 0.68rem; }
 }

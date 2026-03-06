@@ -1,0 +1,24 @@
+HINTERGRUNDMUSIK – ANLEITUNG
+============================
+
+Lege eine Audiodatei mit dem Namen  ambient.mp3  in diesem Ordner ab.
+
+Empfohlene Quellen für kostenfreie Atmosphären-Musik:
+  → pixabay.com/music  (Suche: "dark ambient", "mystery", "tension")
+  → freesound.org      (Suche: "1940s radio", "wartime ambience")
+  → incompetech.com    (Kevin MacLeod – viele Tracks CC0/Lizenzfrei)
+
+Empfohlene Suchbegriffe:
+  "dark mystery ambient loop"
+  "WWII documentary background"
+  "dramatic historical ambient"
+  "tense atmosphere music loop"
+
+Technische Anforderungen:
+  - Format: MP3 (oder OGG als Fallback)
+  - Dauer: mind. 2 Minuten (wird geloopt)
+  - Lautstärke: nicht zu laut (wird auf 30% eingestellt)
+  - Kein Gesang – nur Instrumentalmusik/Ambience
+
+Der Musik-Button erscheint automatisch unten links auf allen Seiten.
+Schüler können ihn jederzeit ein- und ausschalten.

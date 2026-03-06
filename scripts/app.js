@@ -7,6 +7,173 @@
 const STORAGE_KEY = 'archiv45_progress_v1';
 
 // ════════════════════════════════════════
+// 0. SOUND-SYSTEM (Web Audio API – keine Datei nötig)
+// ════════════════════════════════════════
+
+const _audioCtx = (function() {
+  try { return new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return null; }
+})();
+
+function _tone(freq, type, vol, start, dur) {
+  if (!_audioCtx) return;
+  try {
+    const o = _audioCtx.createOscillator();
+    const g = _audioCtx.createGain();
+    o.connect(g); g.connect(_audioCtx.destination);
+    o.type = type; o.frequency.setValueAtTime(freq, _audioCtx.currentTime + start);
+    g.gain.setValueAtTime(vol, _audioCtx.currentTime + start);
+    g.gain.exponentialRampToValueAtTime(0.0001, _audioCtx.currentTime + start + dur);
+    o.start(_audioCtx.currentTime + start);
+    o.stop(_audioCtx.currentTime + start + dur);
+  } catch(e) {}
+}
+
+function playSound(type) {
+  if (!_audioCtx) return;
+  if (_audioCtx.state === 'suspended') _audioCtx.resume();
+  if (type === 'correct') {
+    _tone(523, 'sine', 0.22, 0,    0.18);
+    _tone(659, 'sine', 0.18, 0.1,  0.22);
+    _tone(784, 'sine', 0.16, 0.2,  0.35);
+  } else if (type === 'incorrect') {
+    _tone(220, 'sawtooth', 0.18, 0,   0.18);
+    _tone(175, 'sawtooth', 0.14, 0.1, 0.22);
+  } else if (type === 'warning') {
+    _tone(440, 'sine', 0.18, 0, 0.12);
+    _tone(440, 'sine', 0.14, 0.18, 0.1);
+  } else if (type === 'unlock') {
+    _tone(392, 'sine', 0.18, 0,    0.1);
+    _tone(523, 'sine', 0.2,  0.1,  0.12);
+    _tone(659, 'sine', 0.2,  0.22, 0.14);
+    _tone(784, 'sine', 0.22, 0.36, 0.3);
+    _tone(1047,'sine', 0.2,  0.55, 0.45);
+  }
+}
+
+// ════════════════════════════════════════
+// 0b. STEMPEL-ANIMATION
+// ════════════════════════════════════════
+
+function showStamp(taskNum) {
+  const taskEl = document.getElementById('task-' + taskNum);
+  const docCard = taskEl && taskEl.querySelector('.document-card');
+  if (!docCard) return;
+  const stamp = document.createElement('div');
+  stamp.className = 'analysiert-stamp';
+  stamp.textContent = 'ANALYSIERT ✓';
+  docCard.appendChild(stamp);
+  // Trigger animation after paint
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() { stamp.classList.add('stamped'); });
+  });
+  setTimeout(function() { stamp.classList.add('stamp-settle'); }, 600);
+}
+
+// ════════════════════════════════════════
+// 0c. KONFETTI
+// ════════════════════════════════════════
+
+function launchConfetti() {
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors  = ['#c9a227','#27ae60','#2980b9','#e67e22','#9b59b6','#e74c3c','#1a8fa5'];
+  const pieces  = [];
+  for (let i = 0; i < 130; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: -10 - Math.random() * 250,
+      w: 6 + Math.random() * 8,
+      h: 3 + Math.random() * 5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      angle: Math.random() * Math.PI * 2,
+      spin:  (Math.random() - 0.5) * 0.25,
+      vx:    (Math.random() - 0.5) * 3.5,
+      vy:    2.5 + Math.random() * 4,
+      op:    1
+    });
+  }
+  let f = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(function(p) {
+      p.x += p.vx; p.y += p.vy; p.angle += p.spin;
+      if (f > 80) p.op = Math.max(0, p.op - 0.013);
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.globalAlpha = p.op;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+    });
+    f++;
+    if (f < 190) requestAnimationFrame(draw);
+    else canvas.remove();
+  }
+  draw();
+}
+
+// ════════════════════════════════════════
+// 0d. HINTERGRUNDMUSIK-PLAYER
+// ════════════════════════════════════════
+
+let _musicEl  = null;
+let _musicOn  = false;
+const MUSIC_KEY = 'archiv45_music_v1';
+
+function initMusicPlayer() {
+  const isMappe  = document.body.classList.contains('mappe-page');
+  const rootPath = isMappe ? '../' : './';
+
+  _musicEl = document.createElement('audio');
+  _musicEl.id   = 'bg-music';
+  _musicEl.loop = true;
+  _musicEl.volume = 0.3;
+  _musicEl.src  = rootPath + 'audio/ambient.mp3';
+  _musicEl.preload = 'none';
+  document.body.appendChild(_musicEl);
+
+  const btn = document.createElement('button');
+  btn.id    = 'music-toggle';
+  btn.title = 'Hintergrundmusik ein/aus';
+  btn.setAttribute('aria-label', 'Hintergrundmusik ein/aus');
+  btn.innerHTML = '<span class="music-icon">🎵</span><span class="music-label">Musik</span>';
+  btn.addEventListener('click', toggleMusic);
+  document.body.appendChild(btn);
+
+  // Zustand aus sessionStorage wiederherstellen
+  if (sessionStorage.getItem(MUSIC_KEY) === 'on') {
+    _musicOn = true;
+    _musicEl.play().catch(function() {
+      // Autoplay blockiert – warten auf Nutzerinteraktion
+      _musicOn = false;
+      sessionStorage.removeItem(MUSIC_KEY);
+    });
+    btn.classList.add('music-on');
+  }
+}
+
+function toggleMusic() {
+  const btn = document.getElementById('music-toggle');
+  if (!_musicEl) return;
+  if (_musicOn) {
+    _musicEl.pause();
+    _musicOn = false;
+    sessionStorage.setItem(MUSIC_KEY, 'off');
+    if (btn) btn.classList.remove('music-on');
+  } else {
+    _musicEl.play().catch(function() {});
+    _musicOn = true;
+    sessionStorage.setItem(MUSIC_KEY, 'on');
+    if (btn) btn.classList.add('music-on');
+  }
+}
+
+// ════════════════════════════════════════
 // 1. SPEICHER-FUNKTIONEN (localStorage)
 // ════════════════════════════════════════
 
@@ -164,6 +331,7 @@ function initApp(mappeNum, numTasks) {
   initSidebarToggle();
   initSidebar(mappeNum);
   addTeacherUI();
+  initMusicPlayer();
 }
 
 // Alle Tasks + Code-Section für Lehrende freischalten
@@ -211,6 +379,10 @@ function revealCodeSection() {
 function completeTask(taskNum) {
   markTaskDone(currentMappe, taskNum);
   updateSidebarItem(taskNum, 'completed');
+
+  // Sound + Stempel
+  playSound('correct');
+  showStamp(taskNum);
 
   // Feedback-Button ausblenden (Check-Button)
   const checkBtn = document.querySelector(`#task-${taskNum} .check-btn`);
@@ -263,6 +435,8 @@ function checkCode(correctCode, nextMappeNum, nextMappeUrl) {
       markTaskDone(currentMappe, 'done');
     }
     updateChapterNav(currentMappe);
+    playSound('unlock');
+    launchConfetti();
 
     const weiterLink = nextMappeUrl
       ? `<br><br><a href="${nextMappeUrl}" class="unlock-btn">Weiter zu Mappe ${nextMappeNum} →</a>`
@@ -289,6 +463,9 @@ function checkCode(correctCode, nextMappeNum, nextMappeUrl) {
 function showFeedback(feedbackId, message, type) {
   const el = document.getElementById(feedbackId);
   if (!el) return;
+  // Sound basierend auf Feedback-Typ
+  if (type === 'incorrect') playSound('incorrect');
+  else if (type === 'warning') playSound('warning');
   el.innerHTML = `<div class="feedback feedback-${type}">${message}</div>`;
   // Immer scrollen – ohne Bedingung, damit das Feedback garantiert sichtbar ist.
   // Beide Methoden als Absicherung: scrollIntoView + window.scrollTo.

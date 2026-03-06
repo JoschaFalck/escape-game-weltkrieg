@@ -286,6 +286,7 @@
         </div>
 
         <div class="hint-toggle"><button class="hint-btn" onclick="var h=document.getElementById('hint-6-5');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Tipp ausblenden':'&#128161; Tipp anzeigen'">&#128161; Tipp anzeigen</button><div class="hint-box-collapsible" id="hint-6-5">Warum haben so viele bis zuletzt gekämpft? War es Überzeugung, Angst, Pflicht oder Propaganda? Welche Faktoren spielten zusammen?</div></div>
+        <div class="hint-toggle hint-toggle-2"><button class="hint-btn hint-btn-2" onclick="var h=document.getElementById('hint-6-5-2');h.classList.toggle('visible');this.textContent=h.classList.contains('visible')?'&#128161; Weiterer Tipp ausblenden':'&#128161; Weiterer Tipp anzeigen'">&#128161; Weiterer Tipp anzeigen</button><div class="hint-box-collapsible level-2" id="hint-6-5-2">Drei Faktoren hielten das Regime aufrecht: (1) Das Regime bezeichnete Kapitulation als <em>Verrat</em>, auf den die Todesstrafe stand. (2) Soldaten und Zivilisten hatten Angst vor sowjetischer Vergeltung. (3) Manche glaubten noch an eine <em>Wunderwaffe</em>. Welche Aussagen beschreiben diese Faktoren korrekt?</div></div>
         <button class="check-btn" onclick="checkTask5()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-5" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-5" onclick="goToNextTask(5)">Mappe öffnen →</button>
@@ -345,6 +346,8 @@
     var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
     if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
     if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    if(typeof playSound==='function')playSound('correct');
+    if(typeof showStamp==='function')showStamp(n);
     setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
   }
   function goToNextTask(n){
