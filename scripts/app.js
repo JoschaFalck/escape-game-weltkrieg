@@ -498,9 +498,7 @@ function checkCode(correctCode, nextMappeNum, nextMappeUrl) {
     launchConfetti();
     _autoAdvanceToNextMappe(); // Track wechseln + nächste Mappe startet mit Musik
 
-    const weiterLink = nextMappeUrl
-      ? `<br><br><a href="${nextMappeUrl}" class="unlock-btn">Weiter zu Mappe ${nextMappeNum} →</a>`
-      : `<br><br><a href="../index.html" class="unlock-btn">🏆 Zur Übersicht</a>`;
+    const weiterLink = `<br><br><a href="../karte.html" class="unlock-btn">🗂 Zurück zur Archiv-Karte →</a>`;
 
     feedback.innerHTML = `
       <div class="feedback feedback-correct unlock-success">

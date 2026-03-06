@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archiv 45 – Die verschlossenen Akten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    body.karte-page {
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem 1rem;
+    }
+
+    .karte-header {
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .karte-logo {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 0.3rem;
+    }
+
+    .karte-title {
+      color: var(--text-light);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin: 0 0 0.4rem;
+      font-weight: 400;
+    }
+
+    .karte-subtitle {
+      color: var(--text-light);
+      opacity: 0.6;
+      font-size: 0.9rem;
+      margin: 0;
+      min-height: 1.3em;
+    }
+
+    /* ── Bild-Container ── */
+    .karte-container {
+      position: relative;
+      max-width: 820px;
+      width: 100%;
+      user-select: none;
+    }
+
+    .karte-img {
+      width: 100%;
+      display: block;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      pointer-events: none;
+    }
+
+    /* ── Hotspot-Grundform ── */
+    .mappe-hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 18%;
+      height: 32%;
+      border: none;
+      background: transparent;
+      padding: 0;
+      border-radius: 6px;
+      cursor: not-allowed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .mappe-hotspot:focus {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    /* Innenbereich: füllt den Button aus */
+    .hotspot-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    /* ── GESPERRT ── */
+    .mappe-hotspot.locked .hotspot-inner {
+      background: rgba(0, 0, 0, 0.52);
+      backdrop-filter: blur(1.5px);
+    }
+
+    .lock-icon {
+      font-size: clamp(1.2rem, 3vw, 1.9rem);
+      filter: drop-shadow(0 1px 4px rgba(0,0,0,0.9));
+      pointer-events: none;
+    }
+
+    /* ── FREIGESCHALTET ── */
+    .mappe-hotspot.unlocked {
+      cursor: pointer;
+    }
+
+    .mappe-hotspot.unlocked .hotspot-inner {
+      background: transparent;
+    }
+
+    .mappe-hotspot.unlocked:hover .hotspot-inner {
+      background: rgba(201, 162, 39, 0.18);
+      box-shadow: inset 0 0 0 2px rgba(201, 162, 39, 0.65);
+    }
+
+    /* ── AKTUELL FREIGESCHALTET (pulsiert) ── */
+    .mappe-hotspot.active-mappe {
+      cursor: pointer;
+    }
+
+    .mappe-hotspot.active-mappe .hotspot-inner {
+      background: rgba(201, 162, 39, 0.08);
+      box-shadow: inset 0 0 0 2px var(--gold);
+      animation: mappeGlow 1.8s ease-in-out infinite;
+    }
+
+    @keyframes mappeGlow {
+      0%, 100% { box-shadow: inset 0 0 0 2px var(--gold), 0 0 8px rgba(201,162,39,0.25); }
+      50%       { box-shadow: inset 0 0 0 2px var(--gold), 0 0 22px rgba(201,162,39,0.7); }
+    }
+
+    /* ── ABGESCHLOSSEN ── */
+    .mappe-hotspot.completed {
+      cursor: pointer;
+    }
+
+    .mappe-hotspot.completed .hotspot-inner {
+      background: transparent;
+    }
+
+    .mappe-hotspot.completed:hover .hotspot-inner {
+      background: rgba(39, 174, 96, 0.15);
+      box-shadow: inset 0 0 0 2px rgba(39, 174, 96, 0.5);
+    }
+
+    /* ── Abschluss-Banner ── */
+    .karte-completion {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.5rem;
+      background: rgba(39, 174, 96, 0.1);
+      border: 1px solid rgba(39, 174, 96, 0.35);
+      border-radius: var(--radius-lg);
+      color: var(--green);
+      text-align: center;
+      font-size: 0.95rem;
+      max-width: 820px;
+      width: 100%;
+    }
+
+    .karte-completion.visible { display: block; }
+
+    /* ── Footer ── */
+    .karte-footer {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      opacity: 0.5;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    .karte-footer a {
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    .karte-footer a:hover { opacity: 1; text-decoration: underline; }
+
+    .karte-footer .footer-sep {
+      margin: 0 0.5rem;
+      opacity: 0.5;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .karte-title { font-size: 1.2rem; }
+      .lock-icon { font-size: 1.1rem; }
+      .mappe-hotspot { width: 20%; height: 30%; }
+    }
+  </style>
+</head>
+<body class="karte-page">
+
+  <div class="karte-header">
+    <p class="karte-logo">Archiv 45</p>
+    <h1 class="karte-title">Die verschlossenen Akten</h1>
+    <p class="karte-subtitle" id="karte-subtitle">Wähle eine Mappe.</p>
+  </div>
+
+  <!-- ── Karten-Bild mit Hotspots ── -->
+  <div class="karte-container">
+    <img
+      src="images/Die sieben Mappen.png"
+      class="karte-img"
+      alt="Die sieben versiegelten Mappen des Archivs 45"
+      draggable="false"
+    >
+
+    <!--
+      Hotspot-Positionen (left/top = Mittelpunkt jeder Mappe, in % der Bildgröße):
+      Obere Reihe:  1 → 12%/42%   2 → 32%/35%   3 → 54%/31%   4 → 78%/36%
+      Untere Reihe: 5 → 22%/73%   6 → 50%/78%   7 → 77%/71%
+    -->
+
+    <button class="mappe-hotspot locked" id="hotspot-1" data-mappe="1"
+            style="left:12%; top:42%;"
+            onclick="openMappe(1)"
+            aria-label="Mappe 1: Die Wende">
+      <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
+    </button>
+
+    <button class="mappe-hotspot locked" id="hotspot-2" data-mappe="2"
+            style="left:32%; top:35%;"
+            onclick="openMappe(2)"
+            aria-label="Mappe 2: Das verbrecherische System">
+      <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
+    </button>
+
+    <button class="mappe-hotspot locked" id="hotspot-3" data-mappe="3"
+            style="left:54%; top:31%;"
+            onclick="openMappe(3)"
+            aria-label="Mappe 3: Nicht alle haben mitgemacht">
+      <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
+    </button>
+
+    <button class="mappe-hotspot locked" id="hotspot-4" data-mappe="4"
+            style="left:78%; top:36%;"
+            onclick="openMappe(4)"
+            aria-label="Mappe 4: Der Westen greift an">
+      <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
+    </button>
+
+    <button class="mappe-hotspot locked" id="hotspot-5" data-mappe="5"
+            style="left:22%; top:73%;"
+            onclick="openMappe(5)"
+            aria-label="Mappe 5: Verzweiflung">
+      <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
+    </button>
+
+    <button class="mappe-hotspot locked" id="hotspot-6" data-mappe="6"
+            style="left:50%; top:78%;"
+            onclick="openMappe(6)"
+            aria-label="Mappe 6: Die letzten Tage">
+      <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
+    </button>
+
+    <button class="mappe-hotspot locked" id="hotspot-7" data-mappe="7"
+            style="left:77%; top:71%;"
+            onclick="openMappe(7)"
+            aria-label="Mappe 7: Stunde Null">
+      <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
+    </button>
+
+  </div><!-- /.karte-container -->
+
+  <div class="karte-completion" id="karte-completion">
+    🏆 <strong>Archiv 45 vollständig rekonstruiert.</strong> Alle sieben Mappen wurden geöffnet.
+  </div>
+
+  <div class="karte-footer">
+    <a href="index.html">← Startseite</a>
+    <span class="footer-sep">|</span>
+    <a href="impressum.html">Impressum</a>
+    <span class="footer-sep">|</span>
+    <a href="datenschutz.html">Datenschutz</a>
+    <span class="footer-sep">|</span>
+    <a href="lehrer.html">Lehrer-Login</a>
+  </div>
+
+  <script>
+    var PROGRESS_KEY = 'archiv45_progress_v1';
+    var MUSIC_KEY    = 'archiv45_music';
+    var TRACK_KEY    = 'archiv45_track';
+
+    var MAPPE_URLS = {
+      1: 'mappen/mappe-01.html',
+      2: 'mappen/mappe-02.html',
+      3: 'mappen/mappe-03.html',
+      4: 'mappen/mappe-04.html',
+      5: 'mappen/mappe-05.html',
+      6: 'mappen/mappe-06.html',
+      7: 'mappen/mappe-07.html'
+    };
+
+    var MAPPE_TITEL = {
+      1: 'Die Wende',
+      2: 'Das verbrecherische System',
+      3: 'Nicht alle haben mitgemacht',
+      4: 'Der Westen greift an',
+      5: 'Verzweiflung',
+      6: 'Die letzten Tage',
+      7: 'Stunde Null'
+    };
+
+    function getProgress() {
+      try { return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); }
+      catch(e) { return {}; }
+    }
+
+    // Mappe N ist erreichbar?
+    // Mappe 1 immer, alle anderen wenn progress['mappe-N'] gesetzt ist.
+    function isUnlocked(n) {
+      if (n === 1) return true;
+      var p = getProgress();
+      return !!p['mappe-' + n];
+    }
+
+    // Welche ist die höchste freigeschaltete Mappe?
+    function getHighestUnlocked() {
+      for (var i = 7; i >= 1; i--) {
+        if (isUnlocked(i)) return i;
+      }
+      return 1;
+    }
+
+    // Ist alles abgeschlossen? (Mappe 7 freigeschaltet = alle 6 Codes korrekt eingegeben)
+    function isAllDone() {
+      var p = getProgress();
+      return !!p['archiv-complete'];
+    }
+
+    function renderKarte() {
+      var highest  = getHighestUnlocked();
+      var allDone  = isAllDone();
+      var subtitle = document.getElementById('karte-subtitle');
+
+      for (var n = 1; n <= 7; n++) {
+        var btn     = document.getElementById('hotspot-' + n);
+        var inner   = btn.querySelector('.hotspot-inner');
+        var unlocked = isUnlocked(n);
+
+        // Klassen zurücksetzen
+        btn.classList.remove('locked', 'unlocked', 'active-mappe', 'completed');
+        btn.disabled = false;
+
+        if (!unlocked) {
+          btn.classList.add('locked');
+          btn.disabled = true;
+          inner.innerHTML = '<span class="lock-icon">🔒</span>';
+        } else if (allDone || n < highest) {
+          // Bereits besucht / abgeschlossen
+          btn.classList.add('completed');
+          inner.innerHTML = '';
+        } else {
+          // Aktuell freigeschaltete Mappe (pulsiert)
+          btn.classList.add('active-mappe');
+          inner.innerHTML = '';
+        }
+      }
+
+      // Untertitel
+      if (allDone) {
+        subtitle.textContent = 'Alle Mappen wurden geöffnet. Mission abgeschlossen.';
+        document.getElementById('karte-completion').classList.add('visible');
+      } else if (highest === 1 && !isUnlocked(2)) {
+        subtitle.textContent = 'Beginne mit Mappe 1 – klicke darauf.';
+      } else {
+        subtitle.textContent =
+          'Mappe ' + highest + ': „' + MAPPE_TITEL[highest] + '" ist freigeschaltet.';
+      }
+    }
+
+    function openMappe(n) {
+      if (!isUnlocked(n)) return;
+      // Musik-Flag setzen – app.js liest es in initMusicPlayer()
+      sessionStorage.setItem(MUSIC_KEY, 'on');
+      window.location.href = MAPPE_URLS[n];
+    }
+
+    // Sofort rendern
+    renderKarte();
+  </script>
+
+</body>
+</html>

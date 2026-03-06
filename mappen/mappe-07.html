@@ -458,7 +458,7 @@
             <span class="cert-badge">✓ Stunde Null</span>
           </div>
           <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;">
-            <a href="../index.html" class="home-btn">← Zurück zur Übersicht</a>
+            <a href="../karte.html" class="home-btn">🗂 Zurück zur Archiv-Karte</a>
             <button class="print-btn" onclick="window.print()">🖨️ Zertifikat drucken</button>
           </div>
         </div>
@@ -519,6 +519,8 @@
     }else{
       if(typeof revealCodeSection==='function')revealCodeSection();
       else{var cs=document.getElementById('code-section');if(cs){cs.style.display='block';cs.classList.add('visible');}}
+      // Archiv vollständig – Flag für karte.html setzen
+      try{var p=JSON.parse(localStorage.getItem('archiv45_progress_v1')||'{}');p['archiv-complete']=true;localStorage.setItem('archiv45_progress_v1',JSON.stringify(p));}catch(e){}
       setTimeout(function(){var cs=document.getElementById('code-section');if(cs)cs.scrollIntoView({behavior:'smooth',block:'start'});},100);
     }
   }
