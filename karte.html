@@ -69,8 +69,8 @@
     .mappe-hotspot {
       position: absolute;
       transform: translate(-50%, -50%);
-      width: 18%;
-      height: 32%;
+      width: 13%;
+      height: 22%;
       border: none;
       background: transparent;
       padding: 0;
@@ -196,7 +196,7 @@
     @media (max-width: 600px) {
       .karte-title { font-size: 1.2rem; }
       .lock-icon { font-size: 1.1rem; }
-      .mappe-hotspot { width: 20%; height: 30%; }
+      .mappe-hotspot { width: 16%; height: 20%; }
     }
   </style>
 </head>
@@ -219,54 +219,54 @@
 
     <!--
       Hotspot-Positionen (left/top = Mittelpunkt jeder Mappe, in % der Bildgröße):
-      Obere Reihe:  1 → 12%/42%   2 → 32%/35%   3 → 54%/31%   4 → 78%/36%
-      Untere Reihe: 5 → 22%/73%   6 → 50%/78%   7 → 77%/71%
+      Obere Reihe:  1 → 15%/43%   2 → 34%/37%   3 → 57%/33%   4 → 80%/37%
+      Untere Reihe: 5 → 22%/74%   6 → 50%/79%   7 → 77%/74%
     -->
 
     <button class="mappe-hotspot locked" id="hotspot-1" data-mappe="1"
-            style="left:12%; top:42%;"
+            style="left:15%; top:43%;"
             onclick="openMappe(1)"
             aria-label="Mappe 1: Die Wende">
       <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
     </button>
 
     <button class="mappe-hotspot locked" id="hotspot-2" data-mappe="2"
-            style="left:32%; top:35%;"
+            style="left:34%; top:37%;"
             onclick="openMappe(2)"
             aria-label="Mappe 2: Das verbrecherische System">
       <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
     </button>
 
     <button class="mappe-hotspot locked" id="hotspot-3" data-mappe="3"
-            style="left:54%; top:31%;"
+            style="left:57%; top:33%;"
             onclick="openMappe(3)"
             aria-label="Mappe 3: Nicht alle haben mitgemacht">
       <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
     </button>
 
     <button class="mappe-hotspot locked" id="hotspot-4" data-mappe="4"
-            style="left:78%; top:36%;"
+            style="left:80%; top:37%;"
             onclick="openMappe(4)"
             aria-label="Mappe 4: Der Westen greift an">
       <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
     </button>
 
     <button class="mappe-hotspot locked" id="hotspot-5" data-mappe="5"
-            style="left:22%; top:73%;"
+            style="left:22%; top:74%;"
             onclick="openMappe(5)"
             aria-label="Mappe 5: Verzweiflung">
       <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
     </button>
 
     <button class="mappe-hotspot locked" id="hotspot-6" data-mappe="6"
-            style="left:50%; top:78%;"
+            style="left:50%; top:79%;"
             onclick="openMappe(6)"
             aria-label="Mappe 6: Die letzten Tage">
       <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
     </button>
 
     <button class="mappe-hotspot locked" id="hotspot-7" data-mappe="7"
-            style="left:77%; top:71%;"
+            style="left:77%; top:74%;"
             onclick="openMappe(7)"
             aria-label="Mappe 7: Stunde Null">
       <div class="hotspot-inner"><span class="lock-icon">🔒</span></div>
