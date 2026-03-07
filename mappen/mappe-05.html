@@ -236,13 +236,21 @@
       </div>
 
       <div class="question-block">
-        <p class="question-text">In welchem Jahr wurde der Volkssturm gegründet?</p>
-        <div class="mc-options">
-          <label class="mc-option"><input type="radio" name="q4" value="a"> <span>1939 – zu Beginn des Krieges, als Vorsichtsmaßnahme.</span></label>
-          <label class="mc-option"><input type="radio" name="q4" value="b"> <span>1944 – als die militärische Lage für Deutschland hoffnungslos wurde.</span></label>
-          <label class="mc-option"><input type="radio" name="q4" value="c"> <span>1943 – nach der Niederlage von Stalingrad.</span></label>
-          <label class="mc-option"><input type="radio" name="q4" value="d"> <span>1945 – in den letzten Wochen des Krieges.</span></label>
+        <p class="question-text">
+          Ziehe jeden Begriff in die richtige Kategorie: Wer wurde in den Volkssturm <strong>eingezogen</strong> – und wer nicht?
+        </p>
+        <div class="word-bank" id="word-bank-5" aria-label="Wortbank Kategorisierung">
+          <div class="word-bank-label">Wortbank – ziehen oder antippen:</div>
         </div>
+        <div class="drag-categories">
+          <div class="drag-category" id="cat5-ein" aria-label="Kategorie: Eingezogen">
+            <div class="drag-category-label">Volkssturm – eingezogen</div>
+          </div>
+          <div class="drag-category" id="cat5-nicht" aria-label="Kategorie: Nicht eingezogen">
+            <div class="drag-category-label">Nicht eingezogen</div>
+          </div>
+        </div>
+        <p class="cloze-hint">Tipp: Doppelklick / zweites Antippen eines Begriffs gibt ihn zurück in die Wortbank.</p>
         <button class="check-btn" onclick="checkTask4()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-4" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-4" onclick="goToNextTask(4)">Weiter zu Aufgabe 5 →</button>
@@ -384,7 +392,7 @@
     {num:1,title:"Der Volkssturm",type:"MC",answer:"<b>Antwort B:</b> Der Volkssturm war eine Notmaßnahme – er bestand aus Männern, die regulär nicht kriegstauglich waren."},
     {num:2,title:"Der Bombenkrieg",type:"TF",answer:"<b>Falsch:</b> A, C<br><b>Richtig:</b> B, D"},
     {num:3,title:"Dresden, Februar 1945",type:"MC",answer:"<b>Antwort B:</b> Die Bombardierung Dresdens traf eine Stadt, die kaum Kriegsproduktion hatte – sie gilt bis heute als umstritten."},
-    {num:4,title:"Wer wurde eingezogen?",type:"MC",answer:"<b>Antwort B:</b> Gegen Kriegsende wurden 16–60-Jährige eingezogen, darunter Jugendliche und Greise."},
+    {num:4,title:"Wer wurde eingezogen?",type:"Drag &amp; Drop Kategorisierung",answer:"<b>Eingezogen:</b> Jungen ab 16, Männer bis 60, HJ-Angehörige &nbsp;|&nbsp; <b>Nicht eingezogen:</b> Frauen, Kinder unter 14"},
     {num:5,title:"Zivile Opfer der letzten Kriegsjahre",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
     ]
   };
@@ -427,15 +435,124 @@
   }
 
   function checkTask4() {
-    const r = validateMC('q4');
-    if (!r.valid) { showFeedback('feedback-4','Bitte wähle eine Antwort.','warning'); return; }
-    if (r.value === 'b') {
-      showFeedback('feedback-4','✓ <strong>Richtig!</strong> Der Volkssturm-Erlass erging am 25. September 1944 – als die militärische Lage für Deutschland bereits katastrophal war. Ein letztes verzweifeltes Aufgebot.','correct');
+    var catEin = document.getElementById('cat5-ein');
+    var catNicht = document.getElementById('cat5-nicht');
+    var bank = document.getElementById('word-bank-5');
+    // Check nothing left in bank (only chips, not the label)
+    var bankChips = bank.querySelectorAll('.drag-word');
+    if(bankChips.length > 0){ showFeedback('feedback-4','Bitte ordne alle Begriffe einer Kategorie zu.','warning'); return; }
+    var correctEin = new Set(['Jungen ab 16','Männer bis 60','HJ-Angehörige']);
+    var correctNicht = new Set(['Frauen','Kinder unter 14']);
+    var allOk = true;
+    catEin.querySelectorAll('.drag-word').forEach(function(c){
+      if(!correctEin.has(c.textContent)){ c.style.borderColor='#e74c3c'; allOk=false; } else { c.style.borderColor='#27ae60'; }
+    });
+    catNicht.querySelectorAll('.drag-word').forEach(function(c){
+      if(!correctNicht.has(c.textContent)){ c.style.borderColor='#e74c3c'; allOk=false; } else { c.style.borderColor='#27ae60'; }
+    });
+    if(allOk){
+      showFeedback('feedback-4','\u2713 <strong>Richtig!</strong> Der Volkssturm-Erlass verpflichtete Männer und Jungen von 16 bis 60 Jahren. Auch HJ-Angehörige wurden eingesetzt – oft ohne ausreichende Ausrüstung und Ausbildung.','correct');
       completeTask(4);
     } else {
-      showFeedback('feedback-4','Das Datum steht im Text: Wann wurde der Erlass unterzeichnet?','incorrect');
+      showFeedback('feedback-4','Nicht alle Begriffe sind richtig zugeordnet. Rot markierte Begriffe nochmal überprüfen.','incorrect');
     }
   }
+
+  /* ── Drag & Drop Kategorisierung Mappe 5 / Aufgabe 4 ──────────────── */
+  (function(){
+    var items = [
+      {text:'Jungen ab 16', cat:'ein'},
+      {text:'Männer bis 60', cat:'ein'},
+      {text:'HJ-Angehörige', cat:'ein'},
+      {text:'Frauen', cat:'nicht'},
+      {text:'Kinder unter 14', cat:'nicht'}
+    ];
+    var bank = document.getElementById('word-bank-5');
+    var catEin = document.getElementById('cat5-ein');
+    var catNicht = document.getElementById('cat5-nicht');
+    var selected = null;
+
+    function makeChip(text){
+      var c = document.createElement('span');
+      c.className = 'drag-word';
+      c.textContent = text;
+      c.draggable = true;
+      return c;
+    }
+
+    function returnToBank(chip){
+      if(chip.parentElement) chip.parentElement.removeChild(chip);
+      chip.style.borderColor = '';
+      chip = makeChip(chip.textContent);
+      attachChip(chip);
+      bank.appendChild(chip);
+      if(selected === chip) selected = null;
+    }
+
+    function moveToContainer(container, chip){
+      if(chip.parentElement) chip.parentElement.removeChild(chip);
+      chip.classList.remove('selected');
+      chip.style.borderColor = '';
+      container.appendChild(chip);
+      selected = null;
+    }
+
+    function attachChip(chip){
+      chip.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(selected === chip){
+          chip.classList.remove('selected');
+          selected = null;
+        } else {
+          if(selected) selected.classList.remove('selected');
+          selected = chip;
+          chip.classList.add('selected');
+        }
+      });
+      chip.addEventListener('dblclick', function(e){
+        e.stopPropagation();
+        if(chip.parentElement !== bank){
+          var oldChip = chip;
+          chip.parentElement.removeChild(chip);
+          oldChip = makeChip(oldChip.textContent);
+          attachChip(oldChip);
+          bank.appendChild(oldChip);
+          if(selected) selected.classList.remove('selected');
+          selected = null;
+        }
+      });
+      chip.addEventListener('dragstart', function(e){
+        e.dataTransfer.setData('text/plain', chip.textContent);
+        chip.classList.add('dragging');
+        selected = chip;
+      });
+      chip.addEventListener('dragend', function(){ chip.classList.remove('dragging'); });
+    }
+
+    function attachDropTarget(container){
+      container.addEventListener('click', function(){
+        if(selected) moveToContainer(container, selected);
+      });
+      container.addEventListener('dragover', function(e){ e.preventDefault(); container.classList.add('over'); });
+      container.addEventListener('dragleave', function(){ container.classList.remove('over'); });
+      container.addEventListener('drop', function(e){
+        e.preventDefault();
+        container.classList.remove('over');
+        var txt = e.dataTransfer.getData('text/plain');
+        var chip = document.querySelector('#task-4 .drag-word.dragging');
+        if(chip) moveToContainer(container, chip);
+      });
+    }
+
+    items.forEach(function(item){
+      var chip = makeChip(item.text);
+      attachChip(chip);
+      bank.appendChild(chip);
+    });
+
+    attachDropTarget(catEin);
+    attachDropTarget(catNicht);
+  })();
 
   function checkTask5() {
     const selected = validateMS('ms5');

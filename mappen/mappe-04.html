@@ -140,32 +140,38 @@
       </div>
 
       <div class="question-block">
-        <p class="question-text">Richtig oder falsch?</p>
-        <table class="tf-table">
-          <thead><tr><th>Aussage</th><th>Richtig</th><th>Falsch</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>D-Day fand am 6. Juni 1944 statt.</td>
-              <td><input type="radio" name="tf2a" value="r"></td>
-              <td><input type="radio" name="tf2a" value="f"></td>
-            </tr>
-            <tr>
-              <td>Nur amerikanische Soldaten nahmen an der Landung teil.</td>
-              <td><input type="radio" name="tf2b" value="r"></td>
-              <td><input type="radio" name="tf2b" value="f"></td>
-            </tr>
-            <tr>
-              <td>Die Landung fand in der Normandie in Nordfrankreich statt.</td>
-              <td><input type="radio" name="tf2c" value="r"></td>
-              <td><input type="radio" name="tf2c" value="f"></td>
-            </tr>
-            <tr>
-              <td>Die deutschen Verteidiger hatten die Landung genau an dieser Stelle erwartet.</td>
-              <td><input type="radio" name="tf2d" value="r"></td>
-              <td><input type="radio" name="tf2d" value="f"></td>
-            </tr>
-          </tbody>
-        </table>
+        <p class="question-text">Ergänze den Text mit den richtigen Begriffen aus dem Auswahlmenü.</p>
+        <p class="cloze-text">
+          Am
+          <select class="cloze-select" id="cs4a" aria-label="L\u00fccke 1">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">1. September 1939</option>
+            <option value="jun44">6. Juni 1944</option>
+            <option value="wrong2">8. Mai 1945</option>
+          </select>
+          landeten die Alliierten in der Normandie. Rund
+          <select class="cloze-select" id="cs4b" aria-label="L\u00fccke 2">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">50.000</option>
+            <option value="wrong2">500.000</option>
+            <option value="156000">156.000</option>
+          </select>
+          Soldaten aus mehreren Nationen überquerten den
+          <select class="cloze-select" id="cs4c" aria-label="L\u00fccke 3">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">Atlantik</option>
+            <option value="aermel">\u00c4rmelkanal</option>
+            <option value="wrong2">Mittelmeer</option>
+          </select>.
+          Die deutschen Verteidiger hatten die Landung bei
+          <select class="cloze-select" id="cs4d" aria-label="L\u00fccke 4">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">Dünkirchen</option>
+            <option value="calais">Calais</option>
+            <option value="wrong2">Le Havre</option>
+          </select>
+          erwartet und wurden in der Normandie überrascht.
+        </p>
         <button class="check-btn" onclick="checkTask2()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-2" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-2" onclick="goToNextTask(2)">Weiter zu Aufgabe 3 →</button>
@@ -410,7 +416,7 @@
     code: 'overlord',
     tasks: [
     {num:1,title:"Pearl Harbor",type:"MC",answer:"<b>Antwort B:</b> Der japanische Angriff auf Pearl Harbor veranlasste die USA, in den Zweiten Weltkrieg einzutreten."},
-    {num:2,title:"D-Day – Faktencheck",type:"TF",answer:"<b>Richtig:</b> A, C<br><b>Falsch:</b> B (nicht Pazifik), D (größte Landungsoperation der Geschichte)"},
+    {num:2,title:"D-Day \u2013 Faktencheck",type:"L\u00fcckentext",answer:"1\u202f=\u202f6. Juni 1944 &nbsp;|&nbsp; 2\u202f=\u202f156.000 &nbsp;|&nbsp; 3\u202f=\u202f\u00c4rmelkanal &nbsp;|&nbsp; 4\u202f=\u202fCalais"},
     {num:3,title:"Planung des D-Day",type:"MC",answer:"<b>Antwort C:</b> Operation Overlord war auf höchste Geheimhaltung angewiesen – Täuschungsmanöver lenkten die deutsche Führung ab."},
     {num:4,title:"Die Alliierten",type:"Matching",answer:"<b>USA:</b> m4a &nbsp;|&nbsp; <b>Großbritannien:</b> m4b &nbsp;|&nbsp; <b>Kanada:</b> m4c"},
     {num:5,title:"Bedeutung des D-Day",type:"MS",answer:"<b>Richtig:</b> A, B, D &nbsp;|&nbsp; <b>Falsch:</b> C, E"}
@@ -431,15 +437,25 @@
   }
 
   function checkTask2() {
-    const {allAnswered, results} = validateTF(['tf2a','tf2b','tf2c','tf2d']);
-    if (!allAnswered) { showFeedback('feedback-2','Bitte beantworte alle Aussagen.','warning'); return; }
-    const correct = {tf2a:'r', tf2b:'f', tf2c:'r', tf2d:'f'};
-    const ok = Object.keys(correct).every(k => results[k] === correct[k]);
-    if (ok) {
-      showFeedback('feedback-2','✓ <strong>Korrekt!</strong> D-Day war ein multinationaler Einsatz – USA, GB, Kanada und weitere. Und die Deutschen wurden bewusst getäuscht: Sie erwarteten die Landung bei Calais, nicht in der Normandie.','correct');
+    var ids = ['cs4a','cs4b','cs4c','cs4d'];
+    var correct = {cs4a:'jun44', cs4b:'156000', cs4c:'aermel', cs4d:'calais'};
+    var allFilled = ids.every(function(id){ return document.getElementById(id).value !== ''; });
+    if (!allFilled) { showFeedback('feedback-2','Bitte f\u00fclle alle L\u00fccken aus.','warning'); return; }
+    var allOk = true;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el.value === correct[id]){
+        el.classList.add('correct'); el.classList.remove('incorrect');
+      } else {
+        el.classList.add('incorrect'); el.classList.remove('correct');
+        allOk = false;
+      }
+    });
+    if (allOk) {
+      showFeedback('feedback-2','\u2713 <strong>Alle L\u00fccken richtig!</strong> D-Day war ein multinationaler Einsatz. Die gezielte Täuschungsaktion der Alliierten ließ die Deutschen eine Landung bei Calais erwarten – und verschaffte den Truppen in der Normandie einen entscheidenden Vorteil.','correct');
       completeTask(2);
     } else {
-      showFeedback('feedback-2','Schau noch einmal: Welche Nationen waren beteiligt? Und hatten die Deutschen die Stelle vorhergesehen?','incorrect');
+      showFeedback('feedback-2','Nicht alle Antworten stimmen. Rot markierte L\u00fccken nochmal \u00fcberpr\u00fcfen.','incorrect');
     }
   }
 

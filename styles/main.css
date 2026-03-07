@@ -1596,3 +1596,216 @@ h1, h2, h3, h4 {
   border-color: #27ae60;
   color: #1e8449;
 }
+
+/* ======================================================
+   DRAG & DROP / LÜCKENTEXT – neue Aufgabentypen
+   ====================================================== */
+
+/* Wortbank */
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(201,162,39,0.08);
+  border: 1.5px dashed var(--gold);
+  border-radius: 8px;
+  margin-bottom: 1.1rem;
+  min-height: 2.5rem;
+}
+.word-bank-label {
+  width: 100%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+
+/* Zieh-Chips */
+.drag-word {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.65rem;
+  background: var(--bg-mid);
+  border: 1.5px solid var(--gold);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  cursor: grab;
+  user-select: none;
+  transition: background 0.15s, transform 0.15s, opacity 0.15s;
+}
+.drag-word:hover {
+  background: rgba(201,162,39,0.18);
+}
+.drag-word.selected {
+  background: var(--gold);
+  color: var(--bg-dark);
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(201,162,39,0.4);
+}
+.drag-word.dragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+/* Lückentext-Fließtext */
+.cloze-text {
+  font-size: 0.95rem;
+  line-height: 2.1;
+  color: var(--text-light);
+}
+
+/* Ablagebereiche (Drop Zones) */
+.drop-zone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  min-height: 28px;
+  padding: 0.15rem 0.5rem;
+  margin: 0 0.15rem;
+  border-bottom: 2.5px solid var(--gold);
+  border-radius: 3px;
+  background: rgba(201,162,39,0.06);
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+}
+.drop-zone.over {
+  background: rgba(201,162,39,0.22);
+  border-color: #e8c84a;
+}
+.drop-zone.filled {
+  border-style: solid;
+  border-color: var(--gold);
+  background: rgba(201,162,39,0.14);
+}
+.drop-zone.filled .drop-zone-chip {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+.drop-zone.correct {
+  border-color: #27ae60;
+  background: rgba(39,174,96,0.1);
+}
+.drop-zone.correct .drop-zone-chip { color: #27ae60; }
+.drop-zone.incorrect {
+  border-color: #e74c3c;
+  background: rgba(231,76,60,0.1);
+}
+.drop-zone.incorrect .drop-zone-chip { color: #e74c3c; }
+.drop-zone-placeholder {
+  font-size: 0.78rem;
+  color: rgba(201,162,39,0.5);
+  font-style: italic;
+}
+
+/* Drag-Kategorisierung */
+.drag-categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.drag-category {
+  min-height: 80px;
+  padding: 0.6rem 0.75rem;
+  border: 2px dashed var(--gold);
+  border-radius: 8px;
+  background: rgba(201,162,39,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.drag-category.over {
+  background: rgba(201,162,39,0.18);
+  border-color: #e8c84a;
+}
+.drag-category-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.2rem;
+}
+
+/* Select-Lückentext */
+.cloze-select {
+  display: inline-block;
+  padding: 0.18rem 0.5rem;
+  margin: 0 0.15rem;
+  background: var(--bg-mid);
+  border: 1.5px solid var(--gold);
+  border-radius: 4px;
+  color: var(--gold);
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: border-color 0.15s, background 0.15s;
+}
+.cloze-select:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+.cloze-select.correct {
+  border-color: #27ae60;
+  background: rgba(39,174,96,0.1);
+  color: #27ae60;
+}
+.cloze-select.incorrect {
+  border-color: #e74c3c;
+  background: rgba(231,76,60,0.1);
+  color: #e74c3c;
+}
+
+/* Freitext-Lückentext */
+.cloze-input {
+  display: inline-block;
+  width: 130px;
+  padding: 0.18rem 0.5rem;
+  margin: 0 0.15rem;
+  background: var(--bg-mid);
+  border: 1.5px solid var(--gold);
+  border-bottom-width: 2.5px;
+  border-radius: 4px;
+  color: var(--text-light);
+  font-size: 0.88rem;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+  transition: border-color 0.15s, background 0.15s;
+}
+.cloze-input:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+.cloze-input::placeholder { color: rgba(245,241,232,0.3); text-transform: none; letter-spacing: 0; }
+.cloze-input.correct {
+  border-color: #27ae60;
+  background: rgba(39,174,96,0.1);
+  color: #27ae60;
+}
+.cloze-input.incorrect {
+  border-color: #e74c3c;
+  background: rgba(231,76,60,0.1);
+  color: #e74c3c;
+}
+
+.cloze-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Responsive: Kategorisierung übereinander auf Mobilgeräten */
+@media (max-width: 600px) {
+  .drag-categories { grid-template-columns: 1fr; }
+  .cloze-input { width: 100px; font-size: 0.82rem; }
+  .cloze-select { font-size: 0.82rem; }
+  .drop-zone { min-width: 80px; }
+}

@@ -151,35 +151,23 @@
 
       <div class="question-block">
         <p class="question-text">
-          Welche Aussagen über die Niederlage von Stalingrad sind <strong>richtig</strong>, welche <strong>falsch</strong>?
+          Ziehe die richtigen Begriffe in die passenden Lücken im Text.
         </p>
-        <table class="tf-table">
-          <thead>
-            <tr><th>Aussage</th><th>Richtig</th><th>Falsch</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Die 6. Armee kapitulierte im Februar 1943.</td>
-              <td><input type="radio" name="tf2a" value="r" aria-label="Richtig"></td>
-              <td><input type="radio" name="tf2a" value="f" aria-label="Falsch"></td>
-            </tr>
-            <tr>
-              <td>Alle 300.000 Soldaten gerieten in Gefangenschaft.</td>
-              <td><input type="radio" name="tf2b" value="r" aria-label="Richtig"></td>
-              <td><input type="radio" name="tf2b" value="f" aria-label="Falsch"></td>
-            </tr>
-            <tr>
-              <td>Hitler hatte den Befehl gegeben, Stalingrad zu halten.</td>
-              <td><input type="radio" name="tf2c" value="r" aria-label="Richtig"></td>
-              <td><input type="radio" name="tf2c" value="f" aria-label="Falsch"></td>
-            </tr>
-            <tr>
-              <td>Deutschland gelang es, den Kessel erfolgreich aus der Luft zu versorgen.</td>
-              <td><input type="radio" name="tf2d" value="r" aria-label="Richtig"></td>
-              <td><input type="radio" name="tf2d" value="f" aria-label="Falsch"></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="word-bank" id="word-bank-2" aria-label="Wortbank">
+          <div class="word-bank-label">Wortbank – ziehen oder antippen:</div>
+        </div>
+        <p class="cloze-text">
+          Am <span class="drop-zone" id="dz2-1" data-answer="2. Februar 1943"><span class="drop-zone-placeholder">___</span></span>
+          kapitulierte die letzte Einheit der deutschen
+          <span class="drop-zone" id="dz2-2" data-answer="6. Armee"><span class="drop-zone-placeholder">___</span></span>.
+          Über <span class="drop-zone" id="dz2-3" data-answer="150.000"><span class="drop-zone-placeholder">___</span></span>
+          Soldaten fanden im Kessel den Tod durch Kämpfe, Hunger und Kälte.
+          Etwa <span class="drop-zone" id="dz2-4" data-answer="90.000"><span class="drop-zone-placeholder">___</span></span>
+          Soldaten gerieten in sowjetische Gefangenschaft.
+          Die Temperaturen sanken auf bis zu
+          <span class="drop-zone" id="dz2-5" data-answer="−30 °C"><span class="drop-zone-placeholder">___</span></span>.
+        </p>
+        <p class="cloze-hint">Tipp: Doppelklick / zweites Antippen eines platzierten Begriffs gibt ihn zurück in die Wortbank.</p>
         <button class="check-btn" onclick="checkTask2()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-2" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-2" onclick="goToNextTask(2)">Weiter zu Aufgabe 3 →</button>
@@ -438,7 +426,7 @@
     code: 'wolga',
     tasks: [
     {num:1,title:"Die Lage",type:"MC",answer:"<b>Antwort B:</b> Die 6. Armee war vollständig von sowjetischen Truppen umzingelt – kein Nachschub, keine Flucht möglich."},
-    {num:2,title:"Zahlen der Katastrophe",type:"TF",answer:"<b>Richtig:</b> A (Kapitulation Feb. 1943), C (Hitler Haltebefehl)<br><b>Falsch:</b> B (nicht alle in Gefangenschaft), D (Luftversorgung scheiterte)"},
+    {num:2,title:"Zahlen der Katastrophe",type:"Drag & Drop",answer:"<b>L\u00f6sung:</b> 1\u202f=\u202f2.\u202fFebruar 1943 &nbsp;|&nbsp; 2\u202f=\u202f6. Armee &nbsp;|&nbsp; 3\u202f=\u202f150.000 &nbsp;|&nbsp; 4\u202f=\u202f90.000 &nbsp;|&nbsp; 5\u202f=\u202f\u221230\u202f\u00b0C"},
     {num:3,title:"Die Sportpalastrede",type:"MC",answer:"<b>Antwort C:</b> Goebbels wollte die Niederlage verschleiern und die Bevölkerung zu weiterer Kriegsbegeisterung verleiten."},
     {num:4,title:"Propaganda oder Wirklichkeit?",type:"Matching",answer:"<b>Propaganda:</b> A (\"Heldentod\"), C (\"Endsieg\")<br><b>Wirklichkeit:</b> B (90.000 Gefangene), D (−30 °C im Kessel)"},
     {num:5,title:"Der Wendepunkt",type:"MS",answer:"<b>Richtig:</b> A, B, D, E &nbsp;|&nbsp; <b>Falsch:</b> C (Die Sowjetunion kapitulierte <em>nicht</em>)"}
@@ -459,17 +447,128 @@
   }
 
   function checkTask2() {
-    const {allAnswered, results} = validateTF(['tf2a','tf2b','tf2c','tf2d']);
-    if (!allAnswered) { showFeedback('feedback-2', 'Bitte beantworte alle vier Aussagen.', 'warning'); return; }
-    const correct = {tf2a:'r', tf2b:'f', tf2c:'r', tf2d:'f'};
-    const ok = Object.keys(correct).every(k => results[k] === correct[k]);
-    if (ok) {
-      showFeedback('feedback-2', '✓ <strong>Alle Antworten stimmen!</strong> Die Zahlen zeigen das volle Ausmaß der Niederlage: Von 300.000 Soldaten gerieten nur ca. 90.000 in Gefangenschaft – der Rest kam ums Leben. Die Luftversorgung scheiterte vollständig.', 'correct');
+    var zones = document.querySelectorAll('#task-2 .drop-zone');
+    var allFilled = true;
+    zones.forEach(function(z){ if(!z.dataset.placed) allFilled = false; });
+    if (!allFilled) { showFeedback('feedback-2', 'Bitte f\u00fclle alle L\u00fccken aus.', 'warning'); return; }
+    var allCorrect = true;
+    zones.forEach(function(z){
+      var chip = z.querySelector('.drag-word');
+      if(z.dataset.placed === z.dataset.answer){
+        z.classList.add('correct'); z.classList.remove('incorrect');
+        if(chip) chip.style.borderColor='#27ae60';
+      } else {
+        z.classList.add('incorrect'); z.classList.remove('correct');
+        if(chip) chip.style.borderColor='#e74c3c';
+        allCorrect = false;
+      }
+    });
+    if (allCorrect) {
+      showFeedback('feedback-2', '\u2713 <strong>Alle L\u00fccken richtig!</strong> Die Zahlen zeigen das volle Ausma\u00df der Niederlage: Von 300.000 Soldaten gerieten nur ca. 90.000 in Gefangenschaft. Die Luftversorgung scheiterte, Hitler hatte jeden R\u00fcckzug verboten.', 'correct');
       completeTask(2);
     } else {
-      showFeedback('feedback-2', 'Noch nicht alle Antworten stimmen. Achte besonders auf die Zahl der Gefangenen (nicht alle 300.000!) und ob die Luftversorgung gelang.', 'incorrect');
+      showFeedback('feedback-2', 'Nicht alle L\u00fccken stimmen. Falsch eingesetzte Begriffe sind rot markiert – lies den Text nochmal genau.', 'incorrect');
     }
   }
+
+  /* ── Drag & Drop Init Mappe 1 / Aufgabe 2 ───────────────────────── */
+  (function(){
+    var words = ['2. Februar 1943','6. Armee','150.000','90.000','\u221230 \u00b0C'];
+    var bank = document.getElementById('word-bank-2');
+    var selected = null;
+
+    function makeChip(text){
+      var c = document.createElement('span');
+      c.className = 'drag-word';
+      c.textContent = text;
+      c.draggable = true;
+      return c;
+    }
+
+    function returnToBank(chip){
+      var zone = chip.parentElement;
+      if(zone && zone.classList.contains('drop-zone')){
+        zone.dataset.placed = '';
+        zone.classList.remove('filled','correct','incorrect');
+        zone.innerHTML = '<span class="drop-zone-placeholder">___</span>';
+      }
+      chip = makeChip(chip.textContent);
+      attachChip(chip);
+      bank.appendChild(chip);
+      if(selected === chip) selected = null;
+    }
+
+    function fillZone(zone, chip){
+      // Return existing chip in zone to bank first
+      var existing = zone.querySelector('.drag-word');
+      if(existing){ returnToBank(existing); }
+      // Remove chip from bank
+      if(chip.parentElement) chip.parentElement.removeChild(chip);
+      zone.innerHTML = '';
+      zone.appendChild(chip);
+      zone.dataset.placed = chip.textContent;
+      zone.classList.add('filled');
+      chip.classList.remove('selected');
+      selected = null;
+    }
+
+    function attachChip(chip){
+      chip.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(selected === chip){
+          chip.classList.remove('selected');
+          selected = null;
+        } else {
+          if(selected) selected.classList.remove('selected');
+          selected = chip;
+          chip.classList.add('selected');
+        }
+      });
+      chip.addEventListener('dblclick', function(e){
+        e.stopPropagation();
+        if(chip.parentElement && chip.parentElement.classList.contains('drop-zone')){
+          returnToBank(chip);
+        }
+      });
+      chip.addEventListener('dragstart', function(e){
+        e.dataTransfer.setData('text/plain', chip.textContent);
+        chip.classList.add('dragging');
+        selected = chip;
+      });
+      chip.addEventListener('dragend', function(){ chip.classList.remove('dragging'); });
+    }
+
+    function attachDropTarget(zone){
+      zone.addEventListener('click', function(e){
+        if(selected && selected.parentElement !== zone){
+          fillZone(zone, selected);
+        } else if(!selected && zone.dataset.placed){
+          var chip = zone.querySelector('.drag-word');
+          if(chip) returnToBank(chip);
+        }
+      });
+      zone.addEventListener('dragover', function(e){ e.preventDefault(); zone.classList.add('over'); });
+      zone.addEventListener('dragleave', function(){ zone.classList.remove('over'); });
+      zone.addEventListener('drop', function(e){
+        e.preventDefault();
+        zone.classList.remove('over');
+        var txt = e.dataTransfer.getData('text/plain');
+        var chip = Array.from(bank.querySelectorAll('.drag-word')).find(function(c){ return c.textContent===txt && c.classList.contains('dragging'); });
+        if(!chip) chip = Array.from(document.querySelectorAll('#task-2 .drop-zone .drag-word')).find(function(c){ return c.textContent===txt && c.classList.contains('dragging'); });
+        if(chip) fillZone(zone, chip);
+      });
+    }
+
+    words.forEach(function(w){
+      var chip = makeChip(w);
+      attachChip(chip);
+      bank.appendChild(chip);
+    });
+
+    document.querySelectorAll('#task-2 .drop-zone').forEach(function(z){ attachDropTarget(z); });
+
+    document.addEventListener('click', function(){ if(selected && selected.parentElement === bank){ selected.classList.remove('selected'); selected = null; } });
+  })();
 
   function checkTask3() {
     const r = validateMC('q3');

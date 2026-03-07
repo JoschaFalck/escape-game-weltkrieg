@@ -259,13 +259,21 @@
       </div>
 
       <div class="question-block">
-        <p class="question-text">Was zeigt dieser Bericht über das Leben der Zivilbevölkerung in den letzten Kriegstagen?</p>
-        <div class="mc-options">
-          <label class="mc-option"><input type="radio" name="q4" value="a"> <span>Die Berliner Bevölkerung war entschlossen, bis zum letzten Mann zu kämpfen.</span></label>
-          <label class="mc-option"><input type="radio" name="q4" value="b"> <span>Die Bevölkerung litt unter extremer Not – Hunger, Angst, Erschöpfung – und wünschte sich nur das Ende des Krieges.</span></label>
-          <label class="mc-option"><input type="radio" name="q4" value="c"> <span>Die Zivilisten waren durch NS-Propaganda noch immer vom Endsieg überzeugt.</span></label>
-          <label class="mc-option"><input type="radio" name="q4" value="d"> <span>Die Bevölkerung hatte ausreichend Lebensmittel und war sicher in Bunkern untergebracht.</span></label>
-        </div>
+        <p class="question-text">Fülle die Lücken aus. Die Antworten stehen im Text oben. Schreibe in <strong>Großbuchstaben</strong>.</p>
+        <p class="cloze-text">
+          In den letzten Tagen lebten noch etwa
+          <input class="cloze-input" id="ft6a" type="text" maxlength="10" autocomplete="off" autocapitalize="characters" placeholder="ZAHL" aria-label="L\u00fccke 1">
+          Millionen Menschen in der eingeschlossenen Stadt.
+          Die meisten verbrachten die Zeit in
+          <input class="cloze-input" id="ft6b" type="text" maxlength="10" autocomplete="off" autocapitalize="characters" placeholder="ORT" aria-label="L\u00fccke 2">
+          und Bunkern.
+          Die Menschen litten unter extremem
+          <input class="cloze-input" id="ft6c" type="text" maxlength="10" autocomplete="off" autocapitalize="characters" placeholder="LEID" aria-label="L\u00fccke 3">
+          und Angst.
+          <input class="cloze-input" id="ft6d" type="text" maxlength="10" autocomplete="off" autocapitalize="characters" placeholder="GEFÜHL" aria-label="L\u00fccke 4">
+          hatten sie keine mehr.
+        </p>
+        <p class="cloze-hint">Tipp: Alle Antworten stehen im Text und im Zitat oben. Großbuchstaben werden automatisch erkannt.</p>
         <button class="check-btn" onclick="checkTask4()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-4" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-4" onclick="goToNextTask(4)">Weiter zu Aufgabe 5 →</button>
@@ -403,7 +411,7 @@
     {num:1,title:"Zeitstrahl: Die letzten Tage",type:"Sortierung",answer:"<b>Reihenfolge:</b> Erster Eintrag = 1, Zweiter = 2, Dritter = 3, Vierter = 4 (chronologisch)"},
     {num:2,title:"Die Einkreisung Berlins",type:"TF",answer:"<b>Richtig:</b> A, D<br><b>Falsch:</b> B, C"},
     {num:3,title:"Hitlers letzter Monat",type:"MC",answer:"<b>Antwort C:</b> Hitler befahl die Fortsetzung des Kampfes, obwohl die Lage militärisch hoffnungslos war."},
-    {num:4,title:"Die Berliner Zivilbevölkerung",type:"MC",answer:"<b>Antwort B:</b> Die Zivilbevölkerung litt unter Beschuss, Hunger und Vergewaltigungen – besonders durch eindringende Soldaten."},
+    {num:4,title:"Die Berliner Zivilbev\u00f6lkerung",type:"L\u00fcckentext (Freitext)",answer:"1\u202f=\u202fZWEI &nbsp;|&nbsp; 2\u202f=\u202fKELLERN &nbsp;|&nbsp; 3\u202f=\u202fHUNGER &nbsp;|&nbsp; 4\u202f=\u202fHOFFNUNG"},
     {num:5,title:"Warum kein früheres Kriegsende?",type:"MS",answer:"<b>Richtig:</b> A, B, D, E &nbsp;|&nbsp; <b>Falsch:</b> C"}
     ]
   };
@@ -449,13 +457,29 @@
   }
 
   function checkTask4() {
-    const r = validateMC('q4');
-    if (!r.valid) { showFeedback('feedback-4','Bitte wähle eine Antwort.','warning'); return; }
-    if (r.value === 'b') {
-      showFeedback('feedback-4','✓ <strong>Richtig.</strong> Der Zeugenbericht zeigt extreme Not: kein Essen, dauernde Angst, Erschöpfung. Der Wunsch war einfach, dass „es aufhört" – nicht Kriegsbegeisterung, sondern Erschöpfung und Angst prägten die letzten Tage.','correct');
+    var fields = [
+      {id:'ft6a', answer:'ZWEI'},
+      {id:'ft6b', answer:'KELLERN'},
+      {id:'ft6c', answer:'HUNGER'},
+      {id:'ft6d', answer:'HOFFNUNG'}
+    ];
+    var allFilled = fields.every(function(f){ return document.getElementById(f.id).value.trim() !== ''; });
+    if (!allFilled) { showFeedback('feedback-4','Bitte f\u00fclle alle L\u00fccken aus.','warning'); return; }
+    var allOk = true;
+    fields.forEach(function(f){
+      var el = document.getElementById(f.id);
+      if(el.value.trim().toUpperCase() === f.answer){
+        el.classList.add('correct'); el.classList.remove('incorrect');
+      } else {
+        el.classList.add('incorrect'); el.classList.remove('correct');
+        allOk = false;
+      }
+    });
+    if (allOk) {
+      showFeedback('feedback-4','\u2713 <strong>Alle L\u00fccken richtig!</strong> Das Zitat zeigt extreme Not: kein Essen, dauernde Angst, keine Hoffnung mehr. Die Zivilbev\u00f6lkerung w\u00fcnschte sich nur das Ende des Krieges.','correct');
       completeTask(4);
     } else {
-      showFeedback('feedback-4','Lies das Zitat nochmal: Was wünschte sich die Zivilistin? Kampfwillen oder Frieden?','incorrect');
+      showFeedback('feedback-4','Nicht alle Antworten stimmen. Schau noch einmal in den Text und das Zitat.','incorrect');
     }
   }
 

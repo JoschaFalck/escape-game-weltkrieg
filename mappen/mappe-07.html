@@ -187,13 +187,24 @@
       </div>
 
       <div class="question-block">
-        <p class="question-text">Wann und wo trat die bedingungslose Kapitulation Deutschlands offiziell in Kraft?</p>
-        <div class="mc-options" role="radiogroup">
-          <label class="mc-option"><input type="radio" name="q1" value="a"> <span>30. April 1945 – mit dem Tod Adolf Hitlers in Berlin</span></label>
-          <label class="mc-option"><input type="radio" name="q1" value="b"> <span>7. Mai 1945 – mit der Unterzeichnung in Reims (Frankreich)</span></label>
-          <label class="mc-option"><input type="radio" name="q1" value="c"> <span>8. Mai 1945 – nach der Unterzeichnung in Berlin-Karlshorst</span></label>
-          <label class="mc-option"><input type="radio" name="q1" value="d"> <span>2. September 1945 – zusammen mit der japanischen Kapitulation</span></label>
+        <p class="question-text">
+          Ziehe die richtigen Daten und Orte in die Lücken im Text.
+        </p>
+        <div class="word-bank" id="word-bank-7" aria-label="Wortbank Kapitulation">
+          <div class="word-bank-label">Wortbank – ziehen oder antippen:</div>
         </div>
+        <p class="cloze-text">
+          Am <span class="drop-zone" id="dz7-1" data-answer="7. Mai 1945"><span class="drop-zone-placeholder">___</span></span>
+          unterzeichnete Generaloberst Jodl in
+          <span class="drop-zone" id="dz7-2" data-answer="Reims"><span class="drop-zone-placeholder">___</span></span>
+          ein erstes Kapitulationsdokument.
+          Die vollständige bedingungslose Kapitulation trat am
+          <span class="drop-zone" id="dz7-3" data-answer="8. Mai 1945"><span class="drop-zone-placeholder">___</span></span>
+          in
+          <span class="drop-zone" id="dz7-4" data-answer="Berlin-Karlshorst"><span class="drop-zone-placeholder">___</span></span>
+          in Kraft.
+        </p>
+        <p class="cloze-hint">Tipp: Doppelklick / zweites Antippen eines platzierten Begriffs gibt ihn zurück in die Wortbank.</p>
         <button class="check-btn" onclick="checkTask1()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-1" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-1" onclick="goToNextTask(1)">Weiter zu Aufgabe 2 →</button>
@@ -531,7 +542,7 @@
     mappeTitle: 'Mappe 7: Stunde Null – Kapitulation',
     code: 'kaputt',
     tasks: [
-    {num:1,title:"Die Kapitulation",type:"MC",answer:"<b>Antwort C:</b> Die bedingungslose Kapitulation am 8. Mai 1945 beendete den Krieg in Europa – Deutschland capitulierte vollständig."},
+    {num:1,title:"Die Kapitulation",type:"Drag &amp; Drop",answer:"1\u202f=\u202f7. Mai 1945 &nbsp;|&nbsp; 2\u202f=\u202fReims &nbsp;|&nbsp; 3\u202f=\u202f8. Mai 1945 &nbsp;|&nbsp; 4\u202f=\u202fBerlin-Karlshorst"},
     {num:2,title:"Die Atombombe",type:"TF",answer:"<b>Falsch:</b> A, D<br><b>Richtig:</b> B, C"},
     {num:3,title:"Die Besatzungszonen",type:"Matching",answer:"<b>Zuordnung:</b> UdSSR, UK, Frankreich, USA zu den jeweiligen Zonen"},
     {num:4,title:"Die Nürnberger Prozesse",type:"MC",answer:"<b>Antwort B:</b> Die Nürnberger Prozesse waren die erste internationale Strafverfolgung für Kriegsverbrechen und Verbrechen gegen die Menschlichkeit."},
@@ -542,15 +553,126 @@
   document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(7,5); });
 
   function checkTask1() {
-    const r = validateMC('q1');
-    if (!r.valid) { showFeedback('feedback-1', 'Bitte wähle eine Antwort aus.', 'warning'); return; }
-    if (r.value === 'c') {
-      showFeedback('feedback-1', '✓ <strong>Richtig!</strong> Der 8. Mai 1945 gilt als offizieller Tag der bedingungslosen Kapitulation – unterzeichnet in Berlin-Karlshorst. In Deutschland wird dieser Tag als „Tag der Befreiung" begangen.', 'correct');
+    var zones = document.querySelectorAll('#task-1 .drop-zone');
+    var allFilled = true;
+    zones.forEach(function(z){ if(!z.dataset.placed) allFilled = false; });
+    if (!allFilled) { showFeedback('feedback-1','Bitte f\u00fclle alle L\u00fccken aus.','warning'); return; }
+    var allCorrect = true;
+    zones.forEach(function(z){
+      var chip = z.querySelector('.drag-word');
+      if(z.dataset.placed === z.dataset.answer){
+        z.classList.add('correct'); z.classList.remove('incorrect');
+        if(chip) chip.style.borderColor='#27ae60';
+      } else {
+        z.classList.add('incorrect'); z.classList.remove('correct');
+        if(chip) chip.style.borderColor='#e74c3c';
+        allCorrect = false;
+      }
+    });
+    if (allCorrect) {
+      showFeedback('feedback-1','\u2713 <strong>Alle L\u00fccken richtig!</strong> Der 8. Mai 1945 gilt als offizieller Tag der bedingungslosen Kapitulation – unterzeichnet in Berlin-Karlshorst. In Deutschland wird dieser Tag als „Tag der Befreiung" begangen.','correct');
       completeTask(1);
     } else {
-      showFeedback('feedback-1', 'Nicht ganz. Lies den Text genau: Wann trat die Kapitulation offiziell in Kraft – und wo wurde sie endgültig unterzeichnet?', 'incorrect');
+      showFeedback('feedback-1','Nicht ganz. Rot markierte L\u00fccken nochmal \u00fcberpr\u00fcfen – lies den Text genau.','incorrect');
     }
   }
+
+  /* ── Drag & Drop Init Mappe 7 / Aufgabe 1 ───────────────────────── */
+  (function(){
+    var words = ['7. Mai 1945','Reims','8. Mai 1945','Berlin-Karlshorst'];
+    var bank = document.getElementById('word-bank-7');
+    var selected = null;
+
+    function makeChip(text){
+      var c = document.createElement('span');
+      c.className = 'drag-word';
+      c.textContent = text;
+      c.draggable = true;
+      return c;
+    }
+
+    function returnToBank(chip){
+      var zone = chip.parentElement;
+      if(zone && zone.classList.contains('drop-zone')){
+        zone.dataset.placed = '';
+        zone.classList.remove('filled','correct','incorrect');
+        zone.innerHTML = '<span class="drop-zone-placeholder">___</span>';
+      }
+      chip = makeChip(chip.textContent);
+      attachChip(chip);
+      bank.appendChild(chip);
+      if(selected === chip) selected = null;
+    }
+
+    function fillZone(zone, chip){
+      var existing = zone.querySelector('.drag-word');
+      if(existing){ returnToBank(existing); }
+      if(chip.parentElement) chip.parentElement.removeChild(chip);
+      zone.innerHTML = '';
+      zone.appendChild(chip);
+      zone.dataset.placed = chip.textContent;
+      zone.classList.add('filled');
+      chip.classList.remove('selected');
+      selected = null;
+    }
+
+    function attachChip(chip){
+      chip.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(selected === chip){
+          chip.classList.remove('selected');
+          selected = null;
+        } else {
+          if(selected) selected.classList.remove('selected');
+          selected = chip;
+          chip.classList.add('selected');
+        }
+      });
+      chip.addEventListener('dblclick', function(e){
+        e.stopPropagation();
+        if(chip.parentElement && chip.parentElement.classList.contains('drop-zone')){
+          returnToBank(chip);
+        }
+      });
+      chip.addEventListener('dragstart', function(e){
+        e.dataTransfer.setData('text/plain', chip.textContent);
+        chip.classList.add('dragging');
+        selected = chip;
+      });
+      chip.addEventListener('dragend', function(){ chip.classList.remove('dragging'); });
+    }
+
+    function attachDropTarget(zone){
+      zone.addEventListener('click', function(e){
+        if(selected && selected.parentElement !== zone){
+          fillZone(zone, selected);
+        } else if(!selected && zone.dataset.placed){
+          var chip = zone.querySelector('.drag-word');
+          if(chip) returnToBank(chip);
+        }
+      });
+      zone.addEventListener('dragover', function(e){ e.preventDefault(); zone.classList.add('over'); });
+      zone.addEventListener('dragleave', function(){ zone.classList.remove('over'); });
+      zone.addEventListener('drop', function(e){
+        e.preventDefault();
+        zone.classList.remove('over');
+        var txt = e.dataTransfer.getData('text/plain');
+        var chip = Array.from(bank.querySelectorAll('.drag-word')).find(function(c){ return c.textContent===txt && c.classList.contains('dragging'); });
+        if(!chip) chip = Array.from(document.querySelectorAll('#task-1 .drop-zone .drag-word')).find(function(c){ return c.textContent===txt && c.classList.contains('dragging'); });
+        if(chip) fillZone(zone, chip);
+      });
+    }
+
+    words.forEach(function(w){
+      var chip = makeChip(w);
+      attachChip(chip);
+      bank.appendChild(chip);
+    });
+
+    document.querySelectorAll('#task-1 .drop-zone').forEach(function(z){ attachDropTarget(z); });
+
+    document.addEventListener('click', function(){ if(selected && selected.parentElement === bank){ selected.classList.remove('selected'); selected = null; } });
+  })();
 
   function checkTask2() {
     const {allAnswered, results} = validateTF(['tf2a','tf2b','tf2c','tf2d']);

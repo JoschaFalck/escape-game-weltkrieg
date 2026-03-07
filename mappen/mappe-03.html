@@ -228,32 +228,18 @@
       </div>
 
       <div class="question-block">
-        <p class="question-text">Richtig oder falsch?</p>
-        <table class="tf-table">
-          <thead><tr><th>Aussage</th><th>Richtig</th><th>Falsch</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Stauffenberg legte die Bombe im Führerhauptquartier „Wolfsschanze".</td>
-              <td><input type="radio" name="tf3a" value="r"></td>
-              <td><input type="radio" name="tf3a" value="f"></td>
-            </tr>
-            <tr>
-              <td>Hitler wurde durch das Attentat getötet.</td>
-              <td><input type="radio" name="tf3b" value="r"></td>
-              <td><input type="radio" name="tf3b" value="f"></td>
-            </tr>
-            <tr>
-              <td>Stauffenberg war ein einfacher Soldat ohne militärischen Rang.</td>
-              <td><input type="radio" name="tf3c" value="r"></td>
-              <td><input type="radio" name="tf3c" value="f"></td>
-            </tr>
-            <tr>
-              <td>Die Verschwörer wurden nach dem Scheitern hingerichtet.</td>
-              <td><input type="radio" name="tf3d" value="r"></td>
-              <td><input type="radio" name="tf3d" value="f"></td>
-            </tr>
-          </tbody>
-        </table>
+        <p class="question-text">Fülle die Lücken aus. Schreibe in <strong>Großbuchstaben</strong>.</p>
+        <p class="cloze-text">
+          <strong>Claus Schenk Graf von
+          <input class="cloze-input" id="ft3a" type="text" maxlength="20" autocomplete="off" autocapitalize="characters" placeholder="NAME" aria-label="L\u00fccke 1"></strong>
+          legte am 20. Juli 1944 eine Bombe im Führerhauptquartier
+          <input class="cloze-input" id="ft3b" type="text" maxlength="20" autocomplete="off" autocapitalize="characters" placeholder="ORT" aria-label="L\u00fccke 2">
+          versteckt. Das Attentat
+          <input class="cloze-input" id="ft3c" type="text" maxlength="15" autocomplete="off" autocapitalize="characters" placeholder="ERGEBNIS" aria-label="L\u00fccke 3">,
+          weil Hitler die Explosion überlebte. Stauffenberg und seine Mitverschwörer wurden noch in der Nacht
+          <input class="cloze-input" id="ft3d" type="text" maxlength="15" autocomplete="off" autocapitalize="characters" placeholder="SCHICKSAL" aria-label="L\u00fccke 4">.
+        </p>
+        <p class="cloze-hint">Tipp: Alle Antworten stehen im Text oben. Großbuchstaben werden automatisch erkannt.</p>
         <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
@@ -434,7 +420,7 @@
     tasks: [
     {num:1,title:"Formen des Widerstands",type:"Matching",answer:"<b>Zuordnung:</b> A → Studentenwiderstand, B → Widerstand der Wehrmacht, C → Eichmann-Prozess, D → Bekennende Kirche"},
     {num:2,title:"Die Weiße Rose",type:"MC",answer:"<b>Antwort C:</b> Die Weiße Rose verbreitete Flugblätter und rief zur passiven Resistenz gegen das NS-Regime auf."},
-    {num:3,title:"Der 20. Juli 1944",type:"TF",answer:"<b>Richtig:</b> A, D<br><b>Falsch:</b> B (Hitler überlebte), C (Attentat scheiterte)"},
+    {num:3,title:"Der 20. Juli 1944",type:"L\u00fcckentext (Freitext)",answer:"1\u202f=\u202fSTAUFFENBERG &nbsp;|&nbsp; 2\u202f=\u202fWOLFSSCHANZE &nbsp;|&nbsp; 3\u202f=\u202fSCHEITERTE &nbsp;|&nbsp; 4\u202f=\u202fERSCHOSSEN"},
     {num:4,title:"Jugendlicher Widerstand",type:"MC",answer:"<b>Antwort B:</b> Jugendliche Widerständler riskierten Verhaftung, KZ oder Hinrichtung – dennoch lehnten sie sich gegen das Regime auf."},
     {num:5,title:"Warum wagten es so wenige?",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
     ]
@@ -467,15 +453,29 @@
   }
 
   function checkTask3() {
-    const {allAnswered, results} = validateTF(['tf3a','tf3b','tf3c','tf3d']);
-    if (!allAnswered) { showFeedback('feedback-3','Bitte beantworte alle Aussagen.','warning'); return; }
-    const correct = {tf3a:'r', tf3b:'f', tf3c:'f', tf3d:'r'};
-    const ok = Object.keys(correct).every(k => results[k] === correct[k]);
-    if (ok) {
-      showFeedback('feedback-3','✓ <strong>Korrekt!</strong> Stauffenberg war Oberst (kein einfacher Soldat) und legte die Bombe in der Wolfsschanze. Hitler überlebte schwer verletzt. Die Verschwörer wurden noch in der Nacht erschossen – ein tragisches Scheitern des einzigen hochrangigen Attentatsversuchs.','correct');
+    var fields = [
+      {id:'ft3a', answer:'STAUFFENBERG'},
+      {id:'ft3b', answer:'WOLFSSCHANZE'},
+      {id:'ft3c', answer:'SCHEITERTE'},
+      {id:'ft3d', answer:'ERSCHOSSEN'}
+    ];
+    var allFilled = fields.every(function(f){ return document.getElementById(f.id).value.trim() !== ''; });
+    if (!allFilled) { showFeedback('feedback-3','Bitte f\u00fclle alle L\u00fccken aus.','warning'); return; }
+    var allOk = true;
+    fields.forEach(function(f){
+      var el = document.getElementById(f.id);
+      if(el.value.trim().toUpperCase() === f.answer){
+        el.classList.add('correct'); el.classList.remove('incorrect');
+      } else {
+        el.classList.add('incorrect'); el.classList.remove('correct');
+        allOk = false;
+      }
+    });
+    if (allOk) {
+      showFeedback('feedback-3','\u2713 <strong>Alle L\u00fccken richtig!</strong> Stauffenberg und seine Mitverschwörer riskierten ihr Leben für ein Deutschland ohne Hitler. Ihr Mut wird heute als Zeichen des Widerstands geehrt.','correct');
       completeTask(3);
     } else {
-      showFeedback('feedback-3','Überprüfe: Überlebte Hitler das Attentat? Und welchen Rang hatte Stauffenberg?','incorrect');
+      showFeedback('feedback-3','Nicht alle Antworten stimmen. Rot markierte Felder nochmal \u00fcberpr\u00fcfen – die Antworten stehen im Text.','incorrect');
     }
   }
 

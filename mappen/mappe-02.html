@@ -228,32 +228,37 @@
       </div>
 
       <div class="question-block">
-        <p class="question-text">Richtig oder falsch?</p>
-        <table class="tf-table">
-          <thead><tr><th>Aussage</th><th>Richtig</th><th>Falsch</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>In den NS-Lagern wurden ausschließlich Jüdinnen und Juden ermordet.</td>
-              <td><input type="radio" name="tf3a" value="r"></td>
-              <td><input type="radio" name="tf3a" value="f"></td>
-            </tr>
-            <tr>
-              <td>Auschwitz-Birkenau war das größte Vernichtungslager der NS-Zeit.</td>
-              <td><input type="radio" name="tf3b" value="r"></td>
-              <td><input type="radio" name="tf3b" value="f"></td>
-            </tr>
-            <tr>
-              <td>Die Rote Armee befreite Auschwitz am 27. Januar 1945.</td>
-              <td><input type="radio" name="tf3c" value="r"></td>
-              <td><input type="radio" name="tf3c" value="f"></td>
-            </tr>
-            <tr>
-              <td>Insgesamt wurden ca. 6 Millionen Jüdinnen und Juden ermordet.</td>
-              <td><input type="radio" name="tf3d" value="r"></td>
-              <td><input type="radio" name="tf3d" value="f"></td>
-            </tr>
-          </tbody>
-        </table>
+        <p class="question-text">Ergänze den Text mit den richtigen Begriffen aus dem Auswahlmenü.</p>
+        <p class="cloze-text">
+          Das NS-Regime errichtete ein weitverzweigtes Netz aus
+          <select class="cloze-select" id="cs3a" aria-label="L\u00fccke 1">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">Gef\u00e4ngnissen und Arbeitslagern</option>
+            <option value="kv">Konzentrations- und Vernichtungslagern</option>
+            <option value="wrong2">Milit\u00e4rst\u00fctzpunkten und Lazaretten</option>
+          </select>.
+          Neben Jüdinnen und Juden wurden auch
+          <select class="cloze-select" id="cs3b" aria-label="L\u00fccke 2">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">Kommunisten und Sozialisten ausschlie\u00dflich</option>
+            <option value="sinti">Sinti und Roma, politische Gefangene und Menschen mit Behinderungen</option>
+            <option value="wrong2">nur Kriegsgefangene aus der Sowjetunion</option>
+          </select>
+          verfolgt und ermordet. In Auschwitz wurden bis zu
+          <select class="cloze-select" id="cs3c" aria-label="L\u00fccke 3">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">1.000</option>
+            <option value="10000">10.000</option>
+            <option value="wrong2">500</option>
+          </select>
+          Menschen pro Tag ermordet. Die Rote Armee befreite Auschwitz am
+          <select class="cloze-select" id="cs3d" aria-label="L\u00fccke 4">
+            <option value="">– w\u00e4hlen –</option>
+            <option value="wrong1">8. Mai 1945</option>
+            <option value="wrong2">1. September 1944</option>
+            <option value="jan45">27. Januar 1945</option>
+          </select>.
+        </p>
         <button class="check-btn" onclick="checkTask3()">Antwort prüfen</button>
         <div class="feedback-area" id="feedback-3" aria-live="polite"></div>
         <button class="next-task-btn" id="next-btn-3" onclick="goToNextTask(3)">Weiter zu Aufgabe 4 →</button>
@@ -437,7 +442,7 @@
     tasks: [
     {num:1,title:"Zeitstrahl: Die Verfolgung",type:"Sortierung",answer:"<b>Reihenfolge:</b> B (1933) → D (1935) → A (1938 Pogromnacht) → C (1942 Wannsee-Konferenz)"},
     {num:2,title:"Die Wannsee-Konferenz",type:"MC",answer:"<b>Antwort B:</b> Die Wannsee-Konferenz war eine geheime Behördenkonferenz, auf der die organisatorische Durchführung des Massenmords geplant wurde."},
-    {num:3,title:"Das Lagersystem",type:"TF",answer:"<b>Falsch:</b> A (nicht alle Lager = Vernichtungslager)<br><b>Richtig:</b> B, C, D"},
+    {num:3,title:"Das Lagersystem",type:"L\u00fcckentext",answer:"1\u202f=\u202fKonzentrations- und Vernichtungslagern &nbsp;|&nbsp; 2\u202f=\u202fSinti und Roma, politische Gefangene &hellip; &nbsp;|&nbsp; 3\u202f=\u202f10.000 &nbsp;|&nbsp; 4\u202f=\u202f27. Januar 1945"},
     {num:4,title:"Eine Zeugin",type:"MC",answer:"<b>Antwort B:</b> Der Text zeigt, dass die \"Endlösung\" systematisch, bürokratisch und mit direkter staatlicher Kontrolle durchgeführt wurde."},
     {num:5,title:"Wer trägt Verantwortung?",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
     ]
@@ -471,16 +476,25 @@
   }
 
   function checkTask3() {
-    const {allAnswered, results} = validateTF(['tf3a','tf3b','tf3c','tf3d']);
-    if (!allAnswered) { showFeedback('feedback-3','Bitte beantworte alle Aussagen.','warning'); return; }
-    // f, r, r, r
-    const correct = {tf3a:'f', tf3b:'r', tf3c:'r', tf3d:'r'};
-    const ok = Object.keys(correct).every(k => results[k] === correct[k]);
-    if (ok) {
-      showFeedback('feedback-3','✓ <strong>Korrekt!</strong> Wichtig: Neben Jüdinnen und Juden wurden auch Sinti und Roma, Menschen mit Behinderungen, politische Gefangene und andere verfolgt. Der Holocaust richtete sich aber vor allem gegen Jüdinnen und Juden.','correct');
+    var ids = ['cs3a','cs3b','cs3c','cs3d'];
+    var correct = {cs3a:'kv', cs3b:'sinti', cs3c:'10000', cs3d:'jan45'};
+    var allFilled = ids.every(function(id){ return document.getElementById(id).value !== ''; });
+    if (!allFilled) { showFeedback('feedback-3','Bitte f\u00fclle alle L\u00fccken aus.','warning'); return; }
+    var allOk = true;
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el.value === correct[id]){
+        el.classList.add('correct'); el.classList.remove('incorrect');
+      } else {
+        el.classList.add('incorrect'); el.classList.remove('correct');
+        allOk = false;
+      }
+    });
+    if (allOk) {
+      showFeedback('feedback-3','\u2713 <strong>Alle L\u00fccken richtig!</strong> Wichtig: Das NS-System richtete sich nicht nur gegen Jüdinnen und Juden, sondern gegen viele Gruppen. Der 27. Januar ist heute der internationale Holocaust-Gedenktag.','correct');
       completeTask(3);
     } else {
-      showFeedback('feedback-3','Überprüfe die erste Aussage noch einmal: Wurden im NS-System ausschließlich Jüdinnen und Juden verfolgt?','incorrect');
+      showFeedback('feedback-3','Nicht alle Antworten stimmen. Falsch markierte L\u00fccken rot – lies den Text nochmal genau.','incorrect');
     }
   }
 
