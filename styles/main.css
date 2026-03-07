@@ -51,14 +51,20 @@ body {
 body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
   background-image: url('../images/bg-map.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  opacity: 0.07;
+  opacity: 0.03;
   pointer-events: none;
   z-index: 0;
+}
+/* Karte-Seite: Hintergrundbild ausblenden (Schreibtisch-Bild füllt selbst) */
+body.karte-page::before {
+  display: none;
 }
 
 body.mappe-page { padding-top: 70px; } /* Header-Höhe */
