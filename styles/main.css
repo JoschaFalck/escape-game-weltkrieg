@@ -44,6 +44,21 @@ body {
   color: var(--text-dark);
   line-height: 1.65;
   min-height: 100vh;
+  position: relative;
+}
+
+/* Hintergrundbild – subtile Karte, nur angedeutet */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('../images/bg-map.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
 }
 
 body.mappe-page { padding-top: 70px; } /* Header-Höhe */
