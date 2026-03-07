@@ -361,8 +361,142 @@
   </main>
 </div>
 
-<script src="../scripts/app.js"></script>
+<script src="../scripts/app.js"></script><script src="../scripts/app.js"></script>
 <script>
+    /* ── INLINE-FALLBACKS: garantieren Feedback auch ohne app.js ──────── */
+  var _mappeNum = 6;
+  function showFeedback(id,msg,type){
+    var el=document.getElementById(id);if(!el)return;
+    var c={correct:'background:rgba(39,174,96,.18);border-left:4px solid #27ae60;color:#155a2e;',
+           incorrect:'background:rgba(230,126,34,.15);border-left:4px solid #e67e22;color:#6b3510;',
+           warning:'background:rgba(52,152,219,.15);border-left:4px solid #2980b9;color:#1a3d5c;'};
+    el.innerHTML='<div class="feedback feedback-'+type+'" style="padding:.9rem 1.1rem .9rem 1.4rem;border-radius:6px;font-size:.93rem;font-weight:600;line-height:1.6;'+(c[type]||'')+'">'+msg+'</div>';
+    setTimeout(function(){
+      el.scrollIntoView({behavior:'smooth',block:'nearest'});
+      var r=el.getBoundingClientRect();
+      window.scrollTo({top:Math.max(0,window.pageYOffset+r.top-120),behavior:'smooth'});
+    },100);
+  }
+  function validateMC(name){var s=document.querySelector('input[name="'+name+'"]:checked');return{valid:!!s,value:s?s.value:null};}
+  function validateTF(rows){var r={},ok=true;rows.forEach(function(n){var s=document.querySelector('input[name="'+n+'"]:checked');if(!s)ok=false;else r[n]=s.value;});return{allAnswered:ok,results:r};}
+  function validateMS(name){return Array.from(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(c){return c.value;});}
+  function validateMatching(ids){var r={},ok=true;ids.forEach(function(id){var el=document.getElementById(id);if(!el||!el.value)ok=false;else r[id]=el.value;});return{allAnswered:ok,results:r};}
+  function validateSorting(ids){var r={},ok=true,u={};ids.forEach(function(id){var el=document.getElementById(id);if(!el||!el.value||u[el.value])ok=false;else{u[el.value]=true;r[id]=el.value;}});return{allAnswered:ok,results:r};}
+  function completeTask(n){
+    var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
+    if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
+    if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    if(typeof playSound==='function')playSound('correct');
+    if(typeof showStamp==='function')showStamp(n);
+    setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
+  }
+  function goToNextTask(n){
+    if(n<5){
+      if(typeof revealTask==='function')revealTask(n+1);
+      else{var e=document.getElementById('task-'+(n+1));if(e){e.style.display='block';e.classList.add('visible');}}
+      setTimeout(function(){var e=document.getElementById('task-'+(n+1));if(e)e.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }else{
+      if(typeof revealCodeSection==='function')revealCodeSection();
+      else{var cs=document.getElementById('code-section');if(cs){cs.style.display='block';cs.classList.add('visible');}}
+      setTimeout(function(){var cs=document.getElementById('code-section');if(cs)cs.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }
+  }
+  /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 6: Die letzten Tage – Berlin 1945',
+    code: '30april',
+    tasks: [
+    {num:1,title:"Zeitstrahl: Die letzten Tage",type:"Sortierung",answer:"<b>Reihenfolge:</b> Erster Eintrag = 1, Zweiter = 2, Dritter = 3, Vierter = 4 (chronologisch)"},
+    {num:2,title:"Die Einkreisung Berlins",type:"TF",answer:"<b>Richtig:</b> A, D<br><b>Falsch:</b> B, C"},
+    {num:3,title:"Hitlers letzter Monat",type:"MC",answer:"<b>Antwort C:</b> Hitler befahl die Fortsetzung des Kampfes, obwohl die Lage militärisch hoffnungslos war."},
+    {num:4,title:"Die Berliner Zivilbev\u00f6lkerung",type:"L\u00fcckentext (Freitext)",answer:"1\u202f=\u202fZWEI &nbsp;|&nbsp; 2\u202f=\u202fKELLERN &nbsp;|&nbsp; 3\u202f=\u202fHUNGER &nbsp;|&nbsp; 4\u202f=\u202fHOFFNUNG"},
+    {num:5,title:"Warum kein früheres Kriegsende?",type:"MS",answer:"<b>Richtig:</b> A, B, D, E &nbsp;|&nbsp; <b>Falsch:</b> C"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(6,5); });
+
+  function checkTask1() {
+    const r = validateSorting(['s1a','s1b','s1c','s1d']);
+    if (!r.allAnswered) { showFeedback('feedback-1','Bitte ordne alle vier Ereignisse ein.','warning'); return; }
+    // A=16.April(1), B=25.April(2), C=30.April(3), D=2.Mai(4)
+    const correct = {s1a:'1', s1b:'2', s1c:'3', s1d:'4'};
+    const ok = Object.keys(correct).every(k => r.results[k] === correct[k]);
+    if (ok) {
+      showFeedback('feedback-1','✓ <strong>Richtig!</strong> 16. April: Sowjetoffensive beginnt → 25. April: Einkreisung + Elbe-Treffen → 30. April: Hitlers Tod → 2. Mai: Berlins Kapitulation. Innerhalb von 16 Tagen war das Dritte Reich am Ende.','correct');
+      completeTask(1);
+    } else {
+      showFeedback('feedback-1','Denk an die Daten: Sowjetoffensive 16. April, Elbe-Treffen 25. April, Hitler stirbt 30. April, Berlin kapituliert 2. Mai.','incorrect');
+    }
+  }
+
+  function checkTask2() {
+    const {allAnswered, results} = validateTF(['tf2a','tf2b','tf2c','tf2d']);
+    if (!allAnswered) { showFeedback('feedback-2','Bitte beantworte alle Aussagen.','warning'); return; }
+    const correct = {tf2a:'r', tf2b:'f', tf2c:'f', tf2d:'r'};
+    const ok = Object.keys(correct).every(k => results[k] === correct[k]);
+    if (ok) {
+      showFeedback('feedback-2','✓ <strong>Korrekt!</strong> US- und sowjetische Truppen trafen sich an der Elbe – nicht in Berlin. Und die Bevölkerung wurde nicht evakuiert: Millionen verbrachten die letzten Tage unter katastrophalen Bedingungen in Kellern.','correct');
+      completeTask(2);
+    } else {
+      showFeedback('feedback-2','Wo trafen sich US- und sowjetische Truppen? Und wurde die Berliner Bevölkerung wirklich rechtzeitig evakuiert?','incorrect');
+    }
+  }
+
+  function checkTask3() {
+    const r = validateMC('q3');
+    if (!r.valid) { showFeedback('feedback-3','Bitte wähle eine Antwort.','warning'); return; }
+    if (r.value === 'c') {
+      showFeedback('feedback-3','✓ <strong>Richtig.</strong> Hitler erschoss sich am 30. April 1945 im Führerbunker unter Berlin – einen Tag nach der Hochzeit mit Eva Braun. Die Theorien über eine Flucht wurden von Historiker:innen widerlegt. Sein Tod war ein bewusster Entschluss, der Gefangennahme zu entgehen.','correct');
+      completeTask(3);
+    } else {
+      showFeedback('feedback-3','Das genaue Datum und die Art seines Todes steht im Text. Schau nochmal genau hin.','incorrect');
+    }
+  }
+
+  function checkTask4() {
+    var fields = [
+      {id:'ft6a', answer:'ZWEI'},
+      {id:'ft6b', answer:'KELLERN'},
+      {id:'ft6c', answer:'HUNGER'},
+      {id:'ft6d', answer:'HOFFNUNG'}
+    ];
+    var allFilled = fields.every(function(f){ return document.getElementById(f.id).value.trim() !== ''; });
+    if (!allFilled) { showFeedback('feedback-4','Bitte f\u00fclle alle L\u00fccken aus.','warning'); return; }
+    var allOk = true;
+    fields.forEach(function(f){
+      var el = document.getElementById(f.id);
+      if(el.value.trim().toUpperCase() === f.answer){
+        el.classList.add('correct'); el.classList.remove('incorrect');
+      } else {
+        el.classList.add('incorrect'); el.classList.remove('correct');
+        allOk = false;
+      }
+    });
+    if (allOk) {
+      showFeedback('feedback-4','\u2713 <strong>Alle L\u00fccken richtig!</strong> Das Zitat zeigt extreme Not: kein Essen, dauernde Angst, keine Hoffnung mehr. Die Zivilbev\u00f6lkerung w\u00fcnschte sich nur das Ende des Krieges.','correct');
+      completeTask(4);
+    } else {
+      showFeedback('feedback-4','Nicht alle Antworten stimmen. Schau noch einmal in den Text und das Zitat.','incorrect');
+    }
+  }
+
+  function checkTask5() {
+    const selected = validateMS('ms5');
+    if (selected.length === 0) { showFeedback('feedback-5','Wähle mindestens eine Antwort.','warning'); return; }
+    const correct = new Set(['a','b','d','e']);
+    const selSet = new Set(selected);
+    const ok = [...correct].every(v => selSet.has(v)) && [...selSet].every(v => correct.has(v));
+    if (ok) {
+      showFeedback('feedback-5','✓ <strong>Sehr gut analysiert!</strong> Das Weiterkämpfen hatte viele Gründe: Führerbefehl, Angst vor Strafe, Propaganda, Angst vor sowjetischer Rache. Aussage C ist falsch – es gab keine reale Chance mehr. Jeder zusätzliche Kriegstag kostete Tausende Menschenleben unnötig.','correct');
+      completeTask(5);
+    } else {
+      showFeedback('feedback-5','Welche Aussagen beschreiben reale historische Faktoren? Prüfe besonders C – gab es wirklich noch eine militärische Chance?','incorrect');
+    }
+  }
+</script><script>
     /* ── INLINE-FALLBACKS: garantieren Feedback auch ohne app.js ──────── */
   var _mappeNum = 6;
   function showFeedback(id,msg,type){

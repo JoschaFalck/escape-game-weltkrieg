@@ -18,6 +18,19 @@
       padding: 0 1.5rem; z-index: 100;
     }
     .landing-header .site-logo { font-size: 1.3rem; }
+    .landing-header-eyebrow {
+      font-size: 0.62rem;
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.85;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) { .landing-header-eyebrow { display: none; } }
     .landing-body { padding-top: 60px; }
     .geheim-stamp {
       display: inline-block;
@@ -195,6 +208,7 @@
     <div class="site-logo">
       ARCHIV<span class="logo-badge">45</span>
     </div>
+    <span class="landing-header-eyebrow">Geschichtsunterricht · Klasse 8 · Zweiter Weltkrieg</span>
     <button id="reset-btn" title="Fortschritt zurücksetzen"
       style="background:none;border:1px solid rgba(255,255,255,0.15);color:var(--text-faint);padding:4px 10px;border-radius:4px;font-size:0.75rem;cursor:pointer;">
       ↺ Reset
@@ -205,7 +219,6 @@
     <!-- Hero -->
     <section class="landing-hero">
       <div class="landing-content">
-        <p class="landing-eyebrow">Geschichtsunterricht · Klasse 8 · Zweiter Weltkrieg</p>
         <div class="geheim-stamp">Geheim · Bundesarchiv · 1945</div>
         <h1 class="landing-title">Archiv 45</h1>
         <p class="landing-subtitle">Die verschlossenen Akten</p>

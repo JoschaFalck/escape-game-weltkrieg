@@ -371,8 +371,139 @@
   </main>
 </div>
 
-<script src="../scripts/app.js"></script>
+<script src="../scripts/app.js"></script><script src="../scripts/app.js"></script>
 <script>
+    /* ── INLINE-FALLBACKS: garantieren Feedback auch ohne app.js ──────── */
+  var _mappeNum = 3;
+  function showFeedback(id,msg,type){
+    var el=document.getElementById(id);if(!el)return;
+    var c={correct:'background:rgba(39,174,96,.18);border-left:4px solid #27ae60;color:#155a2e;',
+           incorrect:'background:rgba(230,126,34,.15);border-left:4px solid #e67e22;color:#6b3510;',
+           warning:'background:rgba(52,152,219,.15);border-left:4px solid #2980b9;color:#1a3d5c;'};
+    el.innerHTML='<div class="feedback feedback-'+type+'" style="padding:.9rem 1.1rem .9rem 1.4rem;border-radius:6px;font-size:.93rem;font-weight:600;line-height:1.6;'+(c[type]||'')+'">'+msg+'</div>';
+    setTimeout(function(){
+      el.scrollIntoView({behavior:'smooth',block:'nearest'});
+      var r=el.getBoundingClientRect();
+      window.scrollTo({top:Math.max(0,window.pageYOffset+r.top-120),behavior:'smooth'});
+    },100);
+  }
+  function validateMC(name){var s=document.querySelector('input[name="'+name+'"]:checked');return{valid:!!s,value:s?s.value:null};}
+  function validateTF(rows){var r={},ok=true;rows.forEach(function(n){var s=document.querySelector('input[name="'+n+'"]:checked');if(!s)ok=false;else r[n]=s.value;});return{allAnswered:ok,results:r};}
+  function validateMS(name){return Array.from(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(c){return c.value;});}
+  function validateMatching(ids){var r={},ok=true;ids.forEach(function(id){var el=document.getElementById(id);if(!el||!el.value)ok=false;else r[id]=el.value;});return{allAnswered:ok,results:r};}
+  function validateSorting(ids){var r={},ok=true,u={};ids.forEach(function(id){var el=document.getElementById(id);if(!el||!el.value||u[el.value])ok=false;else{u[el.value]=true;r[id]=el.value;}});return{allAnswered:ok,results:r};}
+  function completeTask(n){
+    var btn=document.querySelector('#task-'+n+' .check-btn');if(btn)btn.disabled=true;
+    if(typeof markTaskDone==='function')markTaskDone(_mappeNum,n);
+    if(typeof updateSidebarItem==='function')updateSidebarItem(n,'completed');
+    if(typeof playSound==='function')playSound('correct');
+    if(typeof showStamp==='function')showStamp(n);
+    setTimeout(function(){var nb=document.getElementById('next-btn-'+n);if(nb){nb.classList.add('visible');nb.scrollIntoView({behavior:'smooth',block:'nearest'});}},800);
+  }
+  function goToNextTask(n){
+    if(n<5){
+      if(typeof revealTask==='function')revealTask(n+1);
+      else{var e=document.getElementById('task-'+(n+1));if(e){e.style.display='block';e.classList.add('visible');}}
+      setTimeout(function(){var e=document.getElementById('task-'+(n+1));if(e)e.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }else{
+      if(typeof revealCodeSection==='function')revealCodeSection();
+      else{var cs=document.getElementById('code-section');if(cs){cs.style.display='block';cs.classList.add('visible');}}
+      setTimeout(function(){var cs=document.getElementById('code-section');if(cs)cs.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }
+  }
+  /* ── Ende Fallbacks ─────────────────────────────────────────────────── */
+
+  /* ── MUSTERLÖSUNGEN FÜR LEHRER-ANSICHT ─────────────────────────── */
+  window.TASK_SOLUTIONS = {
+    mappeTitle: 'Mappe 3: Widerstand gegen das NS-Regime',
+    code: 'freiheit',
+    tasks: [
+    {num:1,title:"Formen des Widerstands",type:"Matching",answer:"<b>Zuordnung:</b> A → Studentenwiderstand, B → Widerstand der Wehrmacht, C → Eichmann-Prozess, D → Bekennende Kirche"},
+    {num:2,title:"Die Weiße Rose",type:"MC",answer:"<b>Antwort C:</b> Die Weiße Rose verbreitete Flugblätter und rief zur passiven Resistenz gegen das NS-Regime auf."},
+    {num:3,title:"Der 20. Juli 1944",type:"L\u00fcckentext (Freitext)",answer:"1\u202f=\u202fSTAUFFENBERG &nbsp;|&nbsp; 2\u202f=\u202fWOLFSSCHANZE &nbsp;|&nbsp; 3\u202f=\u202fSCHEITERTE &nbsp;|&nbsp; 4\u202f=\u202fERSCHOSSEN"},
+    {num:4,title:"Jugendlicher Widerstand",type:"MC",answer:"<b>Antwort B:</b> Jugendliche Widerständler riskierten Verhaftung, KZ oder Hinrichtung – dennoch lehnten sie sich gegen das Regime auf."},
+    {num:5,title:"Warum wagten es so wenige?",type:"MS",answer:"<b>Richtig:</b> A, B, C, E &nbsp;|&nbsp; <b>Falsch:</b> D"}
+    ]
+  };
+  /* ── Ende Musterlösungen ─────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function(){ if(typeof initApp==='function') initApp(3,5); });
+
+  function checkTask1() {
+    const r = validateMatching(['m1a','m1b','m1c','m1d']);
+    if (!r.allAnswered) { showFeedback('feedback-1','Bitte ordne alle Gruppen zu.','warning'); return; }
+    const correct = {m1a:'st', m1b:'wr', m1c:'ep', m1d:'bo'};
+    const ok = Object.keys(correct).every(k => r.results[k] === correct[k]);
+    if (ok) {
+      showFeedback('feedback-1','✓ <strong>Perfekt!</strong> Alle vier Widerstandsformen richtig erkannt: Militärischer Widerstand (Stauffenberg), geistiger Widerstand (Weiße Rose), jugendlicher Protest (Edelweißpiraten) und kirchlicher Widerstand (Bonhoeffer).','correct');
+      completeTask(1);
+    } else {
+      showFeedback('feedback-1','Nicht ganz. Lies die Beschreibungen nochmal genau. Wer hat Flugblätter gedruckt? Wer hat die Bombe gelegt?','incorrect');
+    }
+  }
+
+  function checkTask2() {
+    const r = validateMC('q2');
+    if (!r.valid) { showFeedback('feedback-2','Bitte wähle eine Antwort.','warning'); return; }
+    if (r.value === 'c') {
+      showFeedback('feedback-2','✓ <strong>Richtig!</strong> Die Weiße Rose wollte kein Militärputsch. Sie setzte auf das Wort: Aufklärung, Appell an das Gewissen. Sie riefen die Menschen auf, aus der „Gleichgültigkeit" aufzuwachen – und bezahlten dafür mit ihrem Leben.','correct');
+      completeTask(2);
+    } else {
+      showFeedback('feedback-2','Schau dir das Flugblatt nochmal an: Was fordern die Scholls von den Leserinnen und Lesern? Bomben oder Worte?','incorrect');
+    }
+  }
+
+  function checkTask3() {
+    var fields = [
+      {id:'ft3a', answer:'STAUFFENBERG'},
+      {id:'ft3b', answer:'WOLFSSCHANZE'},
+      {id:'ft3c', answer:'SCHEITERTE'},
+      {id:'ft3d', answer:'ERSCHOSSEN'}
+    ];
+    var allFilled = fields.every(function(f){ return document.getElementById(f.id).value.trim() !== ''; });
+    if (!allFilled) { showFeedback('feedback-3','Bitte f\u00fclle alle L\u00fccken aus.','warning'); return; }
+    var allOk = true;
+    fields.forEach(function(f){
+      var el = document.getElementById(f.id);
+      if(el.value.trim().toUpperCase() === f.answer){
+        el.classList.add('correct'); el.classList.remove('incorrect');
+      } else {
+        el.classList.add('incorrect'); el.classList.remove('correct');
+        allOk = false;
+      }
+    });
+    if (allOk) {
+      showFeedback('feedback-3','\u2713 <strong>Alle L\u00fccken richtig!</strong> Stauffenberg und seine Mitverschwörer riskierten ihr Leben für ein Deutschland ohne Hitler. Ihr Mut wird heute als Zeichen des Widerstands geehrt.','correct');
+      completeTask(3);
+    } else {
+      showFeedback('feedback-3','Nicht alle Antworten stimmen. Rot markierte Felder nochmal \u00fcberpr\u00fcfen – die Antworten stehen im Text.','incorrect');
+    }
+  }
+
+  function checkTask4() {
+    const r = validateMC('q4');
+    if (!r.valid) { showFeedback('feedback-4','Bitte wähle eine Antwort.','warning'); return; }
+    if (r.value === 'b') {
+      showFeedback('feedback-4','✓ <strong>Richtig!</strong> Widerstand braucht keine Waffen. Das Verweigern der Hitlerjugend, das Hören verbotener Musik, das Bilden eigener Gemeinschaften – all das waren Formen der Ablehnung. Die Gestapo verfolgte auch diese Jugendlichen, weil das Regime jeden Widerspruch als Bedrohung sah.','correct');
+      completeTask(4);
+    } else {
+      showFeedback('feedback-4','Welche Art von Widerstand leisteten Edelweißpiraten und Swing-Jugend? War das militärisch oder eher eine Verweigerung des NS-Lebensstils?','incorrect');
+    }
+  }
+
+  function checkTask5() {
+    const selected = validateMS('ms5');
+    if (selected.length === 0) { showFeedback('feedback-5','Wähle mindestens eine Antwort.','warning'); return; }
+    const correct = new Set(['a','b','c','e']);
+    const selSet = new Set(selected);
+    const ok = [...correct].every(v => selSet.has(v)) && [...selSet].every(v => correct.has(v));
+    if (ok) {
+      showFeedback('feedback-5','✓ <strong>Sehr gut durchdacht!</strong> Die Gründe für mangelnden Widerstand sind komplex: Angst, Täuschung, Zustimmung, fehlende Strukturen. Aussage D ist klar falsch – Widerstand war möglich, wie die Beispiele in dieser Mappe zeigen. Wer Widerstand leistete, tat dies trotz extremer Gefahr.','correct');
+      completeTask(5);
+    } else {
+      showFeedback('feedback-5','Prüfe jede Aussage: Welche erklären historisch nachvollziehbar, warum Widerstand selten blieb? Aussage D macht eine Pauschalaussage, die historisch falsch ist.','incorrect');
+    }
+  }
+</script><script>
     /* ── INLINE-FALLBACKS: garantieren Feedback auch ohne app.js ──────── */
   var _mappeNum = 3;
   function showFeedback(id,msg,type){
