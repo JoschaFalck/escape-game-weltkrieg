@@ -418,15 +418,25 @@ function unlockAllForTeacher(numTasks) {
 
 function restoreTaskProgress(mappeNum, numTasks) {
   // Alle bereits erledigten Aufgaben wiederherstellen
+  let allTasksDone = true;
   for (let i = 1; i <= numTasks; i++) {
     if (isTaskDone(mappeNum, i)) {
-      revealTask(i + 1);
+      // Nur Tasks innerhalb der Mappe aufdecken (nicht über numTasks hinaus)
+      if (i < numTasks) revealTask(i + 1);
       updateSidebarItem(i, 'completed');
+    } else {
+      allTasksDone = false;
     }
   }
-  // Code-Section, wenn alle Tasks erledigt
-  if (isTaskDone(mappeNum, numTasks)) {
+
+  if (isTaskDone(mappeNum, 'done')) {
+    // Code wurde bereits eingegeben → Code-Section wieder anzeigen
     revealCodeSection();
+  } else if (allTasksDone) {
+    // Alle Aufgaben gelöst, aber Code noch nicht eingegeben →
+    // nur den "Weiter"-Button der letzten Aufgabe einblenden
+    const lastBtn = document.getElementById('next-btn-' + numTasks);
+    if (lastBtn) lastBtn.classList.add('visible');
   }
 }
 
