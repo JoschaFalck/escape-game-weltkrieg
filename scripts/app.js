@@ -190,9 +190,19 @@ function initMusicPlayer() {
   sessionStorage.setItem(MUSIC_KEY, 'on');
   _musicEl.play().catch(function() {
     // Browser-Autoplay-Policy hat abgelehnt (z. B. kein vorheriger User-Klick).
-    // Player zeigt dann „aus"-Zustand; Nutzer kann manuell starten.
+    // Beim nächsten Klick irgendwo auf der Seite automatisch nachholen.
     _musicOn = false;
     sessionStorage.removeItem(MUSIC_KEY);
+    document.addEventListener('click', function _resumeOnClick() {
+      document.removeEventListener('click', _resumeOnClick);
+      if (_musicEl && !_musicOn) {
+        _musicEl.play().then(function() {
+          _musicOn = true;
+          sessionStorage.setItem(MUSIC_KEY, 'on');
+          _updateMusicBtn();
+        }).catch(function() {});
+      }
+    }, { once: true });
   });
   _updateMusicBtn();
 }
