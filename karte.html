@@ -314,10 +314,9 @@
     <a href="lehrer.html">Lehrer-Login</a>
   </div>
 
+  <script src="scripts/app.js"></script>
   <script>
     var PROGRESS_KEY = 'archiv45_progress_v1';
-    var MUSIC_KEY    = 'archiv45_music';
-    var TRACK_KEY    = 'archiv45_track';
     var TEACHER_KEY  = 'archiv45_teacher_v1';
 
     var MAPPE_URLS = {
@@ -450,12 +449,13 @@
     function openMappe(n) {
       if (!isUnlocked(n)) return;
       // Musik-Flag setzen – app.js liest es in initMusicPlayer()
-      sessionStorage.setItem(MUSIC_KEY, 'on');
+      sessionStorage.setItem('archiv45_music_v1', 'on');
       window.location.href = MAPPE_URLS[n];
     }
 
     // Sofort rendern
     renderKarte();
+    initMusicPlayer();
   </script>
 
 </body>
