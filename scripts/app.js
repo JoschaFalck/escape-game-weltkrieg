@@ -128,11 +128,15 @@ const MUSIC_KEY  = 'archiv45_music_v1';
 const TRACK_KEY  = 'archiv45_track_v1';
 
 const _TRACKS = [
-  { file: 'hitslab-epic-war-background-music-333128.mp3',         name: 'Kriegsatmosphäre' },
-  { file: 'sergepavkinmusic-soldiers-154022.mp3',                  name: 'Soldaten' },
-  { file: 'lexin_music-inspiring-cinematic-ambient-116199.mp3',    name: 'Cinematic Ambient' },
-  { file: 'ob-lix-heilir-sir-norse-viking-background-music-114582.mp3', name: 'Nordisch I' },
-  { file: 'ob-lix-the-gift-pagan-norse-background-music-117479.mp3',    name: 'Nordisch II' },
+  { file: 'hitslab-epic-war-background-music-333128.mp3',              name: 'Challenge'    },
+  { file: 'sergepavkinmusic-soldiers-154022.mp3',                       name: 'Escape'       },
+  { file: 'lexin_music-inspiring-cinematic-ambient-116199.mp3',         name: 'Thinking'     },
+  { file: 'ob-lix-heilir-sir-norse-viking-background-music-114582.mp3', name: 'Discovery I'  },
+  { file: 'ob-lix-the-gift-pagan-norse-background-music-117479.mp3',    name: 'Discovery II' },
+  { file: 'neu_hitslab-dramatic-war-military-music-427109.mp3',         name: 'Mission'      },
+  { file: 'neu_music_for_video-war-99133.mp3',                          name: 'Focus'        },
+  { file: 'neu_tatamusic-epic-war-military-music-478226.mp3',           name: 'Tension'      },
+  { file: 'neu_viacheslavstarostin-army-war-military-music-474532.mp3', name: 'Exercise'     },
 ];
 
 function _getAudioPath(file) {
