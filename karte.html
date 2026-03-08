@@ -140,6 +140,17 @@
       50%       { box-shadow: inset 0 0 0 2px var(--gold), 0 0 22px rgba(201,162,39,0.7); }
     }
 
+    /* Haken für abgeschlossene Mappen */
+    .check-icon {
+      display: inline-block;
+      font-size: 1.8rem;
+      line-height: 1;
+      color: var(--green);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(39,174,96,0.6);
+      pointer-events: none;
+    }
+
     /* Pfeil-Indikator für aktive Mappe */
     .start-arrow {
       display: inline-block;
@@ -340,21 +351,30 @@
     }
 
     // Mappe N ist erreichbar?
-    // Mappe 1 immer; im Lehrermodus alle; sonst wenn progress['mappe-N'] gesetzt.
+    // Mappe 1 immer; im Lehrermodus alle; sonst wenn in p.unlockedMappes enthalten.
     function isUnlocked(n) {
       if (n === 1) return true;
       if (isTeacherMode()) return true;
       var p = getProgress();
-      return !!p['mappe-' + n];
+      // app.js speichert freigeschaltete Mappen in p.unlockedMappes (Array)
+      return Array.isArray(p.unlockedMappes) && p.unlockedMappes.indexOf(n) !== -1;
     }
 
     // Welche ist die höchste freigeschaltete Mappe (Schüler-Fortschritt)?
     function getHighestUnlocked() {
       var p = getProgress();
+      var unlocked = Array.isArray(p.unlockedMappes) ? p.unlockedMappes : [1];
       for (var i = 7; i >= 1; i--) {
-        if (i === 1 || !!p['mappe-' + i]) return i;
+        if (unlocked.indexOf(i) !== -1) return i;
       }
       return 1;
+    }
+
+    // Ist Mappe N bereits abgeschlossen (d.h. alle Aufgaben inkl. Code gelöst)?
+    function isCompleted(n) {
+      var p = getProgress();
+      return !!(p.completedTasks && Array.isArray(p.completedTasks[n]) &&
+                p.completedTasks[n].indexOf('done') !== -1);
     }
 
     // Ist alles abgeschlossen?
@@ -384,15 +404,19 @@
           btn.disabled = true;
           inner.innerHTML = '<span class="lock-icon">🔒</span>';
         } else if (teacher) {
-          // Lehrermodus: alle offen, kein Pulsieren
+          // Lehrermodus: alle offen, kein Pulsieren, kein Haken
           btn.classList.add('completed');
           inner.innerHTML = '';
-        } else if (allDone || n < highest) {
-          // Bereits besucht / abgeschlossen
+        } else if (allDone || isCompleted(n)) {
+          // Vollständig abgeschlossen → grüner Haken
           btn.classList.add('completed');
+          inner.innerHTML = '<span class="check-icon">✓</span>';
+        } else if (n < highest) {
+          // Freigeschaltet aber noch nicht vollständig abgeschlossen → erreichbar, kein Haken
+          btn.classList.add('unlocked');
           inner.innerHTML = '';
         } else {
-          // Aktuell freigeschaltete Mappe (pulsiert)
+          // Aktuell höchste freigeschaltete Mappe (pulsiert)
           btn.classList.add('active-mappe');
           inner.innerHTML = '<span class="start-arrow">&#9660;</span>';
         }

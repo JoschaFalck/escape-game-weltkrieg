@@ -305,7 +305,7 @@
         <div class="ms-options">
           <label class="ms-option"><input type="checkbox" name="ms5" value="a"> <span>Hitler weigerte sich bis zuletzt, eine Kapitulation zu akzeptieren und bestrafte Defätisten mit dem Tod.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="b"> <span>Die NS-Propaganda hatte viele überzeugt, es gebe noch geheime Wunderwaffen und eine Wende sei möglich.</span></label>
-          <label class="ms-option"><input type="checkbox" name="ms5" value="c"> <span>Deutschland hatte militärisch noch eine realistische Chance auf einen Endsieg. <em>(Vorsicht!)</em></span></label>
+          <label class="ms-option"><input type="checkbox" name="ms5" value="c"> <span>Deutschland hatte militärisch noch eine realistische Chance auf einen Endsieg.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="d"> <span>Soldaten und Offiziere, die kapitulierten oder desertierten, wurden als Verräter erschossen.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms5" value="e"> <span>Die Angst vor dem, was die Sowjetunion mit Deutschland nach dem Krieg machen würde, ließ viele weiterkämpfen.</span></label>
         </div>
@@ -458,7 +458,7 @@
 
   function checkTask4() {
     var fields = [
-      {id:'ft6a', answer:'ZWEI'},
+      {id:'ft6a', answer:'ZWEI', alt:'2'},
       {id:'ft6b', answer:'KELLERN'},
       {id:'ft6c', answer:'HUNGER'},
       {id:'ft6d', answer:'HOFFNUNG'}
@@ -468,7 +468,8 @@
     var allOk = true;
     fields.forEach(function(f){
       var el = document.getElementById(f.id);
-      if(el.value.trim().toUpperCase() === f.answer){
+      var val = el.value.trim().toUpperCase();
+      if(val === f.answer || (f.alt && val === f.alt)){
         el.classList.add('correct'); el.classList.remove('incorrect');
       } else {
         el.classList.add('incorrect'); el.classList.remove('correct');
@@ -592,7 +593,7 @@
 
   function checkTask4() {
     var fields = [
-      {id:'ft6a', answer:'ZWEI'},
+      {id:'ft6a', answer:'ZWEI', alt:'2'},
       {id:'ft6b', answer:'KELLERN'},
       {id:'ft6c', answer:'HUNGER'},
       {id:'ft6d', answer:'HOFFNUNG'}
@@ -602,7 +603,8 @@
     var allOk = true;
     fields.forEach(function(f){
       var el = document.getElementById(f.id);
-      if(el.value.trim().toUpperCase() === f.answer){
+      var val = el.value.trim().toUpperCase();
+      if(val === f.answer || (f.alt && val === f.alt)){
         el.classList.add('correct'); el.classList.remove('incorrect');
       } else {
         el.classList.add('incorrect'); el.classList.remove('correct');

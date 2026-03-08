@@ -81,6 +81,17 @@
       padding: 3px 10px;
       border-radius: 20px;
     }
+    /* Buttons im Zertifikat: dunkler Hintergrund → dunkle Schrift */
+    .code-section .home-btn,
+    .code-section .print-btn {
+      color: var(--text-dark);
+      border-color: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.07);
+    }
+    .code-section .home-btn:hover,
+    .code-section .print-btn:hover {
+      background: rgba(0,0,0,0.14);
+    }
   </style>
 </head>
 <body class="mappe-page">
@@ -280,15 +291,19 @@
       <div class="document-card">
         <div class="document-stamp">Archivnotiz · Die vier Besatzungszonen · 1945</div>
         <p class="document-text">
-          Auf der Konferenz von Jalta (Februar 1945) einigten sich die Alliierten, Deutschland
-          nach der Kapitulation in Besatzungszonen aufzuteilen:
+          Auf der Konferenz von Jalta (Februar 1945) einigten sich die vier Alliierten –
+          <strong>USA, Sowjetunion (UdSSR), Großbritannien</strong> und <strong>Frankreich</strong> –
+          Deutschland nach der Kapitulation in vier Besatzungszonen aufzuteilen. Jede Siegermacht
+          kontrollierte eine Zone:
         </p>
         <p class="document-text">
-          <strong>Ostzone:</strong> östliches Deutschland, von der Elbe bis zur Oder<br>
-          <strong>Nordwestzone:</strong> Nordseeküste, Hamburg, Nordrhein-Westfalen (Ruhrgebiet)<br>
-          <strong>Südwestzone:</strong> Rheinland-Pfalz, Baden, westliches Württemberg<br>
-          <strong>Südzone:</strong> Bayern, Hessen, südliches Deutschland<br>
-          Berlin selbst wurde ebenfalls unter alle vier Mächte aufgeteilt.
+          <strong>Ostzone → Sowjetunion (UdSSR):</strong> östliches Deutschland, von der Elbe bis zur Oder<br>
+          <strong>Nordwestzone → Großbritannien:</strong> Nordseeküste, Hamburg, Nordrhein-Westfalen (Ruhrgebiet)<br>
+          <strong>Südwestzone → Frankreich:</strong> Rheinland-Pfalz, Baden, westliches Württemberg<br>
+          <strong>Südzone → USA:</strong> Bayern, Hessen, südliches Deutschland<br>
+          Berlin selbst lag tief in der Sowjetzone, wurde aber ebenfalls unter alle vier Mächte aufgeteilt.
+          Die Westzonen wurden später zur <strong>Bundesrepublik Deutschland (BRD)</strong>,
+          die Ostzone zur <strong>DDR</strong>.
         </p>
       </div>
 
@@ -363,9 +378,11 @@
         <p class="document-text">
           Von November 1945 bis Oktober 1946 wurden in Nürnberg führende Vertreter des
           NS-Regimes vor einem Internationalen Militärtribunal angeklagt – darunter
-          Hermann Göring, Rudolf Heß und Albert Speer. Die Anklagepunkte umfassten:
-          <em>Verbrechen gegen den Frieden</em> (Vorbereitung eines Angriffskrieges),
-          <em>Kriegsverbrechen</em> und <em>Verbrechen gegen die Menschlichkeit</em>
+          Hermann Göring, Rudolf Heß und Albert Speer. Es gab vier Anklagepunkte:
+          <em>Gemeinsamer Plan / Verschwörung</em> (gemeinsame Planung von Angriffskriegen),
+          <em>Verbrechen gegen den Frieden</em> (Vorbereitung und Führung von Angriffskriegen),
+          <em>Kriegsverbrechen</em> (Verstöße gegen die Kriegsgesetze) und
+          <em>Verbrechen gegen die Menschlichkeit</em>
           (Massenmord, Verfolgung, Versklavung). 12 Angeklagte wurden zum Tode verurteilt,
           andere erhielten Gefängnisstrafen, drei wurden freigesprochen.
           Die Prozesse schufen erstmals einen <strong>internationalen Rechtsrahmen</strong>
@@ -416,7 +433,7 @@
           <label class="ms-option"><input type="checkbox" name="ms7" value="a"> <span>Deutschland lag in Trümmern: Städte, Infrastruktur und Wirtschaft waren weitgehend zerstört.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms7" value="b"> <span>Millionen Menschen waren auf der Flucht, vermisst oder in Kriegsgefangenschaft.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms7" value="c"> <span>Der Nationalsozialismus war offiziell beendet, aber sein Erbe wirkte in Strukturen weiter.</span></label>
-          <label class="ms-option"><input type="checkbox" name="ms7" value="d"> <span>Deutschland erholte sich sofort: Bereits 1946 herrschten Wohlstand und Stabilität. <em>(Vorsicht!)</em></span></label>
+          <label class="ms-option"><input type="checkbox" name="ms7" value="d"> <span>Deutschland erholte sich sofort: Bereits 1946 herrschten Wohlstand und Stabilität.</span></label>
           <label class="ms-option"><input type="checkbox" name="ms7" value="e"> <span>1945 war trotz allem ein Moment der Möglichkeit – ein Neubeginn mit einer anderen Zukunft.</span></label>
         </div>
 
